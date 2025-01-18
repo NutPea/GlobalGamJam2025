@@ -1,2 +1,3 @@
 # GlobalGamJam2025
 Repositoty for the global gam jam 2025
+HAHA YOU READ THIS YOU DICK :DDDDDDDDDDDDDDDDDDDDDDDDDDD
