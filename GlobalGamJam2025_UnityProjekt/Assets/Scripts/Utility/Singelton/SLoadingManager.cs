@@ -21,8 +21,7 @@ public class SLoadingManager : MonoBehaviour
         None = -1,
         LoadingScreen = 0,
         MainMenu = 1,
-        MechConfig = 2,
-        PrototypLevel = 100,
+        Test = 2,
     }
 
     void Awake()
@@ -73,8 +72,7 @@ public class SLoadingManager : MonoBehaviour
         switch (levelName)
         {
             case LevelName.MainMenu: LoadScene("MainMenu"); break;
-            case LevelName.MechConfig: LoadScene("MechConfiguration"); break;
-            case LevelName.PrototypLevel: LoadScene("PROTOTYPLevel_Kanalisation"); break;
+            case LevelName.Test: LoadScene("Prototyp"); break;
         }
     }
 
