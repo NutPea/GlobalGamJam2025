@@ -117,11 +117,11 @@ namespace Game.Unit
             Vector2Int dif = model.Position.Value - position;
             if(Mathf.Abs(dif.x) >= Mathf.Abs(dif.y))
             {
-                model.Rotation.Value = dif.x > 0 ? UnitRotation.Right : UnitRotation.Left;
+                model.Rotation.Value = dif.x > 0 ? UnitRotation.Left : UnitRotation.Right;
             }
             else
             {
-                model.Rotation.Value = dif.y > 0 ? UnitRotation.Up : UnitRotation.Down;
+                model.Rotation.Value = dif.y > 0 ? UnitRotation.Down : UnitRotation.Up;
             }
             model.Position.Value = position;
         }
