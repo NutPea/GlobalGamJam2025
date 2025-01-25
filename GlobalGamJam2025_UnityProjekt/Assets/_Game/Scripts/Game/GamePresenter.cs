@@ -1,10 +1,10 @@
 using Game.Grid;
+using Game.Input;
 using Game.Unit;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using Unity.Collections;
+using UnityEngine;
 
 namespace Game
 {
@@ -12,6 +12,7 @@ namespace Game
     {
         [SerializeField] private GridPresenter[] levels;
         private List<UnitPresenter> units;
+        private AUserInput lastUserInput;
 
         private IEnumerator gameFlow;
 
@@ -26,7 +27,37 @@ namespace Game
                 units.ForEach(p => p.ApplyOverallRoundStart());
                 foreach(UnitPresenter unit in units)
                 {
-                    //if input is ability cast -> continue
+                    List<AAbility> abilities = unit.GetAbilityOptions();
+                    //check which are possible
+
+                    bool unitIsFinished = false;
+                    while(!unitIsFinished)
+                    {
+                        //check which abilities are possible
+                        //give abilities to UI -> Enum: Castable, OutOfEnergy, NoTarget
+                        //register callbacks? -> Nein, schon initial subscribed
+
+                        if (unit.GetCurrentMovementPoints() > 0)
+                        {
+                            HashSet<Vector2Int> movementOptions = unit.GetMovementOptions();
+                            //display movement options
+                            //subscribe movement events?
+                        }
+
+                        yield return null;
+
+                        switch (lastUserInput)
+                        {
+                            case MovementInput movementInput:
+                                //do movement
+                                break;
+                            case AbilityInput actionInput:
+                                //cast
+
+                                break;
+                        }
+                    }
+
                     //while movement points > 0 -> show movement points and handle input
                 }
             }
