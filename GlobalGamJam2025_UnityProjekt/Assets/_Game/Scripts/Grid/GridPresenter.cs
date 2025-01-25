@@ -9,6 +9,7 @@ namespace Game.Grid
     [RequireComponent(typeof(GridModel))]
     public class GridPresenter : MonoBehaviour
     {
+        [SerializeField] private Transform emptyPrefab;
         public event Action<Vector2Int> OnGridPressed;
 
         public static GridPresenter Instance;
@@ -45,6 +46,12 @@ namespace Game.Grid
         public void SwapCells(Vector2Int posA, Vector2Int posB)
         {
             model.SwapCells(posA, posB);
+        }
+        public void DestroyUnit(Vector2Int position)
+        {
+            AGridContent newEmpty = Instantiate(emptyPrefab, transform).GetComponentInChildren<AGridContent>();
+            newEmpty.transform.position = new Vector3(position.x, 0, position.y);
+            model.Replace(position, newEmpty);
         }
         public int GetRoundCount()
         {

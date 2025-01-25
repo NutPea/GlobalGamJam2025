@@ -7,6 +7,7 @@ namespace Game.Grid
     public class GridModel : MonoBehaviour
     {
         [SerializeField] private AGridContent fallbackContent;
+
         [SerializeField] private int roundCount;
 
         private Dictionary<Vector2Int, AGridContent> content = new();
@@ -44,6 +45,10 @@ namespace Game.Grid
         public int GetRoundCount()
         {
             return roundCount;
+        }
+        public void Replace(Vector2Int position, AGridContent gridContent)
+        {
+            content[position] = gridContent;
         }
     }
 }

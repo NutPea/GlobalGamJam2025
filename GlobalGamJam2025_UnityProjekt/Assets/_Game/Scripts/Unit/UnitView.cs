@@ -45,6 +45,11 @@ namespace Game.Unit
         {
             base.CurrentHPChanged(oldValue, newValue);
             SetLife(newValue);
+
+            if(newValue == 0)
+            {
+                GetComponent<UnitPresenter>().DestroyUnit();
+            }
         }
 
         private void SetLife(int newValue)
