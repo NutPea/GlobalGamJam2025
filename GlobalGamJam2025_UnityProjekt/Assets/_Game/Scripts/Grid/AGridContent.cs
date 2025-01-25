@@ -12,7 +12,7 @@ namespace Game.Grid
         {
             if (Application.isPlaying)
             {
-                debugVisual.SetActive(false);
+                debugVisual?.SetActive(false);
             }
         }
 
