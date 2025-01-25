@@ -15,7 +15,7 @@ namespace GetraenkeBub
         // Update is called once per frame
         void Update()
         {
-            transform.forward = -lookAtCameraTransform.forward;
+            transform.forward = lookAtCameraTransform.forward;
         }
     }
 }
