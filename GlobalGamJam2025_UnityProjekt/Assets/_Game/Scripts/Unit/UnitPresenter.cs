@@ -99,6 +99,10 @@ namespace Game.Unit
         {
             model.CurrentMovementPoints.Value += value;
         }
+        public void ApplyCurrentActionPointChange(int value)
+        {
+            model.CurrentActionPoints.Value += value;
+        }
 
         public Vector2Int GetPosition()
         {

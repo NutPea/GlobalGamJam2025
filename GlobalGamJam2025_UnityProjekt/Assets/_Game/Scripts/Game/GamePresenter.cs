@@ -108,6 +108,8 @@ namespace Game
                                 break;
                             case AbilityInput actionInput:
                                 LeanTween.delayedCall(0.01f, () => actionInput.ability.Cast(WaitFinishedHandler));
+                                unit.ApplyCurrentActionPointChange(-actionInput.ability.actionPointCost);
+
                                 unitIsFinished = true;
                                 waitForAnimation = true;
                                 unit.ApplyIndividualRoundFinished();

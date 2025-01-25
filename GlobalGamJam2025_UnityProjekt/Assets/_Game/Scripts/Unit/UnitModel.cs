@@ -46,6 +46,8 @@ namespace Game.Unit
         public void InitValues()
         {
             CurrentHP.SetSanityFixFunc(f => Mathf.Clamp(f, 0, MaxHP.Value));
+            CurrentActionPoints.SetSanityFixFunc(f => Mathf.Clamp(f, 0, MaxActionPoints.Value));
+            CurrentMovementPoints.SetSanityFixFunc(f => Mathf.Clamp(f, 0, MaxMovementPoints.Value));
 
             MaxHP.Value = _maxHP;
             CurrentHP.Value = _maxHP;
