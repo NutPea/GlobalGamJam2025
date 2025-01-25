@@ -206,7 +206,7 @@ namespace Game
                     return true;
             }
 
-            return true;
+            return false;
         }
 
         private bool EvaluateX(Vector2Int parentPos, int length)
