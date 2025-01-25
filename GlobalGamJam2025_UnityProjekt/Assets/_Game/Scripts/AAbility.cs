@@ -3,6 +3,7 @@ using Game.Grid.Content;
 using GetraenkeBub;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,7 +13,10 @@ namespace Game
 {
     public abstract class AAbility : MonoBehaviour
     {
+        public Sprite abilityIcon;
         public string abilityName;
+        public string abilityDescription;
+
         public int actionPointCost;
         public int length;
         public ActionDirection actionDirection;
@@ -91,7 +95,26 @@ namespace Game
 
         private bool EvaluateT(Vector2Int parentPos, Vector2Int direction)
         {
-            throw new NotImplementedException();
+            List<Vector2Int> positions = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 4 + Vector2Int.left, Vector2Int.up * 4 + Vector2Int.right };
+
+            List<Vector2Int> rotatedPositions = positions.Select(pos =>
+            {
+                if (direction == Vector2Int.up)    // (0,  1)
+                    return pos;
+                else if (direction == Vector2Int.right) // (1,  0) -> 90° clockwise
+                    return new Vector2Int(pos.y, -pos.x);
+                else if (direction == Vector2Int.down)  // (0, -1) -> 180°
+                    return new Vector2Int(-pos.x, -pos.y);
+                else if (direction == Vector2Int.left)  // (-1, 0) -> 270° clockwise
+                    return new Vector2Int(-pos.y, pos.x);
+                else
+                    return pos; // Fallback for unexpected directions
+            }).ToList();
+
+            //TODO auf rotatedPositions parentPos drauf addieren
+            //TODO checken ob target Bedingung erfüllt und dann returnen
+            //Liste speichern und dann highlights über Grid visualisieren und später weg machen wieder
+            return true; 
         }
 
         private bool EvaluateL(Vector2Int parentPos, Vector2Int direction)
