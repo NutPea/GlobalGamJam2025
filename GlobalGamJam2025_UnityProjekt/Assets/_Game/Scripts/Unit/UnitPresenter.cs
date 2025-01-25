@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using static Game.Unit.UnitModel;
 
@@ -42,11 +41,11 @@ namespace Game.Unit
 
         public Vector2Int GetPosition()
         {
-            return Vector2Int.right;
+            return model.Position.Value;
         }
         public UnitRotation GetRotation()
         {
-            return UnitRotation.Up;
+            return model.Rotation.Value;
         }
 
         public void SetMaxMovementPointModifier(int value)
