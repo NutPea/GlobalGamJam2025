@@ -31,6 +31,11 @@ namespace Game
         public int attackActionPoints;
         public int attackReduceMovementPoints;
 
+        [Header("Attack Reaktions")]
+        public List<Sprite> showAttackSprites;
+        public List<string> showAttackText;
+        public List<Sprite> attackReaktions;
+
         /// <summary>
         /// ignoriert Kosten -> überprüft ob im Grid Target im AOE Bereich verfügbar ist
         /// </summary>
