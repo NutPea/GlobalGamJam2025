@@ -66,7 +66,114 @@ namespace Game
 
         public void ActivateHighlight()
         {
+            Vector2Int parentPos = GetComponentInParent<Unit.UnitPresenter>().GetPosition();
 
+            Vector2Int direction;
+
+            direction = EvaluateDirectionFromEnum();
+
+            switch (actionDirection)
+            {
+                case ActionDirection.forward:
+                    HighLightStraightDirection(parentPos, length, direction);
+                    break;
+                case ActionDirection.circle:
+                    HighLightDirectionCircle(parentPos);
+                    break;
+                case ActionDirection.O:
+                    HighLightPattern(parentPos, Vector2Int.up, patternO);
+                    break;
+                case ActionDirection.L:
+                    HighLightPattern(parentPos, direction, patternL);
+                    break;
+                case ActionDirection.T:
+                    HighLightPattern(parentPos, direction, patternT);
+                    break;
+                case ActionDirection.X:
+                    HighLightX(parentPos, length);
+                    break;
+                case ActionDirection.cross:
+                    HighLightPattern(parentPos, direction, patternCross);
+                    break;
+                case ActionDirection.middleFinger:
+                    HighLightPattern(parentPos, direction, patternMiddleFinger);
+                    break;
+            }
+        }
+
+        private void HighLightX(Vector2Int parentPos, int length)
+        {
+            for (int i = 0; i > length; i++)
+            {
+                AGridContent content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                }
+
+                content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.left * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                }
+
+                content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.right * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                }
+
+                content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.right * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                }
+            }
+        }
+
+        private void HighLightDirectionCircle(Vector2Int parentPos)
+        {
+            for (int x = 0; x < length; x++)
+            {
+                for (int y = 0; y < length; y++)
+                {
+                    Vector2Int toCheckPos = new Vector2Int(x, y);
+                    if (toCheckPos.magnitude <= length)
+                    {
+                        AGridContent content = GridPresenter.Instance.GetContent(parentPos + toCheckPos);
+                        if (content.GetType() == GetContentType(targetType))
+                        {
+                            content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void HighLightStraightDirection(Vector2Int parentPos, int length, Vector2Int direction)
+        {
+            for (int i = 1; i <= length; i++)
+            {
+                AGridContent content = GridPresenter.Instance.GetContent(parentPos + direction * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                }
+            }
+        }
+
+        private void HighLightPattern(Vector2Int parentPos, Vector2Int direction, List<Vector2Int> pattern)
+        {
+            List<Vector2Int> rotatedList = RotatePattern(pattern, direction);
+
+            foreach (Vector2Int pos in rotatedList)
+            {
+                AGridContent content = GridPresenter.Instance.GetContent(pos + parentPos);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                }
+            }
         }
 
         public bool IsTargetConditionSatisfied()
