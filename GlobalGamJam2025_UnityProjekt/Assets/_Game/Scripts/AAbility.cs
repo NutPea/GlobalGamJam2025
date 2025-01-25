@@ -2,6 +2,7 @@ using Game.Grid;
 using Game.Grid.Content;
 using GetraenkeBub;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -43,8 +44,31 @@ namespace Game
 
         private void OnEnable()
         {
-           // UIStateManager.Instance.OnAbilityHighlight();
+            UIStateManager.Instance.OnAbilityHighlight += GetOnAbilityHighlight;
+            UIStateManager.Instance.OnAbilityStop += OnAbilityStop;
         }
+
+        private void OnAbilityStop()
+        {
+            DisableHighlights();
+        }
+
+        private void OnDisable()
+        {
+            UIStateManager.Instance.OnAbilityHighlight -= GetOnAbilityHighlight;
+            UIStateManager.Instance.OnAbilityStop -= OnAbilityStop;
+        }
+
+        private void GetOnAbilityHighlight(AAbility ability)
+        {
+            ability.ActivateHighlight();
+        }
+
+        public void ActivateHighlight()
+        {
+
+        }
+
         public bool IsTargetConditionSatisfied()
         {
             Vector2Int parentPos = GetComponentInParent<Unit.UnitPresenter>().GetPosition();
@@ -258,10 +282,7 @@ namespace Game
 
         private void DisableHighlights()
         {
-            foreach (AGridContent content in GridPresenter.Instance.GetAllGrids())
-            {
-                content.SetHighlightOption(AGridContent.HighlightOption.None);
-            }
+            GridPresenter.Instance.DisableAllGridHighlights();
         }
 
 
