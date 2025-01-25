@@ -1,12 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GetraenkeBub
 {
     public class PauseUI : MonoBehaviour , IUIState
     {
+
+        [SerializeField] private Button backButton;
+
         public void Init()
         {
-     
+            backButton.onClick.AddListener(BackToPlayerUI);
         }
 
         public void OnBeforeEnter()
@@ -16,11 +20,27 @@ namespace GetraenkeBub
 
         public void OnEnter()
         {
-            
+           
         }
 
         public void OnLeave()
         {
+        }
+
+
+        public void BackToPlayerUI()
+        {
+            UIStateManager.Instance.ChangeUIState(EUIState.PlayerUI);
+        }
+
+        public void ChangeToEnglish()
+        {
+            TODO.LOCA = false;
+        }
+
+        public void ChangeToDeutsch()
+        {
+            TODO.LOCA = false;
         }
     }
 }
