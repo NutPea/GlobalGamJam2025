@@ -46,6 +46,9 @@ namespace GetraenkeBub
                 case AbilityUsability.NotEnoughEnergy: abilityCostText.color = toLessColor; overlay.SetActive(true); break;
                 case AbilityUsability.TargetNotAvailable: abilityCostText.color = toLessColor; overlay.SetActive(true); break;
             }
+
+            abilityCostText.text = ability.actionPointCost.ToString();
+
         }
 
         private void Start()

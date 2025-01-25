@@ -1529,6 +1529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4987779202016553711}
+  - component: {fileID: 3330562136723666537}
   m_Layer: 5
   m_Name: AbilityDescription
   m_TagString: Untagged
@@ -1557,6 +1558,20 @@ RectTransform:
   m_AnchoredPosition: {x: 316, y: -26}
   m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3330562136723666537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5006079495845797016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38826994e38e6e8498023fc9e79dbe28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityNameText: {fileID: 8324638581833803752}
+  abilityDescriptionText: {fileID: 228426595421290484}
 --- !u!1 &5387710844287346625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2919,6 +2934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812671e2975e80f4695254248cdbaa64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityText: {fileID: 0}
+  abilityImage: {fileID: 0}
   abilityCostText: {fileID: 0}
   overlay: {fileID: 0}
   toLessColor: {r: 1, g: 0, b: 0, a: 1}

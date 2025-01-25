@@ -470,6 +470,17 @@ namespace Game
         }
 
 
+        List<GameObject> GetGameObjectsFromGridContent(HashSet<AGridContent> aGridContents)
+        {
+            List<GameObject> returnGameObjects = new List<GameObject> ();
+
+            foreach ( AGridContent content in aGridContents)
+            {
+                returnGameObjects.Add(content.transform.gameObject);
+            }
+
+            return returnGameObjects;
+        }
 
         public void Cast(Action callbackCastFinished)
         {
@@ -483,11 +494,12 @@ namespace Game
                 }
                 else
                 {
-                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished());
+                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished(), this, transform.parent.gameObject, new List<GameObject> { transform.parent.gameObject});
                 }
             }
 
-            foreach (var target in GetTargets())
+            HashSet<AGridContent> targets = GetTargets();
+            foreach (var target in targets)
             {
                 switch (target)
                 {
@@ -528,7 +540,7 @@ namespace Game
             {
                 callbackCastFinished();
             } else {
-                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished());
+                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished(), this, transform.parent.gameObject, GetGameObjectsFromGridContent(targets));
             }
         }
     }
