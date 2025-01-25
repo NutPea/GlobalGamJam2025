@@ -31,6 +31,11 @@ namespace Game
         public int attackActionPoints;
         public int attackReduceMovementPoints;
 
+        [Header("Attack Reaktions")]
+        public List<Sprite> showAttackSprites;
+        public List<string> showAttackText;
+        public List<Sprite> attackReaktions;
+
         /// <summary>
         /// ignoriert Kosten -> überprüft ob im Grid Target im AOE Bereich verfügbar ist
         /// </summary>
@@ -206,7 +211,7 @@ namespace Game
                     return true;
             }
 
-            return true;
+            return false;
         }
 
         private bool EvaluateX(Vector2Int parentPos, int length)
@@ -470,6 +475,17 @@ namespace Game
         }
 
 
+        List<GameObject> GetGameObjectsFromGridContent(HashSet<AGridContent> aGridContents)
+        {
+            List<GameObject> returnGameObjects = new List<GameObject> ();
+
+            foreach ( AGridContent content in aGridContents)
+            {
+                returnGameObjects.Add(content.transform.gameObject);
+            }
+
+            return returnGameObjects;
+        }
 
         public void Cast(Action callbackCastFinished)
         {
@@ -483,11 +499,12 @@ namespace Game
                 }
                 else
                 {
-                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished());
+                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished(), this, transform.parent.gameObject, new List<GameObject> { transform.parent.gameObject});
                 }
             }
 
-            foreach (var target in GetTargets())
+            HashSet<AGridContent> targets = GetTargets();
+            foreach (var target in targets)
             {
                 switch (target)
                 {
@@ -528,7 +545,7 @@ namespace Game
             {
                 callbackCastFinished();
             } else {
-                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished());
+                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished(), this, transform.parent.gameObject, GetGameObjectsFromGridContent(targets));
             }
         }
     }
