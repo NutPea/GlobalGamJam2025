@@ -32,6 +32,9 @@ namespace Game.Grid
 
             content[posA] = contentB;
             content[posB] = contentA;
+
+            contentA.transform.position = new Vector3(posB.x, 0, posB.y);
+            contentB.transform.position = new Vector3(posA.x, 0, posA.y);
         }
         public AGridContent GetContent(Vector2Int position)
         {
