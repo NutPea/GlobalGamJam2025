@@ -8,6 +8,7 @@ using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 namespace Game
 {
@@ -15,7 +16,9 @@ namespace Game
     {
         public Sprite abilityIcon;
         public string abilityName;
+        public string AbilityName=>abilityName;
         public string abilityDescription;
+        public string AbilityDescription => abilityDescription;
 
         public int actionPointCost;
         public int length;
@@ -67,10 +70,22 @@ namespace Game
             throw new NotImplementedException();
         }
 
-        private List<Vector2Int> RotatePattern(List<Vector2Int> pattern, Vector2Int direction)
+        private List<Vector2Int> RotatePattern(List<Vector2Int> positions, Vector2Int direction)
         {
-
-            return new List<Vector2Int>();
+            List<Vector2Int> rotatedPositions = positions.Select(pos =>
+            {
+                if (direction == Vector2Int.up)    // (0,  1)
+                    return pos;
+                else if (direction == Vector2Int.right) // (1,  0) -> 90° clockwise
+                    return new Vector2Int(pos.y, -pos.x);
+                else if (direction == Vector2Int.down)  // (0, -1) -> 180°
+                    return new Vector2Int(-pos.x, -pos.y);
+                else if (direction == Vector2Int.left)  // (-1, 0) -> 270° clockwise
+                    return new Vector2Int(-pos.y, pos.x);
+                else
+                    return pos; // Fallback for unexpected directions
+            }).ToList();
+            return rotatedPositions;
         }
 
         private bool EvaluateCross(Vector2Int parentPos, Vector2Int direction)
@@ -97,20 +112,15 @@ namespace Game
         {
             List<Vector2Int> positions = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 4 + Vector2Int.left, Vector2Int.up * 4 + Vector2Int.right };
 
-            List<Vector2Int> rotatedPositions = positions.Select(pos =>
-            {
-                if (direction == Vector2Int.up)    // (0,  1)
-                    return pos;
-                else if (direction == Vector2Int.right) // (1,  0) -> 90° clockwise
-                    return new Vector2Int(pos.y, -pos.x);
-                else if (direction == Vector2Int.down)  // (0, -1) -> 180°
-                    return new Vector2Int(-pos.x, -pos.y);
-                else if (direction == Vector2Int.left)  // (-1, 0) -> 270° clockwise
-                    return new Vector2Int(-pos.y, pos.x);
-                else
-                    return pos; // Fallback for unexpected directions
-            }).ToList();
+            List<Vector2Int> rotatedList = RotatePattern(positions, direction);
 
+            foreach (Vector2Int pos in rotatedList)
+            {
+                if(GridPresenter.Instance.GetContent(pos + parentPos).GetType() == GetContentType(targetType))
+                {
+                    return true;
+                }
+            }
             //TODO auf rotatedPositions parentPos drauf addieren
             //TODO checken ob target Bedingung erfüllt und dann returnen
             //Liste speichern und dann highlights über Grid visualisieren und später weg machen wieder
