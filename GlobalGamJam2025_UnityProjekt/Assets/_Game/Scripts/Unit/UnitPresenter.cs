@@ -146,5 +146,10 @@ namespace Game.Unit
         {
             return model.UnitFaction.Value;
         }
+        public void DestroyUnit()
+        {
+            GridPresenter.Instance.DestroyUnit(model.Position.Value);
+            GameObject.Destroy(transform.parent.gameObject);
+        }
     }
 }
