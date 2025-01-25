@@ -17,6 +17,7 @@ namespace GetraenkeBub
 
         private UIState currentUIState;
         [SerializeField] private EUIState startUIState;
+        [SerializeField] private List<AbilityButtonView> abilityButtonViews;
 
         [SerializeField] private List<UIState> UIStates;
         private void Awake()
@@ -24,6 +25,23 @@ namespace GetraenkeBub
             Instance = this;
             UIStates.ForEach(n => n.OnInit());
             ChangeUIState(startUIState);
+
+        }
+
+        public void InvokeOnAbilityHighlight(AAbility ability)
+        {
+            OnAbilityHighlight.Invoke(ability);
+        }
+
+
+        public void InvokeOnAbilityCasted(AAbility ability)
+        {
+            OnAbilityCasted.Invoke(ability);
+        }
+
+        public void InvokeOnAbilityStop()
+        {
+            OnAbilityStop.Invoke();
         }
 
         public void ChangeUIState(EUIState toChangeUiState)
@@ -40,7 +58,13 @@ namespace GetraenkeBub
 
         public void SetAbilities(List<(AAbility, AbilityUsability)> abilities)
         {
-            //TODO PEANUT
+            abilityButtonViews.ForEach(n => n.gameObject.SetActive(false));
+            for(int i = 0; i< abilities.Count; i++)
+            {
+                (AAbility, AbilityUsability) abilityTopple = abilities[i];
+                abilityButtonViews[i].gameObject.SetActive(true);
+                abilityButtonViews[i].SetAbility(abilityTopple.Item1, abilityTopple.Item2);
+            }
         }
 
         private UIState GetUISTate(EUIState toCheckUIState)
