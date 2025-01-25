@@ -24,4 +24,8 @@ public class ModelEntry<T>
     {
         sanityFix = func;
     }
+    public void ForceInvoke()
+    {
+        OnChange?.Invoke(Value, Value);
+    }
 }

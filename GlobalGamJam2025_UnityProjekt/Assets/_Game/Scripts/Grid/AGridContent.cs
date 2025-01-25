@@ -21,8 +21,8 @@ namespace Game.Grid
                 debugVisual?.SetActive(false);
             }
 
-            movementHighlight = transform.Find("MH").gameObject;
-            abilityHighlight = transform.Find("AH").gameObject;
+            movementHighlight = transform.Find("MH")?.gameObject ?? null;
+            abilityHighlight = transform.Find("AH")?.gameObject ?? null;
         }
 
         private void Update()

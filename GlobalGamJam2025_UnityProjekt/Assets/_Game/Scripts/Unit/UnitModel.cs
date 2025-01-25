@@ -20,27 +20,27 @@ namespace Game.Unit
 
 
         //HP
-        [HideInInspector] public ModelEntry<int> MaxHP = new();
-        [HideInInspector] public ModelEntry<int> CurrentHP = new();
+        public ModelEntry<int> MaxHP = new();
+        public ModelEntry<int> CurrentHP = new();
 
         //MOVEMENT
-        [HideInInspector] public ModelEntry<Vector2Int> Position = new();
-        [HideInInspector] public ModelEntry<UnitRotation> Rotation = new();
+        public ModelEntry<Vector2Int> Position = new();
+        public ModelEntry<UnitRotation> Rotation = new();
 
-        [HideInInspector] public ModelEntry<int> MaxMovementPoints = new();
-        [HideInInspector] public ModelEntry<int> CurrentMovementPoints = new();
-        [HideInInspector] public ModelEntry<int> MaxMovementPointModifier = new();
+        public ModelEntry<int> MaxMovementPoints = new();
+        public ModelEntry<int> CurrentMovementPoints = new();
+        public ModelEntry<int> MaxMovementPointModifier = new();
 
         //ACTION POINTS
-        [HideInInspector] public ModelEntry<int> CurrentActionPoints = new();
-        [HideInInspector] public ModelEntry<int> ActionPointChange = new();
-        [HideInInspector] public ModelEntry<int> ActionPointChangeModifier = new();
-        [HideInInspector] public ModelEntry<int> MaxActionPoints = new();
+        public ModelEntry<int> CurrentActionPoints = new();
+        public ModelEntry<int> ActionPointChange = new();
+        public ModelEntry<int> ActionPointChangeModifier = new();
+        public ModelEntry<int> MaxActionPoints = new();
 
 
-        [HideInInspector] public ModelEntry<bool> IsUsedThisRound = new();
-        [HideInInspector] public ModelEntry<int> Initiative = new();
-        [HideInInspector] public ModelEntry<Faction> UnitFaction = new();
+        public ModelEntry<bool> IsUsedThisRound = new();
+        public ModelEntry<int> Initiative = new();
+        public ModelEntry<Faction> UnitFaction = new();
 
 
         public void InitValues()
@@ -54,7 +54,7 @@ namespace Game.Unit
             CurrentMovementPoints.Value = _maxMovePoints;
             MaxMovementPointModifier.Value = 0;
 
-            CurrentActionPoints.Value = _startActionPoints - _defaultActionPointChange;
+            CurrentActionPoints.Value = _startActionPoints;
             ActionPointChange.Value = _defaultActionPointChange;
             ActionPointChangeModifier.Value = 0;
             MaxActionPoints.Value = _maxActionPoints;
@@ -69,7 +69,7 @@ namespace Game.Unit
             CurrentActionPoints.Value = Mathf.Clamp(CurrentActionPoints.Value + ActionPointChange.Value + ActionPointChangeModifier.Value, 0, MaxActionPoints.Value);
 
             MaxMovementPointModifier.Value = 0;
-            ActionPointChange.Value = 0;
+            ActionPointChangeModifier.Value = 0;
         }
     }
 }

@@ -52,15 +52,22 @@ namespace Game
 
         private IEnumerator PlayLevel(int index)
         {
+            Debug.Log("Started Playloop");
             LoadLevel(index);
+            Debug.Log("Level Loaded");
             GridPresenter currentLevel = GridPresenter.Instance;
             units = currentLevel.FindGetUnits().OrderByDescending(p => p.GetInitiative()).ToList();
 
             for(int i = 0; i < currentLevel.GetRoundCount(); i++)
             {
+                Debug.Log("Starte Runde "+i);
+
                 units.ForEach(p => p.ApplyOverallRoundStart());
                 foreach(UnitPresenter unit in units)
                 {
+                    unit.ApplyIndividualRoundStart();
+
+                    Debug.Log("Starte Zug von Unit " + unit.name);
                     bool unitIsFinished = false;
                     while(!unitIsFinished)
                     {
@@ -71,6 +78,7 @@ namespace Game
                             AbilityUsability.Castable))
                         ).ToList();
                         UIStateManager.Instance.SetAbilities(tuples);
+                        Debug.Log("Hat " + tuples.Count + " abilities geladen");
 
                         HashSet<Vector2Int> movementOptions = new HashSet<Vector2Int>();
                         if (unit.GetCurrentMovementPoints() > 0)
@@ -79,7 +87,8 @@ namespace Game
                             foreach (Vector2Int item in movementOptions)
                             {
                                 GridPresenter.Instance.GetContent(item).SetHighlightOption(AGridContent.HighlightOption.Movement);
-                            }                           
+                            }
+                            Debug.Log("Hat " + movementOptions.Count + " movement options gefunden");
                         }
 
                         yield return null;
@@ -92,13 +101,17 @@ namespace Game
                                 {
                                     unit.ApplyCurrentMovementPointChange(-1);
                                     GridPresenter.Instance.SwapCells(unit.GetPosition(), movementInput.position);
+                                    GridPresenter.Instance.DisableAllGridHighlights();
                                     unit.SetPosition(movementInput.position);
+                                    Debug.Log("Hat movement befehl ausgeführt");
                                 }
                                 break;
                             case AbilityInput actionInput:
                                 LeanTween.delayedCall(0.01f, () => actionInput.ability.Cast(WaitFinishedHandler));
                                 unitIsFinished = true;
                                 waitForAnimation = true;
+                                unit.ApplyIndividualRoundFinished();
+                                Debug.Log("Hat ability befehl ausgeführt");
                                 break;
                         }
 

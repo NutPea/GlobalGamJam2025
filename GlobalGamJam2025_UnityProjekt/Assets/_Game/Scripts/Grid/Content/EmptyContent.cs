@@ -5,18 +5,24 @@ namespace Game.Grid.Content
 {
     public class EmptyContent : AGridContent
     {
+        private static PlayerInput playerInput;
         [SerializeField] private InputActionReference clickAction;
 
         private void OnEnable()
         {
-            clickAction.action.performed += OnClick;
-            clickAction.action.Enable();
+            if(playerInput == null)
+            {
+                playerInput = new PlayerInput();
+                playerInput.Mouse.Enable();
+                playerInput.Enable();
+            }
+
+            playerInput.Mouse.LeftClick.performed += OnClick;
         }
 
         private void OnDisable()
         {
-            clickAction.action.performed -= OnClick;
-            clickAction.action.Disable();
+            playerInput.Mouse.LeftClick.performed -= OnClick;
         }
 
         private void OnClick(InputAction.CallbackContext context)

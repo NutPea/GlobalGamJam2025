@@ -49,6 +49,21 @@ namespace Game.Unit
             model.IsUsedThisRound.OnChange += view.IsUsedThisRoundChanged;
             model.Initiative.OnChange += view.InitiativeChanged;
             model.UnitFaction.OnChange += view.UnitFactionChanged;
+
+            model.MaxHP.ForceInvoke();
+            model.CurrentHP.ForceInvoke();
+            model.Position.ForceInvoke();
+            model.Rotation.ForceInvoke();
+            model.MaxMovementPoints.ForceInvoke();
+            model.CurrentMovementPoints.ForceInvoke();
+            model.MaxMovementPointModifier.ForceInvoke();
+            model.CurrentActionPoints.ForceInvoke();
+            model.ActionPointChange.ForceInvoke();
+            model.ActionPointChangeModifier.ForceInvoke();
+            model.MaxActionPoints.ForceInvoke();
+            model.IsUsedThisRound.ForceInvoke();
+            model.Initiative.ForceInvoke();
+            model.UnitFaction.ForceInvoke();
         }
 
         public void ApplyOverallRoundStart()

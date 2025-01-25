@@ -11,19 +11,19 @@ namespace Game.Unit
 
             if (CheckPosition(position + Vector2Int.up))
             {
-                returnMoves.Add(position);
+                returnMoves.Add(position + Vector2Int.up);
             }
             if (CheckPosition(position + Vector2Int.down))
             {
-                returnMoves.Add(position);
+                returnMoves.Add(position + Vector2Int.down);
             }
             if (CheckPosition(position + Vector2Int.left))
             {
-                returnMoves.Add(position);
+                returnMoves.Add(position + Vector2Int.left);
             }
             if (CheckPosition(position + Vector2Int.right))
             {
-                returnMoves.Add(position);
+                returnMoves.Add(position + Vector2Int.right);
             }
 
             return returnMoves;
@@ -33,7 +33,7 @@ namespace Game.Unit
         {
             switch (Grid.GridPresenter.Instance.GetContent(position))
             {
-                case Game.Grid.Content.EmptyContent unit:
+                case Grid.Content.EmptyContent:
                     return true;
             }
             return false;
