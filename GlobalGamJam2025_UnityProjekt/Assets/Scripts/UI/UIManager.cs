@@ -12,6 +12,8 @@ namespace GetraenkeBub
         public static UIStateManager Instance;
 
         public event Action<AAbility> OnAbilityCasted; //TODO INVOKE!
+        public event Action<AAbility> OnAbilityHighlight; //TODO INVOKE!
+        public event Action OnAbilityStop; //TODO INVOKE!
 
         private UIState currentUIState;
         [SerializeField] private EUIState startUIState;

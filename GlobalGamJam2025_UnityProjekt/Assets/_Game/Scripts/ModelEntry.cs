@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ModelEntry<T> : MonoBehaviour
+public class ModelEntry<T>
 {
     private T _value;
     private Func<T, T> sanityFix;

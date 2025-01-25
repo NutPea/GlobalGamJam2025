@@ -8,14 +8,17 @@ using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 namespace Game
 {
-    public abstract class AAbility : MonoBehaviour
+    public class AAbility : MonoBehaviour
     {
         public Sprite abilityIcon;
         public string abilityName;
+        public string AbilityName=>abilityName;
         public string abilityDescription;
+        public string AbilityDescription => abilityDescription;
 
         public int actionPointCost;
         public int length;
@@ -31,7 +34,18 @@ namespace Game
         /// ignoriert Kosten -> überprüft ob im Grid Target im AOE Bereich verfügbar ist
         /// </summary>
         /// <returns></returns>
-        public virtual bool IsTargetConditionSatisfied()
+        /// 
+        private List<Vector2Int> patternT = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 4 + Vector2Int.left, Vector2Int.up * 4 + Vector2Int.right };
+        private List<Vector2Int> patternL = new List<Vector2Int> { Vector2Int.up , Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up *3 + Vector2Int.left };
+        private List<Vector2Int> patternCross = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 3 + Vector2Int.left, Vector2Int.up * 3 + Vector2Int.right };
+        private List<Vector2Int> patternMiddleFinger = new List<Vector2Int>();
+        private List<Vector2Int> patternO = new List<Vector2Int>();
+
+        private void OnEnable()
+        {
+           // UIStateManager.Instance.OnAbilityHighlight();
+        }
+        public bool IsTargetConditionSatisfied()
         {
             Vector2Int parentPos = GetComponentInParent<Unit.UnitPresenter>().GetPosition();
 
@@ -46,57 +60,51 @@ namespace Game
                 case ActionDirection.circle:
                     return EvaluateDirectionCircle(parentPos);
                 case ActionDirection.O:
-                    return EvaluateO(parentPos);
+                    return EvaluatePattern(parentPos, Vector2Int.up, patternO);
                 case ActionDirection.L:
-                    return EvaluateL(parentPos, direction);
+                    return EvaluatePattern(parentPos, direction, patternL);
                 case ActionDirection.T:
-                    return EvaluateT(parentPos, direction);
+                    return EvaluatePattern(parentPos, direction, patternT);
                 case ActionDirection.X:
                     return EvaluateX(parentPos, length);
                 case ActionDirection.cross:
-                    return EvaluateCross(parentPos, direction);
+                    return EvaluatePattern(parentPos, direction, patternCross);
                 case ActionDirection.middleFinger:
-                    return EvaluateMiddleFinger(parentPos, direction);
+                    return EvaluatePattern(parentPos, direction, patternMiddleFinger);
             }
 
             return true;
         }
 
-        private bool EvaluateMiddleFinger(Vector2Int parentPos, Vector2Int direction)
-        {
-            throw new NotImplementedException();
-        }
-
-        private List<Vector2Int> RotatePattern(List<Vector2Int> pattern, Vector2Int direction)
-        {
-
-            return new List<Vector2Int>();
-        }
-
-        private bool EvaluateCross(Vector2Int parentPos, Vector2Int direction)
-        {
-
-            //Todo Check two cross fields
-            if (GridPresenter.Instance.GetContent(parentPos + direction * 3 + new Vector2Int(0,1)).GetType() == GetContentType(targetType))
-            {
-                return true;
-            }
-            if (GridPresenter.Instance.GetContent(parentPos + direction * 3 + new Vector2Int(1, 0)).GetType() == GetContentType(targetType))
-            {
-                return true;
-            }
-            return EvaluateStraightDirection(parentPos, 4, direction);
-        }
-
         private bool EvaluateX(Vector2Int parentPos, int length)
         {
-            throw new NotImplementedException();
+            for ( int i = 0; i > length; i++)
+            {
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i).GetType() == GetContentType(targetType))
+                {
+                    return true;
+                }
+
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.left * i).GetType() == GetContentType(targetType))
+                {
+                    return true;
+                }
+
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.right * i).GetType() == GetContentType(targetType))
+                {
+                    return true;
+                }
+
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.right * i).GetType() == GetContentType(targetType))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
-        private bool EvaluateT(Vector2Int parentPos, Vector2Int direction)
+        private List<Vector2Int> RotatePattern(List<Vector2Int> positions, Vector2Int direction)
         {
-            List<Vector2Int> positions = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 4 + Vector2Int.left, Vector2Int.up * 4 + Vector2Int.right };
-
             List<Vector2Int> rotatedPositions = positions.Select(pos =>
             {
                 if (direction == Vector2Int.up)    // (0,  1)
@@ -110,21 +118,40 @@ namespace Game
                 else
                     return pos; // Fallback for unexpected directions
             }).ToList();
+            return rotatedPositions;
+        }
 
+        private bool EvaluatePattern(Vector2Int parentPos, Vector2Int direction, List<Vector2Int> pattern)
+        {
+            List<Vector2Int> rotatedList = RotatePattern(pattern, direction);
+
+            foreach (Vector2Int pos in rotatedList)
+            {
+                if(GridPresenter.Instance.GetContent(pos + parentPos).GetType() == GetContentType(targetType))
+                {
+                    return true;
+                }
+            }
             //TODO auf rotatedPositions parentPos drauf addieren
             //TODO checken ob target Bedingung erfüllt und dann returnen
             //Liste speichern und dann highlights über Grid visualisieren und später weg machen wieder
-            return true; 
+            return false; 
         }
 
-        private bool EvaluateL(Vector2Int parentPos, Vector2Int direction)
+        private HashSet<AGridContent> GetTargetsFromPattern(Vector2Int parentPos, Vector2Int direction, List<Vector2Int> pattern)
         {
-            throw new NotImplementedException();
-        }
+            HashSet<AGridContent> targets = new HashSet<AGridContent>();
+            List<Vector2Int> rotatedList = RotatePattern(pattern, direction);
 
-        private bool EvaluateO(Vector2Int parentPos)
-        {
-            throw new NotImplementedException();
+            foreach (Vector2Int pos in rotatedList)
+            {
+                AGridContent content = GridPresenter.Instance.GetContent(parentPos + pos);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    targets.Add(content);
+                }
+            }
+            return targets;
         }
 
         private Vector2Int EvaluateDirectionFromEnum()
@@ -160,7 +187,6 @@ namespace Game
                     }
                 }
             }
-
             return false;
         }
 
@@ -230,6 +256,15 @@ namespace Game
             return false;
         }
 
+        private void DisableHighlights()
+        {
+            foreach (AGridContent content in GridPresenter.Instance.GetAllGrids())
+            {
+                content.SetHighlightOption(AGridContent.HighlightOption.None);
+            }
+        }
+
+
         HashSet<AGridContent> GetTargets()
         {
             Vector2Int parentPos = GetComponentInParent<Unit.UnitPresenter>().GetPosition();
@@ -248,58 +283,62 @@ namespace Game
                     targets.AddRange( GetTargetsDirectionCircle(parentPos));
                     break;
                 case ActionDirection.O:
-                    targets.AddRange( GetTargetsO(parentPos));
+                    targets.AddRange(GetTargetsFromPattern(parentPos, Vector2Int.up, patternO));
                     break;
                 case ActionDirection.L:
-                    targets.AddRange(GetTargetsL(parentPos, direction));
+                    targets.AddRange(GetTargetsFromPattern(parentPos, direction, patternL));
                     break;
                 case ActionDirection.T:
-                    targets.AddRange(GetTargetsT(parentPos, direction));
+                    targets.AddRange(GetTargetsFromPattern(parentPos, direction, patternT));
                     break;
                 case ActionDirection.X:
                     targets.AddRange(GetTargetsX(parentPos, length));
                     break;
                 case ActionDirection.cross:
-                    targets.AddRange(GetTargetsCross(parentPos, direction));
+                    targets.AddRange(GetTargetsFromPattern(parentPos, direction, patternCross));
                     break;
                 case ActionDirection.middleFinger:
-                    targets.AddRange(GetTargetsMiddleFinger(parentPos, direction));
+                    targets.AddRange(GetTargetsFromPattern(parentPos, direction, patternMiddleFinger));
                     break;
             }
             return targets;
         }
 
-        private IEnumerable<AGridContent> GetTargetsMiddleFinger(Vector2Int parentPos, Vector2Int direction)
-        {
-            throw new NotImplementedException();
-        }
-
-        private IEnumerable<AGridContent> GetTargetsCross(Vector2Int parentPos, Vector2Int direction)
-        {
-            throw new NotImplementedException();
-        }
-
         private IEnumerable<AGridContent> GetTargetsX(Vector2Int parentPos, int length)
         {
-            throw new NotImplementedException();
+            HashSet<AGridContent> targets = new HashSet<AGridContent>();
+            for (int i = 0; i > length; i++)
+            {
+                AGridContent content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    targets.Add(content);
+                }
+
+                content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.left * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    targets.Add(content);
+                }
+
+                content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.right * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    targets.Add(content);
+                }
+
+                content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.right * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    targets.Add(content);
+                }
+            }
+            return targets;
         }
 
-        private IEnumerable<AGridContent> GetTargetsT(Vector2Int parentPos, Vector2Int direction)
-        {
-            throw new NotImplementedException();
-        }
 
-        private IEnumerable<AGridContent> GetTargetsL(Vector2Int parentPos, Vector2Int direction)
-        {
-            throw new NotImplementedException();
-        }
 
-        private HashSet<AGridContent> GetTargetsO(Vector2Int parentPos)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void Cast(Action callbackCastFinished)
+        public void Cast(Action callbackCastFinished)
         {
             Instantiate(spawnedEffect, transform.parent.transform);
             foreach (var target in GetTargets())
