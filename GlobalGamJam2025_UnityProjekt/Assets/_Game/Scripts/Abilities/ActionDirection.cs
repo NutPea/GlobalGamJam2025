@@ -9,6 +9,7 @@
         middleFinger,
         cross,
         X,
-        O
+        O,
+        skip
     }
 }

@@ -202,6 +202,8 @@ namespace Game
                     return EvaluatePattern(parentPos, direction, patternCross);
                 case ActionDirection.middleFinger:
                     return EvaluatePattern(parentPos, direction, patternMiddleFinger);
+                case ActionDirection.skip:
+                    return true;
             }
 
             return true;
@@ -428,6 +430,9 @@ namespace Game
                 case ActionDirection.middleFinger:
                     targets.AddRange(GetTargetsFromPattern(parentPos, direction, patternMiddleFinger));
                     break;
+                case ActionDirection.skip:
+                    targets.Add(GridPresenter.Instance.GetContent(parentPos));
+                    break;
             }
             return targets;
         }
@@ -469,6 +474,19 @@ namespace Game
         public void Cast(Action callbackCastFinished)
         {
             Instantiate(spawnedEffect, transform.parent.transform);
+
+            if(this.actionDirection == ActionDirection.skip)
+            {
+                if (UIStateManager.Instance == null)
+                {
+                    callbackCastFinished();
+                }
+                else
+                {
+                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished());
+                }
+            }
+
             foreach (var target in GetTargets())
             {
                 switch (target)
