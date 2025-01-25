@@ -3,7 +3,9 @@ using Game.Grid.Content;
 using GetraenkeBub;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Game
 {
@@ -19,11 +21,6 @@ namespace Game
         public int attackDamage;
         public int attackActionPoints;
         public int attackReduceMovementPoints;
-
-
-        //add configuration possibilty for effect /
-        //add definition for AOE area /
-        //add configuration possibility for targetType /
 
         /// <summary>
         /// ignoriert Kosten -> überprüft ob im Grid Target im AOE Bereich verfügbar ist
@@ -67,6 +64,10 @@ namespace Game
 
         private bool EvaluateCross(Vector2Int parentPos, Vector2Int direction)
         {
+
+
+            EvaluateStraightDirection(parentPos, 4, direction);
+
             throw new NotImplementedException();
         }
 
@@ -127,6 +128,28 @@ namespace Game
             return false;
         }
 
+        private HashSet<AGridContent> GetTargetsDirectionCircle(Vector2Int parentPos)
+        {
+            HashSet<AGridContent> targets = new HashSet<AGridContent>();
+            for (int x = 0; x < length; x++)
+            {
+                for (int y = 0; y < length; y++)
+                {
+                    Vector2Int toCheckPos = new Vector2Int(x, y);
+                    if (toCheckPos.magnitude <= length)
+                    {
+                        AGridContent content = GridPresenter.Instance.GetContent(parentPos + toCheckPos);
+                        if (content.GetType() == GetContentType(targetType))
+                        {
+                            targets.Add(content);
+                        }
+                    }
+                }
+            }
+
+            return targets;
+        }
+
         private Type GetContentType(TargetType targetType)
         {
             switch (targetType)
@@ -144,6 +167,20 @@ namespace Game
             return typeof(Grid.Content.BlockerContent);
         }
 
+        private HashSet<AGridContent> GetTargetsStraightDirection(Vector2Int parentPos, int length, Vector2Int direction)
+        {
+            HashSet<AGridContent> targets = new HashSet<AGridContent>();
+            for (int i = 1; i <= length; i++)
+            {
+                AGridContent content = GridPresenter.Instance.GetContent(parentPos + direction * i);
+                if (content.GetType() == GetContentType(targetType))
+                {
+                    targets.Add(content);
+                }
+            }
+            return targets;
+        }
+
         private bool EvaluateStraightDirection(Vector2Int parentPos, int length, Vector2Int direction)
         {
             for (int i = 1; i <= length; i++)
@@ -157,10 +194,75 @@ namespace Game
             return false;
         }
 
-        List<AGridContent> GetTargets()
+        HashSet<AGridContent> GetTargets()
         {
-            return new List<AGridContent>();
+            Vector2Int parentPos = GetComponentInParent<Unit.UnitPresenter>().GetPosition();
+
+            Vector2Int direction;
+
+            direction = EvaluateDirectionFromEnum();
+            HashSet<AGridContent> targets = new HashSet<AGridContent>();
+
+            switch (actionDirection)
+            {
+                case ActionDirection.forward:
+                    targets.AddRange(GetTargetsStraightDirection(parentPos, length, direction));
+                    break;
+                case ActionDirection.circle:
+                    targets.AddRange( GetTargetsDirectionCircle(parentPos));
+                    break;
+                case ActionDirection.O:
+                    targets.AddRange( GetTargetsO(parentPos));
+                    break;
+                case ActionDirection.L:
+                    targets.AddRange(GetTargetsL(parentPos, direction));
+                    break;
+                case ActionDirection.T:
+                    targets.AddRange(GetTargetsT(parentPos, direction));
+                    break;
+                case ActionDirection.X:
+                    targets.AddRange(GetTargetsX(parentPos, length));
+                    break;
+                case ActionDirection.cross:
+                    targets.AddRange(GetTargetsCross(parentPos, direction));
+                    break;
+                case ActionDirection.middleFinger:
+                    targets.AddRange(GetTargetsMiddleFinger(parentPos, direction));
+                    break;
+            }
+            return targets;
         }
+
+        private IEnumerable<AGridContent> GetTargetsMiddleFinger(Vector2Int parentPos, Vector2Int direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IEnumerable<AGridContent> GetTargetsCross(Vector2Int parentPos, Vector2Int direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IEnumerable<AGridContent> GetTargetsX(Vector2Int parentPos, int length)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IEnumerable<AGridContent> GetTargetsT(Vector2Int parentPos, Vector2Int direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IEnumerable<AGridContent> GetTargetsL(Vector2Int parentPos, Vector2Int direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        private HashSet<AGridContent> GetTargetsO(Vector2Int parentPos)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void Cast(Action callbackCastFinished)
         {
             Instantiate(spawnedEffect, transform.parent.transform);
@@ -169,8 +271,16 @@ namespace Game
                 switch (target)
                 {
                     case UnitContent unit:
+                        unit.unitReference.ApplyHPChange(-attackDamage);
+                        unit.unitReference.SetActionPointChangeModifier(-attackActionPoints);
+                        unit.unitReference.SetMaxMovementPointModifier(-attackReduceMovementPoints);
+                        //TODO Animationen!
                         break;
                     case CommunityContent community: 
+                        // Community abfragen wegen animationen -> 
+                        // isCaptureSuccessful
+                        // faction an der unit + faction an der Community
+                        // Capture(myFaction)
                         break;
 
                 }
