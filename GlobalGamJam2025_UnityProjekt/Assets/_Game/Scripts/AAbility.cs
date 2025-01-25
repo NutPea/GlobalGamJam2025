@@ -39,8 +39,8 @@ namespace Game
         private List<Vector2Int> patternT = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 4 + Vector2Int.left, Vector2Int.up * 4 + Vector2Int.right };
         private List<Vector2Int> patternL = new List<Vector2Int> { Vector2Int.up , Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up *3 + Vector2Int.left };
         private List<Vector2Int> patternCross = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 3 + Vector2Int.left, Vector2Int.up * 3 + Vector2Int.right };
-        private List<Vector2Int> patternMiddleFinger = new List<Vector2Int>();
-        private List<Vector2Int> patternO = new List<Vector2Int>();
+        private List<Vector2Int> patternMiddleFinger = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.right, Vector2Int.left };
+        private List<Vector2Int> patternO = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.down + Vector2Int.left, Vector2Int.down + Vector2Int.right };
 
         private void OnEnable()
         {
