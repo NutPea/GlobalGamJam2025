@@ -3,6 +3,12 @@
     public enum ActionDirection
     {
         forward,
-        circle
+        circle,
+        T,
+        L,
+        middleFinger,
+        cross,
+        X,
+        O
     }
 }
