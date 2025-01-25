@@ -62,6 +62,8 @@ namespace Game
                 units.ForEach(p => p.ApplyOverallRoundStart());
                 foreach(UnitPresenter unit in units)
                 {
+                    Debug.Log(unit.gameObject);
+                    if(unit.gameObject == null) continue; //TODO HIER GEHTS MORGEN WEITER
                     unit.ApplyIndividualRoundStart();
 
                     bool unitIsFinished = false;

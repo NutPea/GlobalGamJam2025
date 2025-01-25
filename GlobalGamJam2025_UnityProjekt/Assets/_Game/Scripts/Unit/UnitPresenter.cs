@@ -148,8 +148,8 @@ namespace Game.Unit
         }
         public void DestroyUnit()
         {
-            GridPresenter.Instance.DestroyUnit(model.Position.Value);
-            GameObject.Destroy(transform.parent.gameObject);
+            GridPresenter.Instance.DestroyCell(model.Position.Value);
+            GameObject.Destroy(gameObject);
         }
     }
 }

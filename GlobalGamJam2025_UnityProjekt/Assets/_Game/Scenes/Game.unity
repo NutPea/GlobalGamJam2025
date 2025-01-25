@@ -746,6 +746,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5236552662207597429, guid: 62662d7aa7bdbb546adcb59b014aaff6,
+        type: 3}
+      propertyPath: _maxHP
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6109077042722269188, guid: 62662d7aa7bdbb546adcb59b014aaff6,
         type: 3}
       propertyPath: fallbackContent
