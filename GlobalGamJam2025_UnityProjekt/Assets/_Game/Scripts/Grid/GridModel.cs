@@ -1,15 +1,15 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Game.Grid
 {
     public class GridModel : MonoBehaviour
     {
         [SerializeField] private AGridContent fallbackContent;
+        [SerializeField] private int roundCount;
 
         private AGridContent[,] content;
 
-        private void Awake()
+        private void OnEnable()
         {
             InitGrid();
         }
@@ -29,6 +29,10 @@ namespace Game.Grid
                 return fallbackContent;
             }
             return content[position.x, position.y];
+        }
+        public int GetRoundCount()
+        {
+            return roundCount;
         }
     }
 }

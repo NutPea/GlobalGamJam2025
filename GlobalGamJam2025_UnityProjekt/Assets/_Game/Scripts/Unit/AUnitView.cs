@@ -122,4 +122,25 @@ public abstract class AUnitView : MonoBehaviour
     {
 
     }
+
+    /// <summary>
+    /// This is called at the start of the game
+    /// </summary>
+    /// <param name="oldValue"></param>
+    /// <param name="newValue"></param>
+    public virtual void InitiativeChanged(int oldValue, int newValue)
+    {
+
+    }
+
+    /// <summary>
+    /// This is called at the start of the game
+    /// </summary>
+    /// <param name="oldValue"></param>
+    /// <param name="newValue"></param>
+    public virtual void UnitFactionChanged(Faction oldValue, Faction newValue)
+    {
+
+    }
+
 }
