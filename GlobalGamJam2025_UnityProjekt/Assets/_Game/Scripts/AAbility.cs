@@ -6,8 +6,9 @@ namespace Game
     public abstract class AAbility
     {
         public int actionPointCost;
+        public ActionDirection actionDirection;
         //add configuration possibilty for effect
-        //add definition for AOE area
+        //add definition for AOE area /
         //add configuration possibility for targetType
 
         /// <summary>
