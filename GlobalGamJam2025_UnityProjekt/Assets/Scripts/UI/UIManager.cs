@@ -1,6 +1,8 @@
+using Game;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static Game.GameModel;
 
 namespace GetraenkeBub
 {
@@ -8,6 +10,9 @@ namespace GetraenkeBub
     {
 
         public static UIStateManager Instance;
+
+        public event Action<AAbility> OnAbilityCasted; //TODO INVOKE!
+
         private UIState currentUIState;
         [SerializeField] private EUIState startUIState;
 
@@ -29,6 +34,11 @@ namespace GetraenkeBub
             currentUIState.OnBeforeEnter();
             currentUIState.OnEnter();
 
+        }
+
+        public void SetAbilities(List<(AAbility, AbilityUsability)> abilities)
+        {
+            //TODO PEANUT
         }
 
         private UIState GetUISTate(EUIState toCheckUIState)
