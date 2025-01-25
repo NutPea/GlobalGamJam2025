@@ -11,6 +11,8 @@ namespace Game.Grid
         [SerializeField] private GameObject debugVisual;
         private HighlightOption currentHighlightOption;
 
+        private GameObject movementHighlight;
+        private GameObject abilityHighlight;
 
         private void Awake()
         {
@@ -18,6 +20,9 @@ namespace Game.Grid
             {
                 debugVisual?.SetActive(false);
             }
+
+            movementHighlight = transform.Find("MH").gameObject;
+            abilityHighlight = transform.Find("AH").gameObject;
         }
 
         private void Update()
@@ -28,6 +33,9 @@ namespace Game.Grid
         public void SetHighlightOption(HighlightOption highlightOption)
         {
             currentHighlightOption = highlightOption;
+
+            movementHighlight?.SetActive(highlightOption == HighlightOption.Movement);
+            abilityHighlight?.SetActive(highlightOption == HighlightOption.Ability);
         }
     }
 }

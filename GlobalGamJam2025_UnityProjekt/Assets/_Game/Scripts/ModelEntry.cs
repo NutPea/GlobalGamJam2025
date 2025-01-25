@@ -4,7 +4,7 @@ using UnityEngine;
 public class ModelEntry<T>
 {
     private T _value;
-    private Func<T, T> sanityFix;
+    private Func<T, T> sanityFix = f => f;
 
     public T Value { get => _value; set
         {

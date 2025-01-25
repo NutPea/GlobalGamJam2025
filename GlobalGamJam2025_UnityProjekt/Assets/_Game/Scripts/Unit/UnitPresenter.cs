@@ -22,6 +22,9 @@ namespace Game.Unit
 
             movementProvider = GetComponent<IMovementProvider>();
             abilityProvider = GetComponent<IAbilityProvider>();
+        }
+        private void Start()
+        {
             transform.parent = GridPresenter.Instance.transform;
         }
         private void Update()

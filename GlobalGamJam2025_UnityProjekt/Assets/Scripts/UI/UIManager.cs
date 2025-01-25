@@ -30,18 +30,18 @@ namespace GetraenkeBub
 
         public void InvokeOnAbilityHighlight(AAbility ability)
         {
-            OnAbilityHighlight.Invoke(ability);
+            OnAbilityHighlight?.Invoke(ability);
         }
 
 
         public void InvokeOnAbilityCasted(AAbility ability)
         {
-            OnAbilityCasted.Invoke(ability);
+            OnAbilityCasted?.Invoke(ability);
         }
 
         public void InvokeOnAbilityStop()
         {
-            OnAbilityStop.Invoke();
+            OnAbilityStop?.Invoke();
         }
 
         public void ChangeUIState(EUIState toChangeUiState)
@@ -81,7 +81,7 @@ namespace GetraenkeBub
 
         public void HandleAbility(Action done)
         {
-            done.Invoke();
+            done?.Invoke();
         }
 
     }

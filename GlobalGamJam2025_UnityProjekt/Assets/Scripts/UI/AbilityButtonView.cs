@@ -50,6 +50,7 @@ namespace GetraenkeBub
 
         private void Start()
         {
+            button = GetComponent<Button>();
             button.onClick.AddListener(CastAbility);
         }
 
@@ -64,11 +65,19 @@ namespace GetraenkeBub
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!gameObject.activeSelf || ability == null || overlay.activeSelf)
+            {
+                return;
+            }
             UIStateManager.Instance.InvokeOnAbilityHighlight(ability);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (!gameObject.activeSelf || ability == null || overlay.activeSelf)
+            {
+                return;
+            }
             UIStateManager.Instance.InvokeOnAbilityStop();
         }
     }
