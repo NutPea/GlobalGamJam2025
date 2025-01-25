@@ -1,9 +1,12 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Game.Unit
 {
     public class UnitModel : MonoBehaviour
     {
+        public enum UnitRotation { Up, Right, Down, Left }
+
         [SerializeField, Tooltip("maximale movement aktionen pro Runde")] private int _maxMovePoints;
 
         [SerializeField, Tooltip("Actionpoints in der ersten Runde BEVOR defaultActionPointChange applied wurde")] private int _startActionPoints;
@@ -35,6 +38,7 @@ namespace Game.Unit
 
         private void Awake()
         {
+            CurrentHP.SetSanityFixFunc(f => Mathf.Clamp(f, 0, MaxHP.Value));
             InitValues();
         }
 

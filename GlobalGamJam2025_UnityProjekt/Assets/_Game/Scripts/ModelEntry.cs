@@ -4,16 +4,24 @@ using UnityEngine;
 public class ModelEntry<T> : MonoBehaviour
 {
     private T _value;
-    public T Value { get => _value; set 
+    private Func<T, T> sanityFix;
+
+    public T Value { get => _value; set
         {
-            if(value.Equals(_value))
+            T newValue = sanityFix(value);
+            if (newValue.Equals(_value))
             {
                 return;
             }
             T oldValue = _value;
-            _value = value;
+            _value = newValue;
             OnChange?.Invoke(oldValue, _value);
-        } 
+        }
     }
     public event Action<T, T> OnChange;
+
+    public void SetSanityFixFunc(Func<T,T> func)
+    {
+        sanityFix = func;
+    }
 }

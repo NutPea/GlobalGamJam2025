@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static Game.Unit.UnitModel;
 
 namespace Game.Unit
 {
@@ -38,6 +40,15 @@ namespace Game.Unit
             return abilityProvider.GetAbilityPossibilities(model.Position.Value);
         }
 
+        public Vector2Int GetPosition()
+        {
+            return Vector2Int.right;
+        }
+        public UnitRotation GetRotation()
+        {
+            return UnitRotation.Up;
+        }
+
         public void SetMaxMovementPointModifier(int value)
         {
             model.MaxMovementPointModifier.Value = value;
@@ -46,5 +57,11 @@ namespace Game.Unit
         {
             model.ActionPointChangeModifier.Value = value;
         }
+        public void ApplyHPChange(int value)
+        {
+            model.CurrentHP.Value += value;
+        }
+
+        //hp
     }
 }

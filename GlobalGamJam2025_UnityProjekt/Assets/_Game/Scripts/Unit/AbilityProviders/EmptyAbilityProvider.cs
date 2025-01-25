@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Unit
@@ -7,7 +8,7 @@ namespace Game.Unit
     {
         public List<AAbility> GetAbilityPossibilities(Vector2Int position)
         {
-            return new List<AAbility>();
+            return GetComponentsInChildren<AAbility>().ToList();
         }
     }
 }
