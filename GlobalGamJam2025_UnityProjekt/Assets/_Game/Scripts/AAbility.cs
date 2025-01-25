@@ -47,7 +47,7 @@ namespace Game
         private List<Vector2Int> patternMiddleFinger = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.right, Vector2Int.left };
         private List<Vector2Int> patternO = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.down + Vector2Int.left, Vector2Int.down + Vector2Int.right };
 
-        private void OnEnable()
+        private void Start()
         {
             UIStateManager.Instance.OnAbilityHighlight += GetOnAbilityHighlight;
             UIStateManager.Instance.OnAbilityStop += OnAbilityStop;
@@ -111,28 +111,18 @@ namespace Game
             for (int i = 0; i > length; i++)
             {
                 AGridContent content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
 
                 content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.left * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                
 
                 content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.right * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                
 
                 content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.right * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
             }
         }
 
@@ -146,10 +136,7 @@ namespace Game
                     if (toCheckPos.magnitude <= length)
                     {
                         AGridContent content = GridPresenter.Instance.GetContent(parentPos + toCheckPos);
-                        if (content.GetType() == GetContentType(targetType))
-                        {
-                            content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                        }
+                        content.SetHighlightOption(AGridContent.HighlightOption.Ability);
                     }
                 }
             }
@@ -160,10 +147,7 @@ namespace Game
             for (int i = 1; i <= length; i++)
             {
                 AGridContent content = GridPresenter.Instance.GetContent(parentPos + direction * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
             }
         }
 
@@ -174,10 +158,7 @@ namespace Game
             foreach (Vector2Int pos in rotatedList)
             {
                 AGridContent content = GridPresenter.Instance.GetContent(pos + parentPos);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
             }
         }
 
