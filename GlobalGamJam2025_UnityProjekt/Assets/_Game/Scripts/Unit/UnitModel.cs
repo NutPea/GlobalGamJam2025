@@ -23,6 +23,8 @@ namespace Game.Unit
 
         //MOVEMENT
         [HideInInspector] public ModelEntry<Vector2Int> Position = new();
+        [HideInInspector] public ModelEntry<UnitRotation> Rotation = new();
+
         [HideInInspector] public ModelEntry<int> MaxMovementPoints = new();
         [HideInInspector] public ModelEntry<int> CurrentMovementPoints = new();
         [HideInInspector] public ModelEntry<int> MaxMovementPointModifier = new();

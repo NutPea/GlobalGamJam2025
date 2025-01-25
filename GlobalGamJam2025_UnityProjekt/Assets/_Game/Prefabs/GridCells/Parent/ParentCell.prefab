@@ -356,9 +356,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5795033577657319637}
-  - component: {fileID: 2947346123411284916}
   m_Layer: 0
-  m_Name: EmptyCell
+  m_Name: ParentCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,19 +380,6 @@ Transform:
   - {fileID: 1551245075476284426}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2947346123411284916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5968246510144762717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 265baef0a6cd6554191e2286239743b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugVisual: {fileID: 7323208776434075770}
 --- !u!1 &7323208776434075770
 GameObject:
   m_ObjectHideFlags: 0
