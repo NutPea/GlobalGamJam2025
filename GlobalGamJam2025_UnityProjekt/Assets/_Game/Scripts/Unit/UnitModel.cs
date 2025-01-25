@@ -5,6 +5,7 @@ namespace Game.Unit
 {
     public class UnitModel : MonoBehaviour
     {
+        public enum Faction { None, Vegans, Bavarians, Tinfoil}
         public enum UnitRotation { Up, Right, Down, Left }
 
         [SerializeField, Tooltip("maximale movement aktionen pro Runde")] private int _maxMovePoints;
@@ -15,6 +16,7 @@ namespace Game.Unit
 
         [SerializeField, Tooltip("Maximale und StartHP der Unit")] private int _maxHP;
         [SerializeField, Tooltip("Initiative, um Reihenfolge der Units zu definieren")] private int _initiative;
+        [SerializeField, Tooltip("Start Faction der Unit")] private Faction _faction;
 
 
         //HP
@@ -37,15 +39,14 @@ namespace Game.Unit
 
 
         [HideInInspector] public ModelEntry<bool> IsUsedThisRound = new();
+        [HideInInspector] public ModelEntry<int> Initiative = new();
+        [HideInInspector] public ModelEntry<Faction> UnitFaction = new();
 
-        private void Start()
+
+        public void InitValues()
         {
             CurrentHP.SetSanityFixFunc(f => Mathf.Clamp(f, 0, MaxHP.Value));
-            InitValues();
-        }
 
-        private void InitValues()
-        {
             MaxHP.Value = _maxHP;
             CurrentHP.Value = _maxHP;
 
@@ -57,6 +58,9 @@ namespace Game.Unit
             ActionPointChange.Value = _defaultActionPointChange;
             ActionPointChangeModifier.Value = 0;
             MaxActionPoints.Value = _maxActionPoints;
+
+            Initiative.Value = _initiative;
+            UnitFaction.Value = _faction;
         }
         public void ApplyRoundStart()
         {

@@ -1,3 +1,8 @@
+using Game.Unit;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.Grid
@@ -20,7 +25,14 @@ namespace Game.Grid
         {
             return model.GetContent(position);
         }
-
+        public List<UnitPresenter> FindGetUnits()
+        {
+            return GetComponentsInChildren<UnitPresenter>().ToList();
+        }
+        public int GetRoundCount()
+        {
+            return model.GetRoundCount();
+        }
 
     }
 }

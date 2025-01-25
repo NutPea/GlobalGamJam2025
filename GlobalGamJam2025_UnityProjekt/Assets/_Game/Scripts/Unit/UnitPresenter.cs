@@ -8,14 +8,23 @@ namespace Game.Unit
     public class UnitPresenter : MonoBehaviour
     {
         private UnitModel model;
+        private AUnitView view;
         private IMovementProvider movementProvider;
         private IAbilityProvider abilityProvider;
 
         private void Awake()
         {
             model = GetComponent<UnitModel>();
+            view = GetComponent<AUnitView>();
+
             movementProvider = GetComponent<IMovementProvider>();
             abilityProvider = GetComponent<IAbilityProvider>();
+        }
+        private void OnEnable()
+        {
+            model.InitValues();
+
+            //TODO SUBSCRIBE VIEW
         }
 
         public void ApplyOverallRoundStart()
@@ -48,6 +57,11 @@ namespace Game.Unit
             return model.Rotation.Value;
         }
 
+        public int GetInitiative()
+        {
+            return model.Initiative.Value;
+        }
+
         public void SetMaxMovementPointModifier(int value)
         {
             model.MaxMovementPointModifier.Value = value;
@@ -60,7 +74,9 @@ namespace Game.Unit
         {
             model.CurrentHP.Value += value;
         }
-
-        //hp
+        public Faction GetFaction()
+        {
+            return model.UnitFaction.Value;
+        }
     }
 }
