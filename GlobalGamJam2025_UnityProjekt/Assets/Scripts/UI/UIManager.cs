@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,8 +60,15 @@ namespace GetraenkeBub
 
        public void OnInit()
        {
-            IUIState = UIManager.GetComponent<IUIState>();
-            IUIState.Init();
+            try
+            {
+                IUIState = UIManager.GetComponent<IUIState>();
+                IUIState.Init();
+            }
+            catch(Exception e)
+            {
+                Debug.Log(UIManager.name + e);
+            }
        }
 
         public void OnBeforeEnter()
