@@ -9,7 +9,7 @@ namespace Game.Grid
         public static GridPresenter Instance;
         private GridModel model;
 
-        private void Awake()
+        private void OnEnable()
         {
             Instance = this;
             model = GetComponent<GridModel>();

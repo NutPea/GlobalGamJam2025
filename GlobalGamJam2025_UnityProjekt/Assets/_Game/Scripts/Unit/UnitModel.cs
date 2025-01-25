@@ -38,7 +38,7 @@ namespace Game.Unit
 
         [HideInInspector] public ModelEntry<bool> IsUsedThisRound = new();
 
-        private void Awake()
+        private void Start()
         {
             CurrentHP.SetSanityFixFunc(f => Mathf.Clamp(f, 0, MaxHP.Value));
             InitValues();
@@ -60,8 +60,11 @@ namespace Game.Unit
         }
         public void ApplyRoundStart()
         {
-            CurrentMovementPoints.Value = MaxMovementPoints.Value + MaxMovementPoints.Value;
+            CurrentMovementPoints.Value = MaxMovementPoints.Value + MaxMovementPointModifier.Value;
             CurrentActionPoints.Value = Mathf.Clamp(CurrentActionPoints.Value + ActionPointChange.Value + ActionPointChangeModifier.Value, 0, MaxActionPoints.Value);
+
+            MaxMovementPointModifier.Value = 0;
+            ActionPointChange.Value = 0;
         }
     }
 }

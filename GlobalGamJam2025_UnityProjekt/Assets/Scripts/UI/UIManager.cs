@@ -14,6 +14,7 @@ namespace GetraenkeBub
         [SerializeField] private List<UIState> UIStates;
         private void Awake()
         {
+            Instance = this;
             UIStates.ForEach(n => n.OnInit());
             ChangeUIState(startUIState);
         }
@@ -68,6 +69,7 @@ namespace GetraenkeBub
             {
                 IUIState = UIManager.GetComponent<IUIState>();
                 IUIState.Init();
+                UIManager.gameObject.SetActive(false);
             }
             catch(Exception e)
             {
@@ -77,6 +79,7 @@ namespace GetraenkeBub
 
         public void OnBeforeEnter()
         {
+            UIManager.gameObject.SetActive(true);
             IUIState.OnBeforeEnter();
         }
         public void OnEnter()
@@ -87,6 +90,7 @@ namespace GetraenkeBub
         public void OnLeave()
         {
             IUIState.OnLeave();
+            UIManager.gameObject.SetActive(false);
         }
 
 
