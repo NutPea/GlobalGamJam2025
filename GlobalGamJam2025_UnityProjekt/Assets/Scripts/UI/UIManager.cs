@@ -85,5 +85,10 @@ namespace GetraenkeBub
             IUIState.OnLeave();
         }
 
+
+        public void HandleAbility(Action done)
+        {
+            done.Invoke();
+        }
     }
 }
