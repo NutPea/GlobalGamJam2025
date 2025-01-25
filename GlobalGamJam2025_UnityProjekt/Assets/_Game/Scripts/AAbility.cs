@@ -253,6 +253,8 @@ namespace Game
             return false;
         }
 
+
+
         HashSet<AGridContent> GetTargets()
         {
             Vector2Int parentPos = GetComponentInParent<Unit.UnitPresenter>().GetPosition();
@@ -323,6 +325,8 @@ namespace Game
             }
             return targets;
         }
+
+
 
         public virtual void Cast(Action callbackCastFinished)
         {
