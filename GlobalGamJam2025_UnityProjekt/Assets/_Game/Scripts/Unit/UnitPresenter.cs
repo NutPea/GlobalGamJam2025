@@ -13,7 +13,6 @@ namespace Game.Unit
         private AUnitView view;
         private IMovementProvider movementProvider;
         private IAbilityProvider abilityProvider;
-        private UnitContent parentContent;
 
         private Vector3 velocity;
         private void Awake()
@@ -33,7 +32,20 @@ namespace Game.Unit
         {
             model.InitValues();
 
-            //TODO SUBSCRIBE VIEW
+            model.MaxHP.OnChange += view.MaxHPChanged;
+            model.CurrentHP.OnChange += view.CurrentHPChanged;
+            model.Position.OnChange += view.PositionChanged;
+            model.Rotation.OnChange += view.UnitRotationChanged;
+            model.MaxMovementPoints.OnChange += view.MaxMovementPointsChanged;
+            model.CurrentMovementPoints.OnChange += view.CurrentMovementPointsChanged;
+            model.MaxMovementPointModifier.OnChange += view.MaxMovementPointModifierChanged;
+            model.CurrentActionPoints.OnChange += view.CurrentActionPointsChanged;
+            model.ActionPointChange.OnChange += view.ActionPointChangeChanged;
+            model.ActionPointChangeModifier.OnChange += view.ActionPointChangeModifierChanged;
+            model.MaxActionPoints.OnChange += view.MaxActionPointsChanged;
+            model.IsUsedThisRound.OnChange += view.IsUsedThisRoundChanged;
+            model.Initiative.OnChange += view.InitiativeChanged;
+            model.UnitFaction.OnChange += view.UnitFactionChanged;
         }
 
         public void ApplyOverallRoundStart()
@@ -80,6 +92,15 @@ namespace Game.Unit
         }
         public void SetPosition(Vector2Int position)
         {
+            Vector2Int dif = model.Position.Value - position;
+            if(Mathf.Abs(dif.x) >= Mathf.Abs(dif.y))
+            {
+                model.Rotation.Value = dif.x > 0 ? UnitRotation.Right : UnitRotation.Left;
+            }
+            else
+            {
+                model.Rotation.Value = dif.y > 0 ? UnitRotation.Up : UnitRotation.Down;
+            }
             model.Position.Value = position;
         }
         public int GetInitiative()
