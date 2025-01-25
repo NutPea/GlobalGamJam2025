@@ -18,6 +18,14 @@ namespace Game.Grid
             content = new AGridContent[0, 0];
         }
 
+        public void SwapCells(Vector2Int posA, Vector2Int posB)
+        {
+            AGridContent contentA = GetContent(posA);
+            AGridContent contentB = GetContent(posB);
+
+            content[posA.x, posA.y] = contentB;
+            content[posB.x, posB.y] = contentA;
+        }
         public AGridContent GetContent(Vector2Int position)
         {
             if(position.x <0 || position.x > content.GetLength(0))

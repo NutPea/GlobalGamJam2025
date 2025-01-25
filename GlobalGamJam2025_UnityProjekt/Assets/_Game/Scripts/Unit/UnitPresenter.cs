@@ -1,3 +1,5 @@
+using Game.Grid;
+using Game.Grid.Content;
 using System.Collections.Generic;
 using UnityEngine;
 using static Game.Unit.UnitModel;
@@ -11,7 +13,9 @@ namespace Game.Unit
         private AUnitView view;
         private IMovementProvider movementProvider;
         private IAbilityProvider abilityProvider;
+        private UnitContent parentContent;
 
+        private Vector3 velocity;
         private void Awake()
         {
             model = GetComponent<UnitModel>();
@@ -19,6 +23,11 @@ namespace Game.Unit
 
             movementProvider = GetComponent<IMovementProvider>();
             abilityProvider = GetComponent<IAbilityProvider>();
+            transform.parent = GridPresenter.Instance.transform;
+        }
+        private void Update()
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(model.Position.Value.x, 0, model.Position.Value.y), ref velocity, 0.25f);
         }
         private void OnEnable()
         {
@@ -69,7 +78,10 @@ namespace Game.Unit
         {
             return model.Rotation.Value;
         }
-
+        public void SetPosition(Vector2Int position)
+        {
+            model.Position.Value = position;
+        }
         public int GetInitiative()
         {
             return model.Initiative.Value;

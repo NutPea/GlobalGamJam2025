@@ -91,8 +91,8 @@ namespace Game
                                 if (movementOptions.Contains(movementInput.position))
                                 {
                                     unit.ApplyCurrentMovementPointChange(-1);
-                                    LeanTween.delayedCall(0.01f, () => actionInput.ability.Cast(WaitFinishedHandler)); //TODO movement
-                                    waitForAnimation = true;
+                                    GridPresenter.Instance.SwapCells(unit.GetPosition(), movementInput.position);
+                                    unit.SetPosition(movementInput.position);
                                 }
                                 break;
                             case AbilityInput actionInput:

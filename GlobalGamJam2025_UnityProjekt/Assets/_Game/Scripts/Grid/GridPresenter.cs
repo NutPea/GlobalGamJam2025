@@ -20,6 +20,10 @@ namespace Game.Grid
             model = GetComponent<GridModel>();
         }
 
+        public void InvokeGridPressed(Vector2Int position)
+        {
+            OnGridPressed?.Invoke(position);
+        }
 
         public AGridContent GetContent(Vector2Int position)
         {
@@ -38,6 +42,10 @@ namespace Game.Grid
             }
         }
 
+        public void SwapCells(Vector2Int posA, Vector2Int posB)
+        {
+            model.SwapCells(posA, posB);
+        }
         public int GetRoundCount()
         {
             return model.GetRoundCount();
