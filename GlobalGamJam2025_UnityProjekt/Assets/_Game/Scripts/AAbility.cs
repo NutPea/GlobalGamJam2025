@@ -3,6 +3,7 @@ using Game.Grid.Content;
 using GetraenkeBub;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -62,13 +63,25 @@ namespace Game
             throw new NotImplementedException();
         }
 
+        private List<Vector2Int> RotatePattern(List<Vector2Int> pattern, Vector2Int direction)
+        {
+
+            return new List<Vector2Int>();
+        }
+
         private bool EvaluateCross(Vector2Int parentPos, Vector2Int direction)
         {
 
-
-            EvaluateStraightDirection(parentPos, 4, direction);
-
-            throw new NotImplementedException();
+            //Todo Check two cross fields
+            if (GridPresenter.Instance.GetContent(parentPos + direction * 3 + new Vector2Int(0,1)).GetType() == GetContentType(targetType))
+            {
+                return true;
+            }
+            if (GridPresenter.Instance.GetContent(parentPos + direction * 3 + new Vector2Int(1, 0)).GetType() == GetContentType(targetType))
+            {
+                return true;
+            }
+            return EvaluateStraightDirection(parentPos, 4, direction);
         }
 
         private bool EvaluateX(Vector2Int parentPos, int length)
@@ -276,11 +289,25 @@ namespace Game
                         unit.unitReference.SetMaxMovementPointModifier(-attackReduceMovementPoints);
                         //TODO Animationen!
                         break;
-                    case CommunityContent community: 
-                        // Community abfragen wegen animationen -> 
-                        // isCaptureSuccessful
-                        // faction an der unit + faction an der Community
-                        // Capture(myFaction)
+                    case CommunityContent community:
+                        if(community.communityPresenter.GetFaction() == Unit.UnitModel.Faction.None)
+                        {
+                            if (community.communityPresenter.IsCaptureSuccessful())
+                            {
+                                //TODDO: Success Animations
+                                community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
+                            }
+                        } else
+                        {
+                            if (community.communityPresenter.IsCaptureSuccessful())
+                            {
+                                //TODO: Success Animations
+                                community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
+                            } else
+                            {
+                                //TODO: Failure Animation
+                            }
+                        }
                         break;
 
                 }
