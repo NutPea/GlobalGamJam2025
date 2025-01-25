@@ -42,6 +42,10 @@ namespace GetraenkeBub
             return null;
         }
 
+        public void HandleAbility(Action done)
+        {
+            done.Invoke();
+        }
 
     }
 
@@ -86,9 +90,5 @@ namespace GetraenkeBub
         }
 
 
-        public void HandleAbility(Action done)
-        {
-            done.Invoke();
-        }
     }
 }
