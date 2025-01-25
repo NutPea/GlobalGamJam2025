@@ -16,6 +16,11 @@ namespace Game
 
         private IEnumerator gameFlow;
 
+        private void Start()
+        {
+            gameFlow = PlayLevel(0);
+            gameFlow.MoveNext();
+        }
         private IEnumerator PlayLevel(int index)
         {
             LoadLevel(index);

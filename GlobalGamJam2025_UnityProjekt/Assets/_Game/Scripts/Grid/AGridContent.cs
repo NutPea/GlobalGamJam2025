@@ -6,7 +6,11 @@ namespace Game.Grid
     [ExecuteInEditMode]
     public abstract class AGridContent : MonoBehaviour
     {
+        public enum HighlightOption { None, Movement, Ability}
+
         [SerializeField] private GameObject debugVisual;
+        private HighlightOption currentHighlightOption;
+
 
         private void Awake()
         {
@@ -19,6 +23,11 @@ namespace Game.Grid
         private void Update()
         {
             transform.position = Vector3Int.RoundToInt(transform.position);
+        }
+
+        public void SetHighlightOption(HighlightOption highlightOption)
+        {
+            currentHighlightOption = highlightOption;
         }
     }
 }
