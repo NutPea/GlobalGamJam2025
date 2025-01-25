@@ -478,6 +478,7 @@ namespace Game
                         unit.unitReference.SetActionPointChangeModifier(-attackActionPoints);
                         unit.unitReference.SetMaxMovementPointModifier(-attackReduceMovementPoints);
                         //TODO Animationen!
+                        Debug.Log("Attack Successful");
                         break;
                     case CommunityContent community:
                         if(community.communityPresenter.GetFaction() == Unit.UnitModel.Faction.None)
@@ -485,6 +486,7 @@ namespace Game
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
                                 //TODDO: Success Animations
+                                Debug.Log("IsCapture Success");
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             }
                         } else
@@ -492,10 +494,12 @@ namespace Game
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
                                 //TODO: Success Animations
+                                Debug.Log("Capture Success");
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             } else
                             {
                                 //TODO: Failure Animation
+                                Debug.Log("Capture Success");
                             }
                         }
                         break;
