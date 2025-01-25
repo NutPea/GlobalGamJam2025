@@ -59,6 +59,7 @@ namespace Game.Unit
             ActionPointChangeModifier.Value = 0;
             MaxActionPoints.Value = _maxActionPoints;
 
+            Position.Value = Vector2Int.RoundToInt(new Vector2(transform.position.x, transform.position.z));
             Initiative.Value = _initiative;
             UnitFaction.Value = _faction;
         }

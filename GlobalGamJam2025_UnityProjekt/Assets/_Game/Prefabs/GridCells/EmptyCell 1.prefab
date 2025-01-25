@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugVisual: {fileID: 7289256538981963631}
+  clickAction: {fileID: 2876567704756458423, guid: 7647ded558f8a8a4d8a75e196d784342,
+    type: 3}
 --- !u!1 &7289256538981963631 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7323208776434075770, guid: df8427ccd81d31c47b50236a64f5642b,

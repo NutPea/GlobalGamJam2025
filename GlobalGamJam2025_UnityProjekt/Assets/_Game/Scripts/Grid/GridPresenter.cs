@@ -1,8 +1,7 @@
 using Game.Unit;
-using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.Grid
@@ -10,6 +9,7 @@ namespace Game.Grid
     [RequireComponent(typeof(GridModel))]
     public class GridPresenter : MonoBehaviour
     {
+        public event Action<Vector2Int> OnGridPressed;
 
         public static GridPresenter Instance;
         private GridModel model;
@@ -20,6 +20,10 @@ namespace Game.Grid
             model = GetComponent<GridModel>();
         }
 
+        public void InvokeGridPressed(Vector2Int position)
+        {
+            OnGridPressed?.Invoke(position);
+        }
 
         public AGridContent GetContent(Vector2Int position)
         {
@@ -38,6 +42,10 @@ namespace Game.Grid
             }
         }
 
+        public void SwapCells(Vector2Int posA, Vector2Int posB)
+        {
+            model.SwapCells(posA, posB);
+        }
         public int GetRoundCount()
         {
             return model.GetRoundCount();
