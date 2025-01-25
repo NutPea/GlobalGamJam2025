@@ -253,6 +253,13 @@ namespace Game
             return false;
         }
 
+        private void DisableHighlights()
+        {
+            foreach (AGridContent content in GridPresenter.Instance.GetAllGrids())
+            {
+                content.SetHighlightOption(AGridContent.HighlightOption.None);
+            }
+        }
 
 
         HashSet<AGridContent> GetTargets()

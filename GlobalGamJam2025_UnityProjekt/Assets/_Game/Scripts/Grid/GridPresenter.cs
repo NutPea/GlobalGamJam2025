@@ -29,6 +29,12 @@ namespace Game.Grid
         {
             return GetComponentsInChildren<UnitPresenter>().ToList();
         }
+
+        public List<AGridContent> GetAllGrids()
+        {
+            return GetComponentsInChildren<AGridContent>().ToList();
+        }
+
         public int GetRoundCount()
         {
             return model.GetRoundCount();
