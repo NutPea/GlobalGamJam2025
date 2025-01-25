@@ -1,16 +1,28 @@
 using UnityEngine;
 
-public class EnemyUI : MonoBehaviour
+namespace GetraenkeBub
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public class EnemyUI : MonoBehaviour, IUIState
     {
-        
+        public void Init()
+        {
+       
+        }
+
+        public void OnBeforeEnter()
+        {
+          
+        }
+
+        public void OnEnter()
+        {
+       
+        }
+
+        public void OnLeave()
+        {
+      
+        }
     }
 }
