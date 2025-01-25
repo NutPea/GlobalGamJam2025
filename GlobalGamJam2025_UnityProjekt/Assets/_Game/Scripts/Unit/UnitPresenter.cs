@@ -48,10 +48,19 @@ namespace Game.Unit
             return abilityProvider.GetAbilityPossibilities(model.Position.Value);
         }
 
+        public int GetAbilityPoints()
+        {
+            return model.CurrentActionPoints.Value;
+        }
         public int GetCurrentMovementPoints()
         {
             return model.CurrentMovementPoints.Value;
         }
+        public void ApplyCurrentMovementPointChange(int value)
+        {
+            model.CurrentMovementPoints.Value += value;
+        }
+
         public Vector2Int GetPosition()
         {
             return model.Position.Value;
