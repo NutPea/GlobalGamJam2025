@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6799009400989298241}
   - component: {fileID: -3779775534946823180}
   m_Layer: 0
-  m_Name: Ability
+  m_Name: TestAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,12 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 0}
-  abilityName: 
-  abilityDescription: 
-  actionPointCost: 0
-  length: 0
-  actionDirection: 0
-  targetType: 0
+  abilityName: Test
+  abilityDescription: This is a Test
+  actionPointCost: 1
+  length: 2
+  actionDirection: 8
+  targetType: 3
   spawnedEffect: {fileID: 0}
   attackDamage: 0
   attackActionPoints: 0
