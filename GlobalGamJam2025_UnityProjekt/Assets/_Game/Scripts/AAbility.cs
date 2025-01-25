@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace Game
 {
-    public abstract class AAbility : MonoBehaviour
+    public class AAbility : MonoBehaviour
     {
         public Sprite abilityIcon;
         public string abilityName;
@@ -36,13 +36,16 @@ namespace Game
         /// <returns></returns>
         /// 
         private List<Vector2Int> patternT = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 4 + Vector2Int.left, Vector2Int.up * 4 + Vector2Int.right };
-        private List<Vector2Int> patternL = new List<Vector2Int>();
-        private List<Vector2Int> patternCross = new List<Vector2Int>();
+        private List<Vector2Int> patternL = new List<Vector2Int> { Vector2Int.up , Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up *3 + Vector2Int.left };
+        private List<Vector2Int> patternCross = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 3 + Vector2Int.left, Vector2Int.up * 3 + Vector2Int.right };
         private List<Vector2Int> patternMiddleFinger = new List<Vector2Int>();
         private List<Vector2Int> patternO = new List<Vector2Int>();
 
-
-        public virtual bool IsTargetConditionSatisfied()
+        private void OnEnable()
+        {
+           // UIStateManager.Instance.OnAbilityHighlight();
+        }
+        public bool IsTargetConditionSatisfied()
         {
             Vector2Int parentPos = GetComponentInParent<Unit.UnitPresenter>().GetPosition();
 
@@ -335,7 +338,7 @@ namespace Game
 
 
 
-        public virtual void Cast(Action callbackCastFinished)
+        public void Cast(Action callbackCastFinished)
         {
             Instantiate(spawnedEffect, transform.parent.transform);
             foreach (var target in GetTargets())

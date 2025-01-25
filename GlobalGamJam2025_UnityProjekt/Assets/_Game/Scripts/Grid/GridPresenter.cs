@@ -30,9 +30,12 @@ namespace Game.Grid
             return GetComponentsInChildren<UnitPresenter>().ToList();
         }
 
-        public List<AGridContent> GetAllGrids()
+        public void DisableAllGridHighlights()
         {
-            return GetComponentsInChildren<AGridContent>().ToList();
+            foreach (AGridContent content in GetComponentsInChildren<AGridContent>().ToList())
+            {
+                content.SetHighlightOption(AGridContent.HighlightOption.None);
+            }
         }
 
         public int GetRoundCount()
