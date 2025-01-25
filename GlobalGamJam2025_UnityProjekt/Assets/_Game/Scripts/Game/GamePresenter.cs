@@ -7,7 +7,10 @@ namespace Game
     {
         private IEnumerator gameFlow;
 
-        private void 
+        private void SCHREIBDIEMETHODEFERTIG()
+        {
+
+        }
 
         //Spiel Start
         //Runde Start, iteriere über Runden bis Runden rum sind
