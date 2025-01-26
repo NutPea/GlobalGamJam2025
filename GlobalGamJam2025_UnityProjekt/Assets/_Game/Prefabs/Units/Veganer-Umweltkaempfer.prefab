@@ -82,6 +82,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7690109346396090372}
     m_Modifications:
+    - target: {fileID: -3779775534946823180, guid: eb6a0310173cdf74c8eee2a7c7fa2c44,
+        type: 3}
+      propertyPath: showAttackSprites.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: eb6a0310173cdf74c8eee2a7c7fa2c44,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bdf0976d1a724f2dad07e4e4d6a2423,
+        type: 3}
     - target: {fileID: 6799009400989298241, guid: eb6a0310173cdf74c8eee2a7c7fa2c44,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -156,6 +167,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7690109346396090372}
     m_Modifications:
+    - target: {fileID: -3779775534946823180, guid: 5da7de738f9361146bac0217c2173cf1,
+        type: 3}
+      propertyPath: showAttackSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: 5da7de738f9361146bac0217c2173cf1,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 18391d66556ff4f7ba64dc71fde49047,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: 5da7de738f9361146bac0217c2173cf1,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 266f476d571c3460b958898ed9158b5f,
+        type: 3}
     - target: {fileID: 6799009400989298241, guid: 5da7de738f9361146bac0217c2173cf1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -230,6 +258,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7690109346396090372}
     m_Modifications:
+    - target: {fileID: -3779775534946823180, guid: 24aed32d16882b34b85f57ca4cff523b,
+        type: 3}
+      propertyPath: attackReaktions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: 24aed32d16882b34b85f57ca4cff523b,
+        type: 3}
+      propertyPath: showAttackSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: 24aed32d16882b34b85f57ca4cff523b,
+        type: 3}
+      propertyPath: 'attackReaktions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 8313c9ea30725c743814b7bd9950132c,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: 24aed32d16882b34b85f57ca4cff523b,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 31166985cc751409ebaf2259618a757b,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: 24aed32d16882b34b85f57ca4cff523b,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 47fc7c033b9e74a9ba59aa87b52a8729,
+        type: 3}
     - target: {fileID: 6799009400989298241, guid: 24aed32d16882b34b85f57ca4cff523b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -479,6 +535,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7690109346396090372}
     m_Modifications:
+    - target: {fileID: -3779775534946823180, guid: 5695a7b39c5de1a4296645aadc52c294,
+        type: 3}
+      propertyPath: showAttackSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: 5695a7b39c5de1a4296645aadc52c294,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 2b1daf8efc9364b569d023f3f394af82,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: 5695a7b39c5de1a4296645aadc52c294,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: a387d0959203d42f0a226b8077d96258,
+        type: 3}
     - target: {fileID: 6799009400989298241, guid: 5695a7b39c5de1a4296645aadc52c294,
         type: 3}
       propertyPath: m_LocalPosition.x

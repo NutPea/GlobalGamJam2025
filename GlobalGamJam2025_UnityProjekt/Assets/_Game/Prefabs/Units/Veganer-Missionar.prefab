@@ -8,6 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7690109346396090372}
     m_Modifications:
+    - target: {fileID: -3779775534946823180, guid: a89acb154dc3e3d44a176611fe083e5e,
+        type: 3}
+      propertyPath: abilityIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 33fad1cac17c0fe478d7bf626c6270a0,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: a89acb154dc3e3d44a176611fe083e5e,
+        type: 3}
+      propertyPath: showAttackSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: a89acb154dc3e3d44a176611fe083e5e,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bdf0976d1a724f2dad07e4e4d6a2423,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: a89acb154dc3e3d44a176611fe083e5e,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: a5c1dfe2febb64245a599d077b59da63,
+        type: 3}
     - target: {fileID: 6799009400989298241, guid: a89acb154dc3e3d44a176611fe083e5e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -82,6 +105,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7690109346396090372}
     m_Modifications:
+    - target: {fileID: -3779775534946823180, guid: eb6a0310173cdf74c8eee2a7c7fa2c44,
+        type: 3}
+      propertyPath: showAttackSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: eb6a0310173cdf74c8eee2a7c7fa2c44,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: ea49d9327f48c405195c54d2da15fdc8,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: eb6a0310173cdf74c8eee2a7c7fa2c44,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 0bdf0976d1a724f2dad07e4e4d6a2423,
+        type: 3}
     - target: {fileID: 6799009400989298241, guid: eb6a0310173cdf74c8eee2a7c7fa2c44,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -230,6 +270,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7690109346396090372}
     m_Modifications:
+    - target: {fileID: -3779775534946823180, guid: 5da7de738f9361146bac0217c2173cf1,
+        type: 3}
+      propertyPath: showAttackSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: 5da7de738f9361146bac0217c2173cf1,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 6820d08eaaf474be6999458acd2bf40c,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: 5da7de738f9361146bac0217c2173cf1,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 96ad47730c3d74ab58f74f72db3f106e,
+        type: 3}
     - target: {fileID: 6799009400989298241, guid: 5da7de738f9361146bac0217c2173cf1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -479,6 +536,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7690109346396090372}
     m_Modifications:
+    - target: {fileID: -3779775534946823180, guid: 897352ee156e7bc499b0d1d7be65656f,
+        type: 3}
+      propertyPath: attackReaktions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: 897352ee156e7bc499b0d1d7be65656f,
+        type: 3}
+      propertyPath: showAttackSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3779775534946823180, guid: 897352ee156e7bc499b0d1d7be65656f,
+        type: 3}
+      propertyPath: 'attackReaktions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 47b78defcb4a1a246bcff3a64d277c4c,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: 897352ee156e7bc499b0d1d7be65656f,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: ff090f8089981407f936129c75462ae6,
+        type: 3}
+    - target: {fileID: -3779775534946823180, guid: 897352ee156e7bc499b0d1d7be65656f,
+        type: 3}
+      propertyPath: 'showAttackSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 9bcf00eb798de4dedbdf847993c05586,
+        type: 3}
     - target: {fileID: 6799009400989298241, guid: 897352ee156e7bc499b0d1d7be65656f,
         type: 3}
       propertyPath: m_LocalPosition.x
