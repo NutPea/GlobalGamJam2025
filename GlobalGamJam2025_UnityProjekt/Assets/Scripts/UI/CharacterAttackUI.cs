@@ -97,7 +97,7 @@ namespace GetraenkeBub
 
             if(communityPresenter != null)
             {
-                HandleCommunityTimeline(transitionTime, showTime, () => done.Invoke());
+                StartCoroutine(HandleCommunityTimeline(transitionTime, showTime, () => done.Invoke()));
             }
             else
             {
@@ -120,7 +120,8 @@ namespace GetraenkeBub
         private void TransitionCummunityIn()
         {
             //Spawn
-            spawnedPostGameobjekt = Instantiate(reaktionGameobject, communityPresenter.transform.position, Quaternion.identity);
+            spawnedPostGameobjekt = Instantiate(reaktionPostGameobject, communityPresenter.transform.position, Quaternion.identity);
+            Debug.Log(spawnedPostGameobjekt.GetComponent<CommunityPostHandlerUI>());
             spawnedPostGameobjekt.GetComponent<CommunityPostHandlerUI>().Setup(UIStateManager.Instance.currentUnitPresenter,communityPresenter, WasCommunityWasSuccsesfull);
         }
 
