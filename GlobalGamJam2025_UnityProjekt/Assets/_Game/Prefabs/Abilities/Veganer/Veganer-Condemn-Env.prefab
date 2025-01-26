@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6799009400989298241}
   - component: {fileID: -3779775534946823180}
   m_Layer: 0
-  m_Name: Circle Damage 1
+  m_Name: Veganer-Condemn-Env
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,12 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21db2e99845b47c48a7dc28b9d776025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityIcon: {fileID: 0}
-  abilityName: Circle DMG 1
-  abilityDescription: This is a Test
+  abilityIcon: {fileID: 21300000, guid: fc1613281b6af5f4c88ac16ae919bcc8, type: 3}
+  abilityName: Condemn Environmental Sins
+  abilityDescription: With his action you can point out environmental sins committed
+    by either companies or individuals to someone. They are indignant but also feel
+    guilty and take 1 Mental Health Damage.
   actionPointCost: 1
-  length: 5
-  actionDirection: 6
+  length: 1
+  actionDirection: 5
   targetType: 3
   spawnedEffect: {fileID: 0}
   attackDamage: 1
