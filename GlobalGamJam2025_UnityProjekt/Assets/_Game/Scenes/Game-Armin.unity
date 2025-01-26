@@ -1622,6 +1622,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4133553342505199439, guid: 62662d7aa7bdbb546adcb59b014aaff6,
+        type: 3}
+      propertyPath: spawnedEffect
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5790773135858615435, guid: 62662d7aa7bdbb546adcb59b014aaff6,
         type: 3}
       propertyPath: _maxHP
@@ -1648,7 +1653,8 @@ PrefabInstance:
       value: Grid-Level-1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1706159204351963126, guid: 62662d7aa7bdbb546adcb59b014aaff6, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2800599420001256377, guid: 62662d7aa7bdbb546adcb59b014aaff6,
         type: 3}
@@ -1808,12 +1814,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905d7082f22da32428d64673592edcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &711448763 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1706159204351963126, guid: 62662d7aa7bdbb546adcb59b014aaff6,
-    type: 3}
-  m_PrefabInstance: {fileID: 711448759}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &731237440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2019,7 +2019,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnedEffect
       value: 
-      objectReference: {fileID: 711448763}
+      objectReference: {fileID: 0}
     - target: {fileID: 6799009400989298241, guid: 5da7de738f9361146bac0217c2173cf1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2543,7 +2543,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnedEffect
       value: 
-      objectReference: {fileID: 711448763}
+      objectReference: {fileID: 0}
     - target: {fileID: 6799009400989298241, guid: 791f6dcb79731ad4abf05cbab5266ebb,
         type: 3}
       propertyPath: m_LocalPosition.x

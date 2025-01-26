@@ -99,6 +99,7 @@ namespace GetraenkeBub
             }
             else
             {
+                characterAttackUI.WasCommunityWasSuccsesfull = communitySuccess;
                 characterAttackUI.HandleAbility(() => done.Invoke(),ability, caster, targets);
             }
         }
