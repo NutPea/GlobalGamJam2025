@@ -2,14 +2,10 @@ using Game.Grid;
 using Game.Grid.Content;
 using GetraenkeBub;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 namespace Game
 {
@@ -46,6 +42,7 @@ namespace Game
         private List<Vector2Int> patternCross = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 3 + Vector2Int.left, Vector2Int.up * 3 + Vector2Int.right };
         private List<Vector2Int> patternMiddleFinger = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.right, Vector2Int.left };
         private List<Vector2Int> patternO = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.down + Vector2Int.left, Vector2Int.down + Vector2Int.right };
+        private List<Vector2Int> patternCircle = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.down, Vector2Int.down * 2, Vector2Int.left, Vector2Int.left * 2, Vector2Int.right, Vector2Int.right * 2 };
 
         private void Start()
         {
@@ -83,7 +80,7 @@ namespace Game
                     HighLightStraightDirection(parentPos, length, direction);
                     break;
                 case ActionDirection.circle:
-                    HighLightDirectionCircle(parentPos);
+                    HighLightPattern(parentPos, Vector2Int.up, patternCircle);
                     break;
                 case ActionDirection.O:
                     HighLightPattern(parentPos, Vector2Int.up, patternO);
@@ -126,22 +123,6 @@ namespace Game
             }
         }
 
-        private void HighLightDirectionCircle(Vector2Int parentPos)
-        {
-            for (int x = 0; x < length; x++)
-            {
-                for (int y = 0; y < length; y++)
-                {
-                    Vector2Int toCheckPos = new Vector2Int(x, y);
-                    if (toCheckPos.magnitude <= length)
-                    {
-                        AGridContent content = GridPresenter.Instance.GetContent(parentPos + toCheckPos);
-                        content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                    }
-                }
-            }
-        }
-
         private void HighLightStraightDirection(Vector2Int parentPos, int length, Vector2Int direction)
         {
             for (int i = 1; i <= length; i++)
@@ -175,7 +156,7 @@ namespace Game
                 case ActionDirection.forward:
                     return EvaluateStraightDirection(parentPos, length, direction);
                 case ActionDirection.circle:
-                    return EvaluateDirectionCircle(parentPos);
+                    return EvaluatePattern(parentPos, Vector2Int.up, patternCircle);
                 case ActionDirection.O:
                     return EvaluatePattern(parentPos, Vector2Int.up, patternO);
                 case ActionDirection.L:
@@ -251,9 +232,6 @@ namespace Game
                     return true;
                 }
             }
-            //TODO auf rotatedPositions parentPos drauf addieren
-            //TODO checken ob target Bedingung erfüllt und dann returnen
-            //Liste speichern und dann highlights über Grid visualisieren und später weg machen wieder
             return false; 
         }
 
@@ -290,31 +268,12 @@ namespace Game
             }
         }
 
-        private bool EvaluateDirectionCircle(Vector2Int parentPos)
-        {
-            for (int x = 0; x < length; x++)
-            {
-                for(int y = 0; y < length; y++)
-                {
-                    Vector2Int toCheckPos = new Vector2Int(x, y);
-                    if(toCheckPos.magnitude <= length)
-                    {
-                        if (GridPresenter.Instance.GetContent(parentPos + toCheckPos).GetType() == GetContentType(targetType))
-                        {
-                            return true;
-                        } 
-                    }
-                }
-            }
-            return false;
-        }
-
         private HashSet<AGridContent> GetTargetsDirectionCircle(Vector2Int parentPos)
         {
             HashSet<AGridContent> targets = new HashSet<AGridContent>();
-            for (int x = 0; x < length; x++)
+            for (int x = -length; x < length; x++)  
             {
-                for (int y = 0; y < length; y++)
+                for (int y = -length; y < length; y++)
                 {
                     Vector2Int toCheckPos = new Vector2Int(x, y);
                     if (toCheckPos.magnitude <= length)
@@ -396,7 +355,7 @@ namespace Game
                     targets.AddRange(GetTargetsStraightDirection(parentPos, length, direction));
                     break;
                 case ActionDirection.circle:
-                    targets.AddRange( GetTargetsDirectionCircle(parentPos));
+                    targets.AddRange(GetTargetsFromPattern(parentPos, Vector2Int.up, patternCircle));
                     break;
                 case ActionDirection.O:
                     targets.AddRange(GetTargetsFromPattern(parentPos, Vector2Int.up, patternO));
@@ -480,11 +439,12 @@ namespace Game
                 }
                 else
                 {
-                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished(), this, transform.parent.gameObject, new List<GameObject> { transform.parent.gameObject});
+                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished(), this, transform.parent.gameObject, new List<GameObject> { transform.parent.gameObject}, false);
                 }
             }
 
             HashSet<AGridContent> targets = GetTargets();
+            bool communitySucces = false;
             foreach (var target in targets)
             {
                 switch (target)
@@ -493,7 +453,6 @@ namespace Game
                         unit.unitReference.ApplyHPChange(-attackDamage);
                         unit.unitReference.SetActionPointChangeModifier(-attackActionPoints);
                         unit.unitReference.SetMaxMovementPointModifier(-attackReduceMovementPoints);
-                        //TODO Animationen!
                         Debug.Log("Attack Successful");
                         break;
                     case CommunityContent community:
@@ -501,7 +460,7 @@ namespace Game
                         {
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
-                                //TODDO: Success Animations
+                                communitySucces = true;
                                 Debug.Log("IsCapture Success");
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             }
@@ -509,12 +468,12 @@ namespace Game
                         {
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
-                                //TODO: Success Animations
+                                communitySucces = true;
                                 Debug.Log("Capture Success");
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             } else
                             {
-                                //TODO: Failure Animation
+                                communitySucces = false;
                                 Debug.Log("Capture Success");
                             }
                         }
@@ -526,7 +485,7 @@ namespace Game
             {
                 callbackCastFinished();
             } else {
-                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished(), this, transform.parent.gameObject, GetGameObjectsFromGridContent(targets));
+                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished(), this, transform.parent.gameObject, GetGameObjectsFromGridContent(targets), communitySucces);
             }
         }
     }

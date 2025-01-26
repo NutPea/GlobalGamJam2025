@@ -177,20 +177,6 @@ MonoBehaviour:
   _maxHP: 0
   _initiative: 0
   _faction: 0
-  MaxHP: {fileID: 0}
-  CurrentHP: {fileID: 0}
-  Position: {fileID: 0}
-  Rotation: {fileID: 0}
-  MaxMovementPoints: {fileID: 0}
-  CurrentMovementPoints: {fileID: 0}
-  MaxMovementPointModifier: {fileID: 0}
-  CurrentActionPoints: {fileID: 0}
-  ActionPointChange: {fileID: 0}
-  ActionPointChangeModifier: {fileID: 0}
-  MaxActionPoints: {fileID: 0}
-  IsUsedThisRound: {fileID: 0}
-  Initiative: {fileID: 0}
-  UnitFaction: {fileID: 0}
 --- !u!114 &6206842384418937551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8301887, g: 0.76429164, b: 0.11225806, a: 1}
+  m_Color: {r: 1, g: 0.93602437, b: 0.31132066, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -729,7 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9308176, g: 0.9123471, b: 0.06732321, a: 1}
+  m_Color: {r: 0.735849, g: 0.72738314, b: 0.21520104, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -960,8 +946,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

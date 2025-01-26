@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 0}
-  abilityName: T DMG 1
+  abilityName: Circle DMG 1
   abilityDescription: This is a Test
   actionPointCost: 1
-  length: 5
-  actionDirection: 2
+  length: 2
+  actionDirection: 1
   targetType: 3
   spawnedEffect: {fileID: 0}
   attackDamage: 1
