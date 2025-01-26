@@ -65,6 +65,22 @@ namespace GetraenkeBub
 
         public void HandleAbility(Action done, AAbility ability, GameObject caster, List<GameObject> targets)
         {
+            communityPresenter = null;
+            foreach(GameObject target in targets)
+            {
+                CommunityPresenter presi = target.GetComponent<CommunityPresenter>();
+                if (presi != null)
+                {
+                    communityPresenter = presi;
+                    break;
+                }
+            }
+
+            if(communityPresenter != null)
+            {
+                done?.Invoke();
+            }
+
             aAbility = ability;
             this.caster = caster;
             this.opfers = targets;
@@ -76,16 +92,6 @@ namespace GetraenkeBub
             CameraManager.Instance.attackCamera.transform.position = cameraMovePosition;
             CameraManager.Instance.attackCamera.LookAt = targets[0].transform;
 
-            communityPresenter = null;
-            foreach(GameObject target in targets)
-            {
-                CommunityPresenter presi = target.GetComponent<CommunityPresenter>();
-                if (presi != null)
-                {
-                    communityPresenter = presi;
-                    break;
-                }
-            }
 
             if(communityPresenter != null)
             {
