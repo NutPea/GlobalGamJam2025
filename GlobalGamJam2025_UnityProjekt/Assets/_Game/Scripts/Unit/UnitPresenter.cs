@@ -7,7 +7,7 @@ using static Game.Unit.UnitModel;
 namespace Game.Unit
 {
     [RequireComponent(typeof(UnitModel)), RequireComponent(typeof(IMovementProvider)), RequireComponent(typeof(IAbilityProvider))]
-    public class UnitPresenter : MonoBehaviour
+    public class UnitPresenter : MonoBehaviour, ITarget
     {
         private UnitModel model;
         private AUnitView view;
@@ -117,11 +117,11 @@ namespace Game.Unit
             Vector2Int dif = model.Position.Value - position;
             if(Mathf.Abs(dif.x) >= Mathf.Abs(dif.y))
             {
-                model.Rotation.Value = dif.x > 0 ? UnitRotation.Right : UnitRotation.Left;
+                model.Rotation.Value = dif.x > 0 ? UnitRotation.Left : UnitRotation.Right;
             }
             else
             {
-                model.Rotation.Value = dif.y > 0 ? UnitRotation.Up : UnitRotation.Down;
+                model.Rotation.Value = dif.y > 0 ? UnitRotation.Down : UnitRotation.Up;
             }
             model.Position.Value = position;
         }
@@ -145,6 +145,11 @@ namespace Game.Unit
         public Faction GetFaction()
         {
             return model.UnitFaction.Value;
+        }
+        public void DestroyUnit()
+        {
+            GridPresenter.Instance.DestroyCell(model.Position.Value);
+            GameObject.Destroy(gameObject);
         }
     }
 }

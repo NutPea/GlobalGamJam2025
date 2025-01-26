@@ -1,3 +1,4 @@
+using Game.Grid;
 using TMPro;
 using UnityEngine;
 
@@ -52,8 +53,8 @@ namespace GetraenkeBub
         {
             roundChangerUIObject.localPosition = new Vector3(roundChangerUIObject.localPosition.x,-screenHeight,roundChangerUIObject.localPosition.z);
             roundChangerUIObject.gameObject.SetActive(true);
-            notificationText.text = round  +" von 9 Stunden Zeit";
-            timeText.text = round + ":03 pm";
+            notificationText.text = UIStateManager.Instance.CurrentRound  +" from "+ GridPresenter.Instance.GetRoundCount() +"time left";
+            timeText.text = (UIStateManager.Instance.CurrentRound+8) + ":14";
             TODO.LOCA = false;
             TODO.SOUND = false;
             CancelInvoke();

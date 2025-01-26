@@ -1,15 +1,13 @@
 using Game.Grid;
 using Game.Grid.Content;
+using Game.Unit;
 using GetraenkeBub;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
+using static UnityEditor.PlayerSettings;
 
 namespace Game
 {
@@ -31,6 +29,13 @@ namespace Game
         public int attackActionPoints;
         public int attackReduceMovementPoints;
 
+        [Header("Attack Reaktions")]
+        public List<Sprite> showAttackSprites;
+        public List<string> showAttackText;
+        public List<Sprite> attackReaktions;
+
+        private UnitModel.Faction myFaction;
+
         /// <summary>
         /// ignoriert Kosten -> überprüft ob im Grid Target im AOE Bereich verfügbar ist
         /// </summary>
@@ -41,11 +46,13 @@ namespace Game
         private List<Vector2Int> patternCross = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 3 + Vector2Int.left, Vector2Int.up * 3 + Vector2Int.right };
         private List<Vector2Int> patternMiddleFinger = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.right, Vector2Int.left };
         private List<Vector2Int> patternO = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.down + Vector2Int.left, Vector2Int.down + Vector2Int.right };
+        private List<Vector2Int> patternCircle = new List<Vector2Int> { Vector2Int.up + Vector2Int.right, Vector2Int.up + Vector2Int.left, Vector2Int.down + Vector2Int.right, Vector2Int.down + Vector2Int.left,Vector2Int.up, Vector2Int.up * 2, Vector2Int.down, Vector2Int.down * 2, Vector2Int.left, Vector2Int.left * 2, Vector2Int.right, Vector2Int.right * 2 };
 
-        private void OnEnable()
+        private void Start()
         {
             UIStateManager.Instance.OnAbilityHighlight += GetOnAbilityHighlight;
             UIStateManager.Instance.OnAbilityStop += OnAbilityStop;
+            myFaction = GetComponentInParent<UnitPresenter>().GetFaction();
         }
 
         private void OnAbilityStop()
@@ -78,7 +85,7 @@ namespace Game
                     HighLightStraightDirection(parentPos, length, direction);
                     break;
                 case ActionDirection.circle:
-                    HighLightDirectionCircle(parentPos);
+                    HighLightPattern(parentPos, Vector2Int.up, patternCircle);
                     break;
                 case ActionDirection.O:
                     HighLightPattern(parentPos, Vector2Int.up, patternO);
@@ -103,50 +110,21 @@ namespace Game
 
         private void HighLightX(Vector2Int parentPos, int length)
         {
-            for (int i = 0; i > length; i++)
+            for (int i = 1; i <= length; i++)
             {
                 AGridContent content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
 
                 content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.left * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                
 
                 content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.right * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
+                
 
                 content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.right * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
-            }
-        }
-
-        private void HighLightDirectionCircle(Vector2Int parentPos)
-        {
-            for (int x = 0; x < length; x++)
-            {
-                for (int y = 0; y < length; y++)
-                {
-                    Vector2Int toCheckPos = new Vector2Int(x, y);
-                    if (toCheckPos.magnitude <= length)
-                    {
-                        AGridContent content = GridPresenter.Instance.GetContent(parentPos + toCheckPos);
-                        if (content.GetType() == GetContentType(targetType))
-                        {
-                            content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                        }
-                    }
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
             }
         }
 
@@ -155,10 +133,7 @@ namespace Game
             for (int i = 1; i <= length; i++)
             {
                 AGridContent content = GridPresenter.Instance.GetContent(parentPos + direction * i);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
             }
         }
 
@@ -169,10 +144,7 @@ namespace Game
             foreach (Vector2Int pos in rotatedList)
             {
                 AGridContent content = GridPresenter.Instance.GetContent(pos + parentPos);
-                if (content.GetType() == GetContentType(targetType))
-                {
-                    content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                }
+                content.SetHighlightOption(AGridContent.HighlightOption.Ability);
             }
         }
 
@@ -189,7 +161,7 @@ namespace Game
                 case ActionDirection.forward:
                     return EvaluateStraightDirection(parentPos, length, direction);
                 case ActionDirection.circle:
-                    return EvaluateDirectionCircle(parentPos);
+                    return EvaluatePattern(parentPos, Vector2Int.up, patternCircle);
                 case ActionDirection.O:
                     return EvaluatePattern(parentPos, Vector2Int.up, patternO);
                 case ActionDirection.L:
@@ -206,29 +178,33 @@ namespace Game
                     return true;
             }
 
-            return true;
+            return false;
         }
 
         private bool EvaluateX(Vector2Int parentPos, int length)
         {
-            for ( int i = 0; i > length; i++)
+            for ( int i = 1; i <= length; i++)
             {
-                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i).GetType() == GetContentType(targetType))
+                bool compareFactions = CompareToMyFaction(parentPos + Vector2Int.up * i + Vector2Int.left * i); 
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
 
-                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.left * i).GetType() == GetContentType(targetType))
+                compareFactions = CompareToMyFaction(parentPos + Vector2Int.down * i + Vector2Int.left * i);
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.left * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
 
-                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.right * i).GetType() == GetContentType(targetType))
+                compareFactions = CompareToMyFaction(parentPos + Vector2Int.up * i + Vector2Int.right * i);
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.right * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
 
-                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.right * i).GetType() == GetContentType(targetType))
+                compareFactions = CompareToMyFaction(parentPos + Vector2Int.up * i + Vector2Int.left * i);
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
@@ -260,14 +236,12 @@ namespace Game
 
             foreach (Vector2Int pos in rotatedList)
             {
-                if(GridPresenter.Instance.GetContent(pos + parentPos).GetType() == GetContentType(targetType))
+                bool compareFactions = CompareToMyFaction(pos + parentPos);
+                if (GridPresenter.Instance.GetContent(pos + parentPos).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
             }
-            //TODO auf rotatedPositions parentPos drauf addieren
-            //TODO checken ob target Bedingung erfüllt und dann returnen
-            //Liste speichern und dann highlights über Grid visualisieren und später weg machen wieder
             return false; 
         }
 
@@ -302,47 +276,6 @@ namespace Game
                 default:
                     return Vector2Int.left;
             }
-        }
-
-        private bool EvaluateDirectionCircle(Vector2Int parentPos)
-        {
-            for (int x = 0; x < length; x++)
-            {
-                for(int y = 0; y < length; y++)
-                {
-                    Vector2Int toCheckPos = new Vector2Int(x, y);
-                    if(toCheckPos.magnitude <= length)
-                    {
-                        if (GridPresenter.Instance.GetContent(parentPos + toCheckPos).GetType() == GetContentType(targetType))
-                        {
-                            return true;
-                        } 
-                    }
-                }
-            }
-            return false;
-        }
-
-        private HashSet<AGridContent> GetTargetsDirectionCircle(Vector2Int parentPos)
-        {
-            HashSet<AGridContent> targets = new HashSet<AGridContent>();
-            for (int x = 0; x < length; x++)
-            {
-                for (int y = 0; y < length; y++)
-                {
-                    Vector2Int toCheckPos = new Vector2Int(x, y);
-                    if (toCheckPos.magnitude <= length)
-                    {
-                        AGridContent content = GridPresenter.Instance.GetContent(parentPos + toCheckPos);
-                        if (content.GetType() == GetContentType(targetType))
-                        {
-                            targets.Add(content);
-                        }
-                    }
-                }
-            }
-
-            return targets;
         }
 
         private Type GetContentType(TargetType targetType)
@@ -380,13 +313,34 @@ namespace Game
         {
             for (int i = 1; i <= length; i++)
             {
-                if (GridPresenter.Instance.GetContent(parentPos + direction * i).GetType() == GetContentType(targetType))
+                bool compareFactions = CompareToMyFaction(parentPos + direction * i);
+
+                if (GridPresenter.Instance.GetContent(parentPos + direction * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
 
             }
             return false;
+        }
+
+        private bool CompareToMyFaction(Vector2Int pos)
+        {
+            bool compareFactions = false;
+            switch (GridPresenter.Instance.GetContent(pos))
+            {
+                case Grid.Content.UnitContent unit:
+                    if (unit != null && myFaction != unit.unitReference.GetFaction())
+                    {
+                        compareFactions = true;
+                    }
+                    break;
+                case Grid.Content.CommunityContent community:
+                    compareFactions = true;
+                    break;
+            }
+
+            return compareFactions;
         }
 
         private void DisableHighlights()
@@ -410,7 +364,7 @@ namespace Game
                     targets.AddRange(GetTargetsStraightDirection(parentPos, length, direction));
                     break;
                 case ActionDirection.circle:
-                    targets.AddRange( GetTargetsDirectionCircle(parentPos));
+                    targets.AddRange(GetTargetsFromPattern(parentPos, Vector2Int.up, patternCircle));
                     break;
                 case ActionDirection.O:
                     targets.AddRange(GetTargetsFromPattern(parentPos, Vector2Int.up, patternO));
@@ -440,7 +394,7 @@ namespace Game
         private IEnumerable<AGridContent> GetTargetsX(Vector2Int parentPos, int length)
         {
             HashSet<AGridContent> targets = new HashSet<AGridContent>();
-            for (int i = 0; i > length; i++)
+            for (int i = 1; i <= length; i++)
             {
                 AGridContent content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i);
                 if (content.GetType() == GetContentType(targetType))
@@ -476,7 +430,18 @@ namespace Game
 
             foreach ( AGridContent content in aGridContents)
             {
-                returnGameObjects.Add(content.transform.gameObject);
+                switch (content)
+                {
+                    case Grid.Content.UnitContent unit:
+                        if (unit.unitReference.GetFaction() != myFaction)
+                        {
+                            returnGameObjects.Add(content.transform.gameObject);
+                        }
+                        break;
+                    case Grid.Content.CommunityContent community:
+                        returnGameObjects.Add(content.transform.gameObject);
+                        break;
+                }     
             }
 
             return returnGameObjects;
@@ -484,7 +449,10 @@ namespace Game
 
         public void Cast(Action callbackCastFinished)
         {
-            Instantiate(spawnedEffect, transform.parent.transform);
+            if (spawnedEffect != null)
+            {
+                Instantiate(spawnedEffect, transform.parent.transform);
+            }
 
             if(this.actionDirection == ActionDirection.skip)
             {
@@ -494,11 +462,12 @@ namespace Game
                 }
                 else
                 {
-                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished(), this, transform.parent.gameObject, new List<GameObject> { transform.parent.gameObject});
+                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished(), this, transform.parent.gameObject, new List<GameObject> (), false);
                 }
             }
 
             HashSet<AGridContent> targets = GetTargets();
+            bool communitySucces = false;
             foreach (var target in targets)
             {
                 switch (target)
@@ -507,29 +476,24 @@ namespace Game
                         unit.unitReference.ApplyHPChange(-attackDamage);
                         unit.unitReference.SetActionPointChangeModifier(-attackActionPoints);
                         unit.unitReference.SetMaxMovementPointModifier(-attackReduceMovementPoints);
-                        //TODO Animationen!
-                        Debug.Log("Attack Successful");
                         break;
                     case CommunityContent community:
                         if(community.communityPresenter.GetFaction() == Unit.UnitModel.Faction.None)
                         {
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
-                                //TODDO: Success Animations
-                                Debug.Log("IsCapture Success");
+                                communitySucces = true;
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             }
                         } else
                         {
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
-                                //TODO: Success Animations
-                                Debug.Log("Capture Success");
+                                communitySucces = true;
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             } else
                             {
-                                //TODO: Failure Animation
-                                Debug.Log("Capture Success");
+                                communitySucces = false;
                             }
                         }
                         break;
@@ -540,7 +504,7 @@ namespace Game
             {
                 callbackCastFinished();
             } else {
-                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished(), this, transform.parent.gameObject, GetGameObjectsFromGridContent(targets));
+                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished(), this, transform.parent.gameObject, GetGameObjectsFromGridContent(targets), communitySucces);
             }
         }
     }

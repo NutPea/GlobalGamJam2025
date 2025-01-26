@@ -2,6 +2,7 @@ using Game;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Game.GameModel;
 
 namespace GetraenkeBub
@@ -16,16 +17,58 @@ namespace GetraenkeBub
         public event Action OnAbilityStop; //TODO INVOKE!
 
         private UIState currentUIState;
+        private UIState lastUIState;
         [SerializeField] private EUIState startUIState;
         [SerializeField] private List<AbilityButtonView> abilityButtonViews;
+        [SerializeField] private CharacterAttackUI characterAttackUI;
 
         [SerializeField] private List<UIState> UIStates;
+        public int AmountOfPoints = 0;
+        public int CurrentRound = 0;
+
         private void Awake()
         {
             Instance = this;
             UIStates.ForEach(n => n.OnInit());
             ChangeUIState(startUIState);
+          
 
+        }
+
+        private void Start()
+        {
+            GamePresenter.Instance.OnGameOver += OnHandleGameOver;
+            GamePresenter.Instance.OnLastRoundOver += OnHandleLastRound;
+            GamePresenter.Instance.OnPointsChanged += OnPointsHandle;
+            GamePresenter.Instance.OnRoundCounterChanged += OnHandleRoundCounterChange;
+            GamePresenter.Instance.OnTargetChanged += HandleTargetChange;
+           
+        }
+
+        private void OnPointsHandle(int arg1, int arg2)
+        {
+            AmountOfPoints = arg2;
+        }
+
+        private void HandleTargetChange(ITarget old, ITarget newTarget)
+        {
+            GamePresenter.Instance.GetUnits();
+        }
+
+        private void OnHandleRoundCounterChange(int old, int newAmount)
+        {
+            CurrentRound = newAmount;
+            ChangeUIState(EUIState.RoundChangeUI);
+        }
+
+        private void OnHandleLastRound()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnHandleGameOver()
+        {
+            throw new NotImplementedException();
         }
 
         public void InvokeOnAbilityHighlight(AAbility ability)
@@ -49,11 +92,17 @@ namespace GetraenkeBub
             if(currentUIState != null)
             {
                 currentUIState.OnLeave();
+                lastUIState = currentUIState;
             }
             currentUIState = GetUISTate(toChangeUiState);
             currentUIState.OnBeforeEnter();
             currentUIState.OnEnter();
 
+        }
+
+        public void ReturnToLastUiState()
+        {
+            ChangeUIState(lastUIState.uIState);
         }
 
         public void SetAbilities(List<(AAbility, AbilityUsability)> abilities)
@@ -79,9 +128,31 @@ namespace GetraenkeBub
             return null;
         }
 
-        public void HandleAbility(Action done, AAbility ability, GameObject caster, List<GameObject> targets)
+        public void HandleAbility(Action done, AAbility ability, GameObject caster, List<GameObject> targets, bool communitySuccess=false)
         {
-            done?.Invoke();
+            if(targets.Count == 0)
+            {
+                done?.Invoke();
+            }
+            else if(targets.Count == 1 && targets.Contains(caster))
+            {
+                done?.Invoke();
+            }
+            else
+            {
+                characterAttackUI.WasCommunityWasSuccsesfull = communitySuccess;
+                characterAttackUI.HandleAbility(() => done.Invoke(),ability, caster, targets);
+            }
+        }
+
+        public void GetBackToMenu()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void CloseGame()
+        {
+            Application.Quit();
         }
 
     }
@@ -92,6 +163,7 @@ namespace GetraenkeBub
 
         [SerializeField] private GameObject UIManager;
         [SerializeField]private EUIState uiState;
+        public EUIState uIState => uiState;
         private IUIState IUIState;
 
         public bool CheckIfUIState(EUIState toCheckUIState)

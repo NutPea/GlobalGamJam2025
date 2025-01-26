@@ -6,11 +6,13 @@ namespace GetraenkeBub
     public class PauseUI : MonoBehaviour , IUIState
     {
 
+        [SerializeField] private Button backToMenuButton;
         [SerializeField] private Button backButton;
 
         public void Init()
         {
             backButton.onClick.AddListener(BackToPlayerUI);
+            backToMenuButton.onClick.AddListener(() => UIStateManager.Instance.GetBackToMenu());
         }
 
         public void OnBeforeEnter()
