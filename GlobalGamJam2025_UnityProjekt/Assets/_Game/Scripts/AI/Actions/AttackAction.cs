@@ -74,8 +74,29 @@ namespace AI.Actions
             abilities.RemoveAll(a => skipAbilities.Contains(a));
             abilities.RemoveAll(a => captureAbilities.Contains(a));
 
-            return new List<Vector2Int>();
-            //TODO CALCULATE POSITIONS
+            Vector2Int[] directions = new Vector2Int[] {
+                Vector2Int.up, Vector2Int.right, Vector2Int.down,Vector2Int.left
+            };
+
+            HashSet<Vector2Int> output = new();
+            foreach(AAbility ability in abilities)
+            {
+               for(int x = target.GetPosition().x - 5; x < target.GetPosition().x + 5; x++)
+                {
+                    for (int z = target.GetPosition().y - 5; z < target.GetPosition().y + 5; z++)
+                    {
+                        foreach(Vector2Int dir in directions)
+                        {
+                            Vector2Int pos = new Vector2Int(x, z);
+                            if (ability.IsTargetConditionSatisfied(pos, dir))
+                            {
+                                output.Add(pos - dir);
+                            }
+                        }
+                    }
+                }
+            }
+            return output.ToList();
         }
         private float CalculateCost(List<Vector2Int> targetPositions, UnitPresenter caster)
         {
