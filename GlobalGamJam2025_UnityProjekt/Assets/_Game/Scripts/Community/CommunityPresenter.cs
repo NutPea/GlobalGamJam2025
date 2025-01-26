@@ -31,5 +31,15 @@ namespace Game.Community
 
             return Random.Range(0f, 1f) < model.rollSuccessProbability.Value;
         }
+
+        public float GetTurnFocusDuration()
+        {
+            return 1;
+        }
+
+        public void UpdateCommunity()
+        {
+            return;
+        }
     }
 }
