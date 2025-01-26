@@ -20,9 +20,6 @@ namespace Game.Grid
             {
                 debugVisual?.SetActive(false);
             }
-
-            movementHighlight = transform.Find("MH")?.gameObject ?? null;
-            abilityHighlight = transform.Find("AH")?.gameObject ?? null;
         }
 
         private void Update()
@@ -34,8 +31,8 @@ namespace Game.Grid
         {
             currentHighlightOption = highlightOption;
 
-            movementHighlight?.SetActive(highlightOption == HighlightOption.Movement);
-            abilityHighlight?.SetActive(highlightOption == HighlightOption.Ability);
+            transform.Find("MH")?.gameObject.SetActive(highlightOption == HighlightOption.Movement);
+            transform.Find("AH")?.gameObject.SetActive(highlightOption == HighlightOption.Ability);
         }
     }
 }
