@@ -47,7 +47,7 @@ MonoBehaviour:
   abilityIcon: {fileID: 21300000, guid: 3c068d8e25f11744384e9f9d045c0cbb, type: 3}
   abilityName: Take a Nap
   abilityDescription: This skips the round for the unit.
-  actionPointCost: 1
+  actionPointCost: 0
   length: 2
   actionDirection: 8
   targetType: 3
