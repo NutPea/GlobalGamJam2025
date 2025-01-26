@@ -222,6 +222,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6595841622550154912}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6708059600287920444
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6716171691675954983}
+    m_Modifications:
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051600056271537551, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+        type: 3}
+      propertyPath: m_Name
+      value: Bavaria_Model_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 36e5ad3ed88ad409b851e52fc3fe8e74, type: 3}
+--- !u!4 &6171489647055017510 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 626661741844522778, guid: 36e5ad3ed88ad409b851e52fc3fe8e74,
+    type: 3}
+  m_PrefabInstance: {fileID: 6708059600287920444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6910855469493369558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -234,6 +308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bavarians-ClebrateBavarianCulture
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853187865499544321, guid: cd6bd76b9dbeb1e4babc50a8459cbcb9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841724258265729746, guid: cd6bd76b9dbeb1e4babc50a8459cbcb9,
         type: 3}
@@ -332,6 +411,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 419903513738649825}
+    - targetCorrespondingSourceObject: {fileID: 206295864696018417, guid: cd6bd76b9dbeb1e4babc50a8459cbcb9,
+        type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 6171489647055017510}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2096261141848979682, guid: cd6bd76b9dbeb1e4babc50a8459cbcb9,
         type: 3}
@@ -372,6 +455,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75715c237be4c0243a27b5726f180360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &6716171691675954983 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 206295864696018417, guid: cd6bd76b9dbeb1e4babc50a8459cbcb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6910855469493369558}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7690109346396090372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3841724258265729746, guid: cd6bd76b9dbeb1e4babc50a8459cbcb9,

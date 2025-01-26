@@ -99,6 +99,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile_City_Playfield_01
       objectReference: {fileID: 0}
+    - target: {fileID: 6158395420609568902, guid: 0e5bb7c4824a242f097a0234d6803173,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8008228627499609295, guid: 0e5bb7c4824a242f097a0234d6803173,
         type: 3}
       propertyPath: m_LocalPosition.x
