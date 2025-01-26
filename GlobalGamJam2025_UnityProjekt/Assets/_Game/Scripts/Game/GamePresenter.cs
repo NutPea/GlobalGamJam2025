@@ -22,15 +22,25 @@ namespace Game
 
         public event Action<int, int> OnPointsChanged;
 
+        public static GamePresenter Instance;
+
         [SerializeField] private GridPresenter[] levels;
         private List<UnitPresenter> units;
         private List<CommunityPresenter> communities;
         private List<SpawnerPresenter> spawners;
 
         private AUserInput lastUserInput;
+        private GameModel model;
 
         private IEnumerator gameFlow;
 
+        private void Awake()
+        {
+            model = GetComponent<GameModel>();
+
+            model.Points.OnChange += OnPointChangeHandler;
+            Instance = this;
+        }
         private void Start()
         {
             gameFlow = PlayLevel(0);
@@ -68,7 +78,9 @@ namespace Game
             LoadLevel(index);
             GridPresenter currentLevel = GridPresenter.Instance;
 
-            units = UpdateUnits();
+            units = UpdateContent<UnitPresenter>();
+            spawners =  UpdateContent<SpawnerPresenter>();
+            communities = UpdateContent<CommunityPresenter>();
 
             ITarget lastTarget = null;
             for (int i = 0; i < currentLevel.GetRoundCount(); i++)
@@ -83,10 +95,9 @@ namespace Game
                 {
                     LeanTween.delayedCall(spawner.GetTurnFocusDuration(), () => spawner.UpdateSpawner());
                     yield return WaitForFinishTurn();
-                    units = UpdateUnits();
+                    units = UpdateContent<UnitPresenter>();
                 }
 
-                units = currentLevel.FindGetUnits().OrderByDescending(p => p.GetInitiative()).ToList();
                 //do unit turns
                 foreach (UnitPresenter unit in units)
                 {
@@ -129,7 +140,6 @@ namespace Game
                     }                    
                 }
 
-                //communities 
                 foreach (CommunityPresenter community in communities)
                 {
                     LeanTween.delayedCall(community.GetTurnFocusDuration(), () => community.UpdateCommunity());
@@ -141,9 +151,9 @@ namespace Game
             yield return null;
         }
         #region PlayLevel Helper Functions
-        private List<UnitPresenter> UpdateUnits()
+        private List<T> UpdateContent<T>() where T:ITarget
         {
-            return GridPresenter.Instance.FindGetUnits().OrderByDescending(p => p.GetInitiative()).ToList();
+            return GridPresenter.Instance.GetAll<T>().OrderByDescending(p => p.GetInitiative()).ToList();
         }
         private void LoadLevel(int index)
         {
@@ -223,6 +233,15 @@ namespace Game
         public List<UnitPresenter> GetUnits()
         {
             return units;
+        }
+
+        public void ChangePoints(int value)
+        {
+            model.Points.Value += value;
+        }
+        private void OnPointChangeHandler(int oldValue, int newValue)
+        {
+            OnPointsChanged?.Invoke(oldValue, newValue);
         }
     }
 }

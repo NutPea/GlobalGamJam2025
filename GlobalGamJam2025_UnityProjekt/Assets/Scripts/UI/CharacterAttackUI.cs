@@ -1,5 +1,6 @@
 using Cinemachine;
 using Game;
+using Game.Community;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,17 @@ namespace GetraenkeBub
         [SerializeField]private GameObject reaktionGameobject;
         private List<GameObject> spawnedObjects = new List<GameObject>();
 
+        [Header("Community")]
+        private CommunityPresenter communityPresenter;
+        [SerializeField] private GameObject goodReaktionPostGameobject;
+        [SerializeField] private GameObject badReacktionPostGameobject;
+
+        [SerializeField] private float transitionTime = 0.5f;
+        [SerializeField] private LeanTweenType transitionTween;
+        [SerializeField] private float showTime = 2f;
+
+        public bool WasCommunityWasSuccsesfull = false;
+
         public void Init()
         {
             CameraManager.Instance.attackCamera.gameObject.SetActive(false);
@@ -53,6 +65,22 @@ namespace GetraenkeBub
 
         public void HandleAbility(Action done, AAbility ability, GameObject caster, List<GameObject> targets)
         {
+            communityPresenter = null;
+            foreach(GameObject target in targets)
+            {
+                CommunityPresenter presi = target.GetComponent<CommunityPresenter>();
+                if (presi != null)
+                {
+                    communityPresenter = presi;
+                    break;
+                }
+            }
+
+            if(communityPresenter != null)
+            {
+                done?.Invoke();
+            }
+
             aAbility = ability;
             this.caster = caster;
             this.opfers = targets;
@@ -63,10 +91,58 @@ namespace GetraenkeBub
                 + Vector3.up * extraDistance;
             CameraManager.Instance.attackCamera.transform.position = cameraMovePosition;
             CameraManager.Instance.attackCamera.LookAt = targets[0].transform;
-            StartCoroutine(InvokeAfterTime(timeBeforeAttack,timeBeforeReaktion,() => done.Invoke()));
+
+
+            if(communityPresenter != null)
+            {
+
+            }
+            else
+            {
+                StartCoroutine(HandleAttackTimeline(timeBeforeAttack,timeBeforeReaktion,() => done.Invoke()));
+
+            }
         }
 
-        private IEnumerator InvokeAfterTime(float timeBeforeAttack,float timeBeforeReaktion,Action doneAction)
+        private IEnumerator HandleCommunityTimeline(float transitionTime, float showTime, Action doneAction)
+        {
+            TransitionCummunityIn();
+            yield return new WaitForSeconds(transitionTime);
+            ShowCommunityResult();
+            yield return new WaitForSeconds(showTime);
+            TransitionCummunityOut();
+            yield return new WaitForSeconds(transitionTime);
+            UIStateManager.Instance.ReturnToLastUiState();
+            doneAction?.Invoke();
+        }
+
+        private void TransitionCummunityIn()
+        {
+
+        }
+
+        private void ShowCommunityResult()
+        {
+
+
+            if (WasCommunityWasSuccsesfull)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        
+
+        private void TransitionCummunityOut()
+        {
+
+        }
+
+        private IEnumerator HandleAttackTimeline(float timeBeforeAttack,float timeBeforeReaktion,Action doneAction)
         {
             yield return new WaitForSeconds(timeBeforeAttack);
             HandleBeforeAttack();
