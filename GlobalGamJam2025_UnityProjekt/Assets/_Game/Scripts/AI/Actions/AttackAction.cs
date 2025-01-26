@@ -42,6 +42,10 @@ namespace AI.Actions
             abilities.RemoveAll(a => skipAbilities.Contains(a));
             abilities.RemoveAll(a => captureAbilities.Contains(a));
 
+            //TODO REMOVE!
+            GamePresenter.Instance.AbilityCastedHandler(skipAbilities.First());
+            //TODO CONTINUE HERE
+
             List<AAbility> castableAbilities = abilities.Where(a => a.IsTargetConditionSatisfied() && a.actionPointCost <= caster.GetAbilityPoints()).ToList();
             if (castableAbilities.Any())
             {
@@ -71,6 +75,7 @@ namespace AI.Actions
             abilities.RemoveAll(a => captureAbilities.Contains(a));
 
             return new List<Vector2Int>();
+            //TODO CALCULATE POSITIONS
         }
         private float CalculateCost(List<Vector2Int> targetPositions, UnitPresenter caster)
         {
