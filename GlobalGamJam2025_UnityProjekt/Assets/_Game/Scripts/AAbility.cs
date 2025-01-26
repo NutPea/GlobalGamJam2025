@@ -2,14 +2,10 @@ using Game.Grid;
 using Game.Grid.Content;
 using GetraenkeBub;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 namespace Game
 {
@@ -84,7 +80,7 @@ namespace Game
                     HighLightStraightDirection(parentPos, length, direction);
                     break;
                 case ActionDirection.circle:
-                    HighLightDirectionCircle(parentPos);
+                    HighLightPattern(parentPos, Vector2Int.up, patternCircle);
                     break;
                 case ActionDirection.O:
                     HighLightPattern(parentPos, Vector2Int.up, patternO);
@@ -127,22 +123,6 @@ namespace Game
             }
         }
 
-        private void HighLightDirectionCircle(Vector2Int parentPos)
-        {
-            for (int x = -length/2; x < length; x++)
-            {
-                for (int y = -length / 2; y < length; y++)
-                {
-                    Vector2Int toCheckPos = new Vector2Int(x, y);
-                    if (toCheckPos.magnitude <= length)
-                    {
-                        AGridContent content = GridPresenter.Instance.GetContent(parentPos + toCheckPos);
-                        content.SetHighlightOption(AGridContent.HighlightOption.Ability);
-                    }
-                }
-            }
-        }
-
         private void HighLightStraightDirection(Vector2Int parentPos, int length, Vector2Int direction)
         {
             for (int i = 1; i <= length; i++)
@@ -176,7 +156,7 @@ namespace Game
                 case ActionDirection.forward:
                     return EvaluateStraightDirection(parentPos, length, direction);
                 case ActionDirection.circle:
-                    return EvaluateDirectionCircle(parentPos);
+                    return EvaluatePattern(parentPos, Vector2Int.up, patternCircle);
                 case ActionDirection.O:
                     return EvaluatePattern(parentPos, Vector2Int.up, patternO);
                 case ActionDirection.L:
@@ -252,9 +232,6 @@ namespace Game
                     return true;
                 }
             }
-            //TODO auf rotatedPositions parentPos drauf addieren
-            //TODO checken ob target Bedingung erfüllt und dann returnen
-            //Liste speichern und dann highlights über Grid visualisieren und später weg machen wieder
             return false; 
         }
 
@@ -289,25 +266,6 @@ namespace Game
                 default:
                     return Vector2Int.left;
             }
-        }
-
-        private bool EvaluateDirectionCircle(Vector2Int parentPos)
-        {
-            for (int x = -length; x < length; x++)
-            {
-                for(int y = -length; y < length; y++)
-                {
-                    Vector2Int toCheckPos = new Vector2Int(x, y);
-                    if(toCheckPos.magnitude <= length && !(x == 0) && !(y == 0))
-                    {
-                        if (GridPresenter.Instance.GetContent(parentPos + toCheckPos).GetType() == GetContentType(targetType))
-                        {
-                            return true;
-                        } 
-                    }
-                }
-            }
-            return false;
         }
 
         private HashSet<AGridContent> GetTargetsDirectionCircle(Vector2Int parentPos)
@@ -397,7 +355,7 @@ namespace Game
                     targets.AddRange(GetTargetsStraightDirection(parentPos, length, direction));
                     break;
                 case ActionDirection.circle:
-                    targets.AddRange( GetTargetsDirectionCircle(parentPos));
+                    targets.AddRange(GetTargetsFromPattern(parentPos, Vector2Int.up, patternCircle));
                     break;
                 case ActionDirection.O:
                     targets.AddRange(GetTargetsFromPattern(parentPos, Vector2Int.up, patternO));
@@ -495,7 +453,6 @@ namespace Game
                         unit.unitReference.ApplyHPChange(-attackDamage);
                         unit.unitReference.SetActionPointChangeModifier(-attackActionPoints);
                         unit.unitReference.SetMaxMovementPointModifier(-attackReduceMovementPoints);
-                        communitySucces = true;
                         Debug.Log("Attack Successful");
                         break;
                     case CommunityContent community:

@@ -87,7 +87,7 @@ namespace GetraenkeBub
             return null;
         }
 
-        public void HandleAbility(Action done, AAbility ability, GameObject caster, List<GameObject> targets, bool communitySuccess)
+        public void HandleAbility(Action done, AAbility ability, GameObject caster, List<GameObject> targets, bool communitySuccess=false)
         {
             if(targets.Count == 0)
             {
