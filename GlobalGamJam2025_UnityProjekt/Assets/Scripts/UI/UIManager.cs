@@ -2,6 +2,7 @@ using Game;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Game.GameModel;
 
 namespace GetraenkeBub
@@ -22,12 +23,52 @@ namespace GetraenkeBub
         [SerializeField] private CharacterAttackUI characterAttackUI;
 
         [SerializeField] private List<UIState> UIStates;
+        public int AmountOfPoints = 0;
+        public int CurrentRound = 0;
+
         private void Awake()
         {
             Instance = this;
             UIStates.ForEach(n => n.OnInit());
             ChangeUIState(startUIState);
+          
 
+        }
+
+        private void Start()
+        {
+            GamePresenter.Instance.OnGameOver += OnHandleGameOver;
+            GamePresenter.Instance.OnLastRoundOver += OnHandleLastRound;
+            GamePresenter.Instance.OnPointsChanged += OnPointsHandle;
+            GamePresenter.Instance.OnRoundCounterChanged += OnHandleRoundCounterChange;
+            GamePresenter.Instance.OnTargetChanged += HandleTargetChange;
+           
+        }
+
+        private void OnPointsHandle(int arg1, int arg2)
+        {
+            AmountOfPoints = arg2;
+        }
+
+        private void HandleTargetChange(ITarget old, ITarget newTarget)
+        {
+            GamePresenter.Instance.GetUnits();
+        }
+
+        private void OnHandleRoundCounterChange(int old, int newAmount)
+        {
+            CurrentRound = newAmount;
+            ChangeUIState(EUIState.RoundChangeUI);
+        }
+
+        private void OnHandleLastRound()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnHandleGameOver()
+        {
+            throw new NotImplementedException();
         }
 
         public void InvokeOnAbilityHighlight(AAbility ability)
@@ -102,6 +143,16 @@ namespace GetraenkeBub
                 characterAttackUI.WasCommunityWasSuccsesfull = communitySuccess;
                 characterAttackUI.HandleAbility(() => done.Invoke(),ability, caster, targets);
             }
+        }
+
+        public void GetBackToMenu()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void CloseGame()
+        {
+            Application.Quit();
         }
 
     }

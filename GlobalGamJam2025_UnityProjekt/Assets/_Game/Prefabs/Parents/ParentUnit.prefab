@@ -170,6 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918ec113574e3af48bd1205021761cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitName: None
+  unitIcon: {fileID: 0}
   _maxMovePoints: 0
   _startActionPoints: 0
   _defaultActionPointChange: 0
@@ -201,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0622edd324a2cae40aa9d859ba8be05c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  red: {r: 1, g: 0, b: 0, a: 1}
+  red: {r: 1, g: 0.37254903, b: 0.37254903, a: 1}
   white: {r: 1, g: 1, b: 1, a: 1}
   _currentLifeText: {fileID: 573635701612555186}
   _lifeImage: {fileID: 8561970371229612175}
@@ -289,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.93602437, b: 0.31132066, a: 1}
+  m_Color: {r: 0.45330068, g: 1, b: 0.30980396, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -715,7 +717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.735849, g: 0.72738314, b: 0.21520104, a: 1}
+  m_Color: {r: 0.24345301, g: 0.7372549, b: 0.21568628, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
