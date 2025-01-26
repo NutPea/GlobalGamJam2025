@@ -2007,8 +2007,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3779775534946823180, guid: 5da7de738f9361146bac0217c2173cf1,
         type: 3}
-      propertyPath: abilityName
-      value: T
+      propertyPath: length
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -3779775534946823180, guid: 5da7de738f9361146bac0217c2173cf1,
         type: 3}

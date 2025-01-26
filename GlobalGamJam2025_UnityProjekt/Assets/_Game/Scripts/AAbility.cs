@@ -46,6 +46,7 @@ namespace Game
         private List<Vector2Int> patternCross = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 3 + Vector2Int.left, Vector2Int.up * 3 + Vector2Int.right };
         private List<Vector2Int> patternMiddleFinger = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.right, Vector2Int.left };
         private List<Vector2Int> patternO = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.down + Vector2Int.left, Vector2Int.down + Vector2Int.right };
+        private List<Vector2Int> patternCircle = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.down, Vector2Int.down * 2, Vector2Int.left, Vector2Int.left * 2, Vector2Int.right, Vector2Int.right * 2 };
 
         private void Start()
         {
@@ -128,9 +129,9 @@ namespace Game
 
         private void HighLightDirectionCircle(Vector2Int parentPos)
         {
-            for (int x = 0; x < length; x++)
+            for (int x = -length/2; x < length; x++)
             {
-                for (int y = 0; y < length; y++)
+                for (int y = -length / 2; y < length; y++)
                 {
                     Vector2Int toCheckPos = new Vector2Int(x, y);
                     if (toCheckPos.magnitude <= length)
@@ -292,12 +293,12 @@ namespace Game
 
         private bool EvaluateDirectionCircle(Vector2Int parentPos)
         {
-            for (int x = 0; x < length; x++)
+            for (int x = -length; x < length; x++)
             {
-                for(int y = 0; y < length; y++)
+                for(int y = -length; y < length; y++)
                 {
                     Vector2Int toCheckPos = new Vector2Int(x, y);
-                    if(toCheckPos.magnitude <= length)
+                    if(toCheckPos.magnitude <= length && !(x == 0) && !(y == 0))
                     {
                         if (GridPresenter.Instance.GetContent(parentPos + toCheckPos).GetType() == GetContentType(targetType))
                         {
@@ -312,9 +313,9 @@ namespace Game
         private HashSet<AGridContent> GetTargetsDirectionCircle(Vector2Int parentPos)
         {
             HashSet<AGridContent> targets = new HashSet<AGridContent>();
-            for (int x = 0; x < length; x++)
+            for (int x = -length; x < length; x++)  
             {
-                for (int y = 0; y < length; y++)
+                for (int y = -length; y < length; y++)
                 {
                     Vector2Int toCheckPos = new Vector2Int(x, y);
                     if (toCheckPos.magnitude <= length)
@@ -485,6 +486,7 @@ namespace Game
             }
 
             HashSet<AGridContent> targets = GetTargets();
+            bool communitySucces = false;
             foreach (var target in targets)
             {
                 switch (target)
@@ -493,7 +495,7 @@ namespace Game
                         unit.unitReference.ApplyHPChange(-attackDamage);
                         unit.unitReference.SetActionPointChangeModifier(-attackActionPoints);
                         unit.unitReference.SetMaxMovementPointModifier(-attackReduceMovementPoints);
-                        //TODO Animationen!
+                        communitySucces = true;
                         Debug.Log("Attack Successful");
                         break;
                     case CommunityContent community:
@@ -501,7 +503,7 @@ namespace Game
                         {
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
-                                //TODDO: Success Animations
+                                communitySucces = true;
                                 Debug.Log("IsCapture Success");
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             }
@@ -509,12 +511,12 @@ namespace Game
                         {
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
-                                //TODO: Success Animations
+                                communitySucces = true;
                                 Debug.Log("Capture Success");
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             } else
                             {
-                                //TODO: Failure Animation
+                                communitySucces = false;
                                 Debug.Log("Capture Success");
                             }
                         }
@@ -526,7 +528,7 @@ namespace Game
             {
                 callbackCastFinished();
             } else {
-                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished(), this, transform.parent.gameObject, GetGameObjectsFromGridContent(targets));
+                UIStateManager.Instance.HandleAbility(()=>callbackCastFinished(), this, transform.parent.gameObject, GetGameObjectsFromGridContent(targets), communitySucces);
             }
         }
     }

@@ -79,7 +79,7 @@ namespace GetraenkeBub
             return null;
         }
 
-        public void HandleAbility(Action done, AAbility ability, GameObject caster, List<GameObject> targets)
+        public void HandleAbility(Action done, AAbility ability, GameObject caster, List<GameObject> targets, bool communitySuccess)
         {
             done?.Invoke();
         }
