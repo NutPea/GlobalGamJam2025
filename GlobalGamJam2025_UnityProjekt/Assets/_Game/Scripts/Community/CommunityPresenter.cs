@@ -5,6 +5,7 @@ namespace Game.Community
 {
     public class CommunityPresenter : MonoBehaviour, ITarget
     {
+        [SerializeField] private int initiative;
         private CommunityModel model;
 
         private void Awake()
@@ -40,6 +41,11 @@ namespace Game.Community
         public void UpdateCommunity()
         {
             return;
+        }
+
+        public int GetInitiative()
+        {
+            return initiative;
         }
     }
 }

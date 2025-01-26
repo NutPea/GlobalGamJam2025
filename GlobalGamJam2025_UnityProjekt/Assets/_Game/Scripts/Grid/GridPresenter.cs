@@ -30,9 +30,9 @@ namespace Game.Grid
         {
             return model.GetContent(position);
         }
-        public List<UnitPresenter> FindGetUnits()
+        public List<T> GetAll<T>()
         {
-            return GetComponentsInChildren<UnitPresenter>().ToList();
+            return GetComponentsInChildren<T>().ToList();
         }
 
         public void DisableAllGridHighlights()
@@ -51,8 +51,12 @@ namespace Game.Grid
         {
             AGridContent newEmpty = Instantiate(emptyPrefab, transform).GetComponentInChildren<AGridContent>();
             newEmpty.transform.position = new Vector3(position.x, 0, position.y);
+            ReplaceCell(position, newEmpty);
+        }
+        public void ReplaceCell(Vector2Int position, AGridContent content)
+        {
             GameObject.Destroy(model.GetContent(position).gameObject);
-            model.Replace(position, newEmpty);
+            model.Replace(position, content);
         }
         public int GetRoundCount()
         {

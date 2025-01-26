@@ -68,7 +68,9 @@ namespace Game
             LoadLevel(index);
             GridPresenter currentLevel = GridPresenter.Instance;
 
-            units = UpdateUnits();
+            units = UpdateContent<UnitPresenter>();
+            spawners =  UpdateContent<SpawnerPresenter>();
+            communities = UpdateContent<CommunityPresenter>();
 
             ITarget lastTarget = null;
             for (int i = 0; i < currentLevel.GetRoundCount(); i++)
@@ -83,10 +85,9 @@ namespace Game
                 {
                     LeanTween.delayedCall(spawner.GetTurnFocusDuration(), () => spawner.UpdateSpawner());
                     yield return WaitForFinishTurn();
-                    units = UpdateUnits();
+                    units = UpdateContent<UnitPresenter>();
                 }
 
-                units = currentLevel.FindGetUnits().OrderByDescending(p => p.GetInitiative()).ToList();
                 //do unit turns
                 foreach (UnitPresenter unit in units)
                 {
@@ -141,9 +142,9 @@ namespace Game
             yield return null;
         }
         #region PlayLevel Helper Functions
-        private List<UnitPresenter> UpdateUnits()
+        private List<T> UpdateContent<T>() where T:ITarget
         {
-            return GridPresenter.Instance.FindGetUnits().OrderByDescending(p => p.GetInitiative()).ToList();
+            return GridPresenter.Instance.GetAll<T>().OrderByDescending(p => p.GetInitiative()).ToList();
         }
         private void LoadLevel(int index)
         {
