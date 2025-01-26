@@ -1,9 +1,13 @@
 using Game;
+using Game.Community;
+using Game.Spawner;
+using Game.Unit;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static Game.GameModel;
+using static Game.Unit.UnitModel;
 
 namespace GetraenkeBub
 {
@@ -25,6 +29,7 @@ namespace GetraenkeBub
         [SerializeField] private List<UIState> UIStates;
         public int AmountOfPoints = 0;
         public int CurrentRound = 0;
+        public Faction playerFaction = Faction.Vegans;
 
         private void Awake()
         {
@@ -52,7 +57,36 @@ namespace GetraenkeBub
 
         private void HandleTargetChange(ITarget old, ITarget newTarget)
         {
-            GamePresenter.Instance.GetUnits();
+
+            Transform foundTransform = null;
+            switch(newTarget)
+            {
+                case UnitPresenter unitPresenter: foundTransform = unitPresenter.transform; break;
+                case CommunityPresenter communityPresenter: foundTransform = communityPresenter.transform; break;
+                case SpawnerPresenter spawnerPresenter: foundTransform = spawnerPresenter.transform; break;
+                default: Debug.LogError("DAS sollte nicht passieren!"); break;
+            }
+            CameraManager.Instance.SetFollow(foundTransform);
+
+
+
+            if(newTarget is UnitPresenter presenter)
+            {
+                Faction faction =  presenter.GetFaction();
+
+                if(faction != playerFaction)
+                {
+                    ChangeUIState(EUIState.EnemyUI);
+                }
+                else
+                {
+                    ChangeUIState(EUIState.PlayerUI);
+                }
+            }
+            else
+            {
+                ChangeUIState(EUIState.EnemyUI);
+            }
         }
 
         private void OnHandleRoundCounterChange(int old, int newAmount)
@@ -63,12 +97,12 @@ namespace GetraenkeBub
 
         private void OnHandleLastRound()
         {
-            throw new NotImplementedException();
+            ChangeUIState(EUIState.GameEnd);
         }
 
         private void OnHandleGameOver()
         {
-            throw new NotImplementedException();
+            ChangeUIState(EUIState.GameOver);
         }
 
         public void InvokeOnAbilityHighlight(AAbility ability)

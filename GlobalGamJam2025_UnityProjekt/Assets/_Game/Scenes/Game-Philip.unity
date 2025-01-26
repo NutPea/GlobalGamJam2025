@@ -132,26 +132,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraManager
       objectReference: {fileID: 0}
-    - target: {fileID: 2174457099583845394, guid: c049e2fa0d9b273439ca9197e90b8891,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9020377
-      objectReference: {fileID: 0}
-    - target: {fileID: 2174457099583845394, guid: c049e2fa0d9b273439ca9197e90b8891,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.43165195
-      objectReference: {fileID: 0}
-    - target: {fileID: 2174457099583845394, guid: c049e2fa0d9b273439ca9197e90b8891,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.0019575378
-      objectReference: {fileID: 0}
-    - target: {fileID: 2174457099583845394, guid: c049e2fa0d9b273439ca9197e90b8891,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.00093674025
-      objectReference: {fileID: 0}
     - target: {fileID: 5152737339066004641, guid: c049e2fa0d9b273439ca9197e90b8891,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1122,7 +1102,7 @@ PrefabInstance:
     - target: {fileID: 6214187764298084750, guid: b97acf8fd166a704da6b9c7760bcd648,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6674924081448024658, guid: b97acf8fd166a704da6b9c7760bcd648,
         type: 3}
@@ -1686,6 +1666,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grid-Level-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338644538756706139, guid: 62662d7aa7bdbb546adcb59b014aaff6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -3676,7 +3661,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -3702,8 +3687,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911714419}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.41517293, y: -0.0019742255, z: 0.0009009662, w: 0.90974}
-  m_LocalPosition: {x: -4.2229676, y: 29.519669, z: -20.40522}
+  m_LocalRotation: {x: 0.39826602, y: -0.003422574, z: 0.0014860468, w: 0.9172624}
+  m_LocalPosition: {x: -4.2229676, y: 15.259668, z: -10.76522}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,3 +1,7 @@
+using Game;
+using Game.Grid;
+using Game.Unit;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +13,8 @@ namespace GetraenkeBub
         [Header("Buttons")]
         [SerializeField] private Button pauseButton;
 
+        private List<UnitPresenter> allUnitPresenter;
+
 
         public void Init()
         {
@@ -17,7 +23,15 @@ namespace GetraenkeBub
 
         public void OnBeforeEnter()
         {
-          
+           foreach(UnitPresenter presenter in GridPresenter.Instance.GetAll<UnitPresenter>())
+           {
+                if(presenter != null)
+                {
+                    allUnitPresenter.Add(presenter);
+                }
+           }
+
+
         }
 
         public void OnEnter()
