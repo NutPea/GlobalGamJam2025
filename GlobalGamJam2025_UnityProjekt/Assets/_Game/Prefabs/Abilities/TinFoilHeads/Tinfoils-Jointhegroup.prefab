@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6799009400989298241}
   - component: {fileID: -3779775534946823180}
   m_Layer: 0
-  m_Name: Bavarians-Community-Action 1
+  m_Name: Tinfoils-Jointhegroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,16 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 21300000, guid: 4cd5de0541154aa4db2991f950bf2fd9, type: 3}
-  abilityName: Converting the Meatball Fan Club
-  abilityDescription: With this action, you can post something and try to take over
-    the community
+  abilityName: Join the group
+  abilityDescription: AP reduced by x
   actionPointCost: 1
   length: 1
-  actionDirection: 0
-  targetType: 1
+  actionDirection: 7
+  targetType: 3
   spawnedEffect: {fileID: 0}
-  attackDamage: 1
-  attackActionPoints: 0
+  attackDamage: 0
+  attackActionPoints: 1
   attackReduceMovementPoints: 0
   showAttackSprites: []
   showAttackText: []

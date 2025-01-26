@@ -1,11 +1,13 @@
 using Game.Grid;
 using Game.Grid.Content;
+using Game.Unit;
 using GetraenkeBub;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 namespace Game
 {
@@ -32,6 +34,8 @@ namespace Game
         public List<string> showAttackText;
         public List<Sprite> attackReaktions;
 
+        private UnitModel.Faction myFaction;
+
         /// <summary>
         /// ignoriert Kosten -> überprüft ob im Grid Target im AOE Bereich verfügbar ist
         /// </summary>
@@ -48,6 +52,7 @@ namespace Game
         {
             UIStateManager.Instance.OnAbilityHighlight += GetOnAbilityHighlight;
             UIStateManager.Instance.OnAbilityStop += OnAbilityStop;
+            myFaction = GetComponentInParent<UnitPresenter>().GetFaction();
         }
 
         private void OnAbilityStop()
@@ -180,22 +185,26 @@ namespace Game
         {
             for ( int i = 1; i <= length; i++)
             {
-                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i).GetType() == GetContentType(targetType))
+                bool compareFactions = CompareToMyFaction(parentPos + Vector2Int.up * i + Vector2Int.left * i); 
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
 
-                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.left * i).GetType() == GetContentType(targetType))
+                compareFactions = CompareToMyFaction(parentPos + Vector2Int.down * i + Vector2Int.left * i);
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.left * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
 
-                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.right * i).GetType() == GetContentType(targetType))
+                compareFactions = CompareToMyFaction(parentPos + Vector2Int.up * i + Vector2Int.right * i);
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.right * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
 
-                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.down * i + Vector2Int.right * i).GetType() == GetContentType(targetType))
+                compareFactions = CompareToMyFaction(parentPos + Vector2Int.up * i + Vector2Int.left * i);
+                if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
@@ -227,7 +236,8 @@ namespace Game
 
             foreach (Vector2Int pos in rotatedList)
             {
-                if(GridPresenter.Instance.GetContent(pos + parentPos).GetType() == GetContentType(targetType))
+                bool compareFactions = CompareToMyFaction(pos + parentPos);
+                if (GridPresenter.Instance.GetContent(pos + parentPos).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
@@ -303,13 +313,34 @@ namespace Game
         {
             for (int i = 1; i <= length; i++)
             {
-                if (GridPresenter.Instance.GetContent(parentPos + direction * i).GetType() == GetContentType(targetType))
+                bool compareFactions = CompareToMyFaction(parentPos + direction * i);
+
+                if (GridPresenter.Instance.GetContent(parentPos + direction * i).GetType() == GetContentType(targetType) && compareFactions)
                 {
                     return true;
                 }
 
             }
             return false;
+        }
+
+        private bool CompareToMyFaction(Vector2Int pos)
+        {
+            bool compareFactions = false;
+            switch (GridPresenter.Instance.GetContent(pos))
+            {
+                case Grid.Content.UnitContent unit:
+                    if (unit != null && myFaction != unit.unitReference.GetFaction())
+                    {
+                        compareFactions = true;
+                    }
+                    break;
+                case Grid.Content.CommunityContent community:
+                    compareFactions = true;
+                    break;
+            }
+
+            return compareFactions;
         }
 
         private void DisableHighlights()
@@ -399,7 +430,18 @@ namespace Game
 
             foreach ( AGridContent content in aGridContents)
             {
-                returnGameObjects.Add(content.transform.gameObject);
+                switch (content)
+                {
+                    case Grid.Content.UnitContent unit:
+                        if (unit.unitReference.GetFaction() != myFaction)
+                        {
+                            returnGameObjects.Add(content.transform.gameObject);
+                        }
+                        break;
+                    case Grid.Content.CommunityContent community:
+                        returnGameObjects.Add(content.transform.gameObject);
+                        break;
+                }     
             }
 
             return returnGameObjects;
@@ -434,7 +476,6 @@ namespace Game
                         unit.unitReference.ApplyHPChange(-attackDamage);
                         unit.unitReference.SetActionPointChangeModifier(-attackActionPoints);
                         unit.unitReference.SetMaxMovementPointModifier(-attackReduceMovementPoints);
-                        Debug.Log("Attack Successful");
                         break;
                     case CommunityContent community:
                         if(community.communityPresenter.GetFaction() == Unit.UnitModel.Faction.None)
@@ -442,7 +483,6 @@ namespace Game
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
                                 communitySucces = true;
-                                Debug.Log("IsCapture Success");
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             }
                         } else
@@ -450,12 +490,10 @@ namespace Game
                             if (community.communityPresenter.IsCaptureSuccessful())
                             {
                                 communitySucces = true;
-                                Debug.Log("Capture Success");
                                 community.communityPresenter.SetFaction(GetComponentInParent<Unit.UnitPresenter>().GetFaction());
                             } else
                             {
                                 communitySucces = false;
-                                Debug.Log("Capture Success");
                             }
                         }
                         break;
