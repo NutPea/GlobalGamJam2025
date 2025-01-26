@@ -481,7 +481,7 @@ namespace Game
                 }
                 else
                 {
-                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished(), this, transform.parent.gameObject, new List<GameObject> { transform.parent.gameObject});
+                    UIStateManager.Instance.HandleAbility(() => callbackCastFinished(), this, transform.parent.gameObject, new List<GameObject> { transform.parent.gameObject}, false);
                 }
             }
 
