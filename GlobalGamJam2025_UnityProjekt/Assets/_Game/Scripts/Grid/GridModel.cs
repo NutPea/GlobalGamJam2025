@@ -22,7 +22,11 @@ namespace Game.Grid
             content = new Dictionary<Vector2Int, AGridContent>();
             contentList.ForEach(c => {
                 Vector2Int result = Vector2Int.RoundToInt(new Vector2(c.transform.position.x, c.transform.position.z));
-                content.Add(result, c);
+                if(content.ContainsKey(result))
+                {
+                    GameObject.Destroy(content[result]);                    
+                }
+                content[result] = c;
             });
         }
 
