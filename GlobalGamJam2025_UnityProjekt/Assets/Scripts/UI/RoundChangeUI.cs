@@ -32,7 +32,7 @@ namespace GetraenkeBub
 
         public void OnEnter()
         {
-            
+            SetRound(UIStateManager.Instance.CurrentRound);
         }
 
         public void OnLeave()

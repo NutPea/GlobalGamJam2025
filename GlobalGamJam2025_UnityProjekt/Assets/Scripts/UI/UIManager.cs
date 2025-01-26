@@ -94,6 +94,7 @@ namespace GetraenkeBub
         private void OnHandleRoundCounterChange(int old, int newAmount)
         {
             CurrentRound = newAmount;
+
             ChangeUIState(EUIState.RoundChangeUI);
         }
 
