@@ -48,8 +48,8 @@ MonoBehaviour:
   abilityName: Circle DMG 1
   abilityDescription: This is a Test
   actionPointCost: 1
-  length: 2
-  actionDirection: 1
+  length: 5
+  actionDirection: 6
   targetType: 3
   spawnedEffect: {fileID: 0}
   attackDamage: 1

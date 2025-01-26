@@ -42,7 +42,7 @@ namespace Game
         private List<Vector2Int> patternCross = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up * 4, Vector2Int.up * 3 + Vector2Int.left, Vector2Int.up * 3 + Vector2Int.right };
         private List<Vector2Int> patternMiddleFinger = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.up * 3, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.right, Vector2Int.left };
         private List<Vector2Int> patternO = new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, Vector2Int.up + Vector2Int.left, Vector2Int.up + Vector2Int.right, Vector2Int.down + Vector2Int.left, Vector2Int.down + Vector2Int.right };
-        private List<Vector2Int> patternCircle = new List<Vector2Int> { Vector2Int.up, Vector2Int.up * 2, Vector2Int.down, Vector2Int.down * 2, Vector2Int.left, Vector2Int.left * 2, Vector2Int.right, Vector2Int.right * 2 };
+        private List<Vector2Int> patternCircle = new List<Vector2Int> { Vector2Int.up + Vector2Int.right, Vector2Int.up + Vector2Int.left, Vector2Int.down + Vector2Int.right, Vector2Int.down + Vector2Int.left,Vector2Int.up, Vector2Int.up * 2, Vector2Int.down, Vector2Int.down * 2, Vector2Int.left, Vector2Int.left * 2, Vector2Int.right, Vector2Int.right * 2 };
 
         private void Start()
         {
@@ -105,7 +105,7 @@ namespace Game
 
         private void HighLightX(Vector2Int parentPos, int length)
         {
-            for (int i = 0; i > length; i++)
+            for (int i = 1; i <= length; i++)
             {
                 AGridContent content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i);
                 content.SetHighlightOption(AGridContent.HighlightOption.Ability);
@@ -178,7 +178,7 @@ namespace Game
 
         private bool EvaluateX(Vector2Int parentPos, int length)
         {
-            for ( int i = 0; i > length; i++)
+            for ( int i = 1; i <= length; i++)
             {
                 if (GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i).GetType() == GetContentType(targetType))
                 {
@@ -266,28 +266,6 @@ namespace Game
                 default:
                     return Vector2Int.left;
             }
-        }
-
-        private HashSet<AGridContent> GetTargetsDirectionCircle(Vector2Int parentPos)
-        {
-            HashSet<AGridContent> targets = new HashSet<AGridContent>();
-            for (int x = -length; x < length; x++)  
-            {
-                for (int y = -length; y < length; y++)
-                {
-                    Vector2Int toCheckPos = new Vector2Int(x, y);
-                    if (toCheckPos.magnitude <= length)
-                    {
-                        AGridContent content = GridPresenter.Instance.GetContent(parentPos + toCheckPos);
-                        if (content.GetType() == GetContentType(targetType))
-                        {
-                            targets.Add(content);
-                        }
-                    }
-                }
-            }
-
-            return targets;
         }
 
         private Type GetContentType(TargetType targetType)
@@ -385,7 +363,7 @@ namespace Game
         private IEnumerable<AGridContent> GetTargetsX(Vector2Int parentPos, int length)
         {
             HashSet<AGridContent> targets = new HashSet<AGridContent>();
-            for (int i = 0; i > length; i++)
+            for (int i = 1; i <= length; i++)
             {
                 AGridContent content = GridPresenter.Instance.GetContent(parentPos + Vector2Int.up * i + Vector2Int.left * i);
                 if (content.GetType() == GetContentType(targetType))
@@ -429,7 +407,10 @@ namespace Game
 
         public void Cast(Action callbackCastFinished)
         {
-            Instantiate(spawnedEffect, transform.parent.transform);
+            if (spawnedEffect != null)
+            {
+                Instantiate(spawnedEffect, transform.parent.transform);
+            }
 
             if(this.actionDirection == ActionDirection.skip)
             {
