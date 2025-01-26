@@ -1310,7 +1310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa50f3598b6485a4b8be9abdb2898ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extraDistance: 8
+  extraDistance: 3
   timeBeforeAttack: 0.5
   timeBeforeReaktion: 1
   timeNeeded: 2
