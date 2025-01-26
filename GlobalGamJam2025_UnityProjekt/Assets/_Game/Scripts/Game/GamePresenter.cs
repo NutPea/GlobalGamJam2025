@@ -1,3 +1,4 @@
+using AI;
 using Game.Community;
 using Game.Grid;
 using Game.Input;
@@ -89,9 +90,13 @@ namespace Game
                 OnRoundCounterChanged?.Invoke(Mathf.Max(0, i - 1), i);
                 units.ForEach(p => p.ApplyOverallRoundStart());
 
+                foreach (var item in AIDirector.Instances)
+                {
+                    item.Value.RoundStart();
+                }
 
                 //update spawners
-                foreach(SpawnerPresenter spawner in spawners)
+                foreach (SpawnerPresenter spawner in spawners)
                 {
                     LeanTween.delayedCall(spawner.GetTurnFocusDuration(), () => spawner.UpdateSpawner());
                     yield return WaitForFinishTurn();
@@ -213,7 +218,11 @@ namespace Game
         }
         private void If_AI_TakeTurn(UnitPresenter unit)
         {
-
+            if(unit.GetFaction() == UnitModel.Faction.Vegans)
+            {
+                return;
+            }
+            unit.GetComponent<AIAgent>().DoNextAction();
         }
         private IEnumerator WaitForFinishTurn()
         {
