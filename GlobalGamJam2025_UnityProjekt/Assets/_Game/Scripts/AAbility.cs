@@ -330,7 +330,8 @@ namespace Game
             switch (GridPresenter.Instance.GetContent(pos))
             {
                 case Grid.Content.UnitContent unit:
-                    if (unit != null && myFaction != unit.unitReference.GetFaction())
+                    //myFaction != unit.unitReference.GetFaction() &&
+                    if (unit != null &&  ((myFaction == UnitModel.Faction.Vegans && unit.unitReference.GetFaction() != UnitModel.Faction.Vegans) || (myFaction != UnitModel.Faction.Vegans && unit.unitReference.GetFaction() == UnitModel.Faction.Vegans)))
                     {
                         compareFactions = true;
                     }
@@ -433,7 +434,7 @@ namespace Game
                 switch (content)
                 {
                     case Grid.Content.UnitContent unit:
-                        if (unit.unitReference.GetFaction() != myFaction)
+                        if ((myFaction == UnitModel.Faction.Vegans && unit.unitReference.GetFaction() != UnitModel.Faction.Vegans) || (myFaction != UnitModel.Faction.Vegans && unit.unitReference.GetFaction() == UnitModel.Faction.Vegans))
                         {
                             returnGameObjects.Add(content.transform.gameObject);
                         }
