@@ -10,7 +10,7 @@ namespace GetraenkeBub
         public static CameraManager Instance;
         bool follow;
         [SerializeField] private Transform LookAtPosition;
-        private Transform target;
+        public Transform Target;
 
        public CinemachineVirtualCamera attackCamera;
 
@@ -19,6 +19,7 @@ namespace GetraenkeBub
         {
             Instance = this;
             follow = false;
+            attackCamera.gameObject.SetActive(false);
         }
        
         public void LookAtPoint(Vector3 lookAtPosition)
@@ -32,7 +33,7 @@ namespace GetraenkeBub
         public void SetFollow(Transform followTransform)
         {
             follow = true;
-            target = followTransform;
+            Target = followTransform;
         }
 
         public void RemoveFollow()
@@ -46,7 +47,7 @@ namespace GetraenkeBub
             {
                 return;
             }
-            LookAtPosition.transform.position = target.transform.position;
+            LookAtPosition.transform.position = Target.transform.position;
         }
     }
 }

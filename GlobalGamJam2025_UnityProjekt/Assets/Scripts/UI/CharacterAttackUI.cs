@@ -30,8 +30,8 @@ namespace GetraenkeBub
 
         [Header("Community")]
         private CommunityPresenter communityPresenter;
-        [SerializeField] private GameObject goodReaktionPostGameobject;
-        [SerializeField] private GameObject badReacktionPostGameobject;
+        [SerializeField] private GameObject reaktionPostGameobject;
+        private GameObject spawnedPostGameobjekt;
 
         [SerializeField] private float transitionTime = 0.5f;
         [SerializeField] private LeanTweenType transitionTween;
@@ -41,8 +41,10 @@ namespace GetraenkeBub
 
         public void Init()
         {
-            CameraManager.Instance.attackCamera.gameObject.SetActive(false);
+           
         }
+
+        
 
         public void OnBeforeEnter()
         {
@@ -95,7 +97,7 @@ namespace GetraenkeBub
 
             if(communityPresenter != null)
             {
-
+                HandleCommunityTimeline(transitionTime, showTime, () => done.Invoke());
             }
             else
             {
@@ -111,35 +113,27 @@ namespace GetraenkeBub
             ShowCommunityResult();
             yield return new WaitForSeconds(showTime);
             TransitionCummunityOut();
-            yield return new WaitForSeconds(transitionTime);
             UIStateManager.Instance.ReturnToLastUiState();
             doneAction?.Invoke();
         }
 
         private void TransitionCummunityIn()
         {
-
+            //Spawn
+            spawnedPostGameobjekt = Instantiate(reaktionGameobject, communityPresenter.transform.position, Quaternion.identity);
+            spawnedPostGameobjekt.GetComponent<CommunityPostHandlerUI>().Setup(UIStateManager.Instance.currentUnitPresenter,communityPresenter, WasCommunityWasSuccsesfull);
         }
 
         private void ShowCommunityResult()
         {
-
-
-            if (WasCommunityWasSuccsesfull)
-            {
-
-            }
-            else
-            {
-
-            }
+            
         }
 
         
 
         private void TransitionCummunityOut()
         {
-
+            Destroy(spawnedPostGameobjekt);
         }
 
         private IEnumerator HandleAttackTimeline(float timeBeforeAttack,float timeBeforeReaktion,Action doneAction)

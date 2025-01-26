@@ -18,10 +18,12 @@ public class CharacterStateUIPresenter : MonoBehaviour,IPointerEnterHandler , IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(thisUnitPresenter == currentTarget)
+        lastTarget = GetraenkeBub.CameraManager.Instance.Target;
+        if(thisUnitPresenter == currentTarget || thisUnitPresenter == currentTarget)
         {
             return;
         }
+        GetraenkeBub.CameraManager.Instance.SetFollow(thisUnitPresenter.transform);
 
     }
 
@@ -31,7 +33,7 @@ public class CharacterStateUIPresenter : MonoBehaviour,IPointerEnterHandler , IP
         {
             return;
         }
-
+        GetraenkeBub.CameraManager.Instance.SetFollow(lastTarget);
     }
 
     public void Setup(UnitPresenter targetUnitPresenter,UnitPresenter currentTargetPresenter)
