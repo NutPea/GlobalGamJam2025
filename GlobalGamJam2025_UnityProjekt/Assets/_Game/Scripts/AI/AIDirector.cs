@@ -49,7 +49,7 @@ public class AIDirector : MonoBehaviour
     {
         List<AAIAction> attackActions = new List<AAIAction>();
 
-        attackActions.Add(new ChaosAction());
+        //attackActions.Add(new ChaosAction());
 
         foreach (UnitPresenter item in GridPresenter.Instance.GetAll<UnitPresenter>().Where(u => u.GetFaction() == Faction.Vegans))
         {
@@ -58,14 +58,14 @@ public class AIDirector : MonoBehaviour
 
         foreach (CommunityPresenter item in GridPresenter.Instance.GetAll<CommunityPresenter>().Where(u => u.GetFaction() != faction))
         {
-            attackActions.Add(new CaptureAction(item));
+            //attackActions.Add(new CaptureAction(item));
         }
 
         foreach (CommunityPresenter item in GridPresenter.Instance.GetAll<CommunityPresenter>().Where(u => u.GetFaction() == faction))
         {
-            attackActions.Add(new DefendAction(item));
+            //attackActions.Add(new DefendAction(item));
         }
-        return new List<AAIAction>();
+        return attackActions;
     }
     private void AssignBaseBias(List<AAIAction> actions)
     {

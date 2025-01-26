@@ -10,6 +10,10 @@ namespace GetraenkeBub
     public class PlayerUI : MonoBehaviour, IUIState
     {
 
+        [SerializeField] private List<CharacterStateUIPresenter> playerCharacterStateUIPresenter;
+        [SerializeField] private List<CharacterStateUIPresenter> enemyCharacterStateUIPresenter;
+        int currentPlayerStateIndex = 0;
+        int currentEnemyStateIndex = 0;
         [Header("Buttons")]
         [SerializeField] private Button pauseButton;
 
@@ -23,13 +27,31 @@ namespace GetraenkeBub
 
         public void OnBeforeEnter()
         {
-           foreach(UnitPresenter presenter in GridPresenter.Instance.GetAll<UnitPresenter>())
-           {
+            currentPlayerStateIndex = 0;
+            currentEnemyStateIndex = 0;
+            playerCharacterStateUIPresenter.ForEach(n => n.gameObject.SetActive(false));
+            enemyCharacterStateUIPresenter.ForEach(n => n.gameObject.SetActive(false));
+
+            Debug.Log(GridPresenter.Instance);
+            allUnitPresenter = GridPresenter.Instance.GetAll<UnitPresenter>();
+            foreach (UnitPresenter presenter in GridPresenter.Instance.GetAll<UnitPresenter>())
+            {
                 if(presenter != null)
                 {
                     allUnitPresenter.Add(presenter);
+                    if(presenter.GetFaction() == UIStateManager.Instance.playerFaction)
+                    {
+                        playerCharacterStateUIPresenter[currentPlayerStateIndex].Setup(presenter, UIStateManager.Instance.currentUnitPresenter);
+                        currentPlayerStateIndex++;
+                    }
+                    else
+                    {
+                        enemyCharacterStateUIPresenter[currentPlayerStateIndex].Setup(presenter, UIStateManager.Instance.currentUnitPresenter);
+                        currentEnemyStateIndex ++;
+                    }
                 }
-           }
+            }
+
 
 
         }

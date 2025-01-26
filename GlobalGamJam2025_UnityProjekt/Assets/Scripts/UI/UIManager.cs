@@ -29,13 +29,13 @@ namespace GetraenkeBub
         [SerializeField] private List<UIState> UIStates;
         public int AmountOfPoints = 0;
         public int CurrentRound = 0;
+        public UnitPresenter currentUnitPresenter;
         public Faction playerFaction = Faction.Vegans;
 
         private void Awake()
         {
             Instance = this;
-            UIStates.ForEach(n => n.OnInit());
-            ChangeUIState(startUIState);
+
           
 
         }
@@ -47,7 +47,9 @@ namespace GetraenkeBub
             GamePresenter.Instance.OnPointsChanged += OnPointsHandle;
             GamePresenter.Instance.OnRoundCounterChanged += OnHandleRoundCounterChange;
             GamePresenter.Instance.OnTargetChanged += HandleTargetChange;
-           
+            UIStates.ForEach(n => n.OnInit());
+            ChangeUIState(startUIState);
+
         }
 
         private void OnPointsHandle(int arg1, int arg2)
@@ -73,8 +75,8 @@ namespace GetraenkeBub
             if(newTarget is UnitPresenter presenter)
             {
                 Faction faction =  presenter.GetFaction();
-
-                if(faction != playerFaction)
+                currentUnitPresenter = presenter;
+                if (faction != playerFaction)
                 {
                     ChangeUIState(EUIState.EnemyUI);
                 }
@@ -92,6 +94,7 @@ namespace GetraenkeBub
         private void OnHandleRoundCounterChange(int old, int newAmount)
         {
             CurrentRound = newAmount;
+
             ChangeUIState(EUIState.RoundChangeUI);
         }
 
@@ -207,16 +210,10 @@ namespace GetraenkeBub
 
        public void OnInit()
        {
-            try
-            {
-                IUIState = UIManager.GetComponent<IUIState>();
-                IUIState.Init();
-                UIManager.gameObject.SetActive(false);
-            }
-            catch(Exception e)
-            {
-                Debug.Log(UIManager.name + e);
-            }
+            IUIState = UIManager.GetComponent<IUIState>();
+            IUIState.Init();
+            UIManager.gameObject.SetActive(false);
+
        }
 
         public void OnBeforeEnter()

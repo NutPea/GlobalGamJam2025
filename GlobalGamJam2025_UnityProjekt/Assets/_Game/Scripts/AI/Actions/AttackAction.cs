@@ -42,10 +42,6 @@ namespace AI.Actions
             abilities.RemoveAll(a => skipAbilities.Contains(a));
             abilities.RemoveAll(a => captureAbilities.Contains(a));
 
-            //TODO REMOVE!
-            GamePresenter.Instance.AbilityCastedHandler(skipAbilities.First());
-            //TODO CONTINUE HERE
-
             List<AAbility> castableAbilities = abilities.Where(a => a.IsTargetConditionSatisfied() && a.actionPointCost <= caster.GetAbilityPoints()).ToList();
             if (castableAbilities.Any())
             {
@@ -57,10 +53,26 @@ namespace AI.Actions
                 List<Vector2Int> targetPositions = GetTargetPositions(caster);
                 List<Vector2Int> path = AStarHelper.CalculatePath(targetPositions, caster.GetPosition(), GridPresenter.Instance.IsWalkable).Item1;
 
+                if (!path.Any()) 
+                {
+                    Vector2Int[] directions = new Vector2Int[] {Vector2Int.up, Vector2Int.right, Vector2Int.left, Vector2Int.down};
+                    foreach(AAbility ability in abilities)
+                    {
+                        foreach(Vector2Int direction in directions)
+                        {
+                            if (ability.IsTargetConditionSatisfied(caster.GetPosition() + direction, direction))
+                            {
+                                GamePresenter.Instance.GridClickedHandler(caster.GetPosition() + direction);
+                                return;
+                            }
+                        }
+                    }
+                }
                 if (caster.GetMovementOptions().Any(m => path.Contains(m)))
                 {
                     Vector2Int movement = caster.GetMovementOptions().First(m => path.Contains(m));
                     GamePresenter.Instance.GridClickedHandler(movement);
+                    return;
                 }
             }
             GamePresenter.Instance.AbilityCastedHandler(skipAbilities.First());
@@ -88,9 +100,17 @@ namespace AI.Actions
                         foreach(Vector2Int dir in directions)
                         {
                             Vector2Int pos = new Vector2Int(x, z);
+                            if (!GridPresenter.Instance.IsWalkable(pos))
+                            {
+                                continue;
+                            }
                             if (ability.IsTargetConditionSatisfied(pos, dir))
                             {
                                 output.Add(pos - dir);
+                                if (!GridPresenter.Instance.IsWalkable(pos - dir))
+                                {
+                                    continue;
+                                }
                             }
                         }
                     }

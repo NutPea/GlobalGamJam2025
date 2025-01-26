@@ -113,6 +113,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyCharacterState Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5059977030426788184, guid: 0d48624a639930f419df83d90bd1e04e,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.06661281
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059977030426788184, guid: 0d48624a639930f419df83d90bd1e04e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.001503004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059977030426788184, guid: 0d48624a639930f419df83d90bd1e04e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.47798735
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833864560578344112, guid: 0d48624a639930f419df83d90bd1e04e,
+        type: 3}
+      propertyPath: backgroundColor.b
+      value: 0.014327487
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833864560578344112, guid: 0d48624a639930f419df83d90bd1e04e,
+        type: 3}
+      propertyPath: backgroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833864560578344112, guid: 0d48624a639930f419df83d90bd1e04e,
+        type: 3}
+      propertyPath: backgroundColor.r
+      value: 0.40392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833864560578344112, guid: 0d48624a639930f419df83d90bd1e04e,
+        type: 3}
+      propertyPath: highlightBackgroundColor.b
+      value: 0.5310474
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833864560578344112, guid: 0d48624a639930f419df83d90bd1e04e,
+        type: 3}
+      propertyPath: highlightBackgroundColor.g
+      value: 0.45597476
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833864560578344112, guid: 0d48624a639930f419df83d90bd1e04e,
+        type: 3}
+      propertyPath: highlightBackgroundColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7208674501586397857, guid: 0d48624a639930f419df83d90bd1e04e,
         type: 3}
       propertyPath: m_LocalRotation.w

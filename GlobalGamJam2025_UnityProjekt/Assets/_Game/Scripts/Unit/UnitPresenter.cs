@@ -29,12 +29,7 @@ namespace Game.Unit
         }
         private void Update()
         {
-            Vector3 target = new Vector3(model.Position.Value.x, 0, model.Position.Value.y);
-            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, 0.25f);
-            if(Vector3.Distance(target, transform.position) > 0.01f)
-            {
-                transform.LookAt(target, Vector3.up);
-            }
+            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(model.Position.Value.x, 0, model.Position.Value.y), ref velocity, 0.25f);
         }
         private void OnEnable()
         {
@@ -166,5 +161,11 @@ namespace Game.Unit
         {
             return model.unitIcon;
         }
+
+        public string GetName()
+        {
+            return model.unitName;
+        }
+
     }
 }
