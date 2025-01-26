@@ -115,18 +115,20 @@ namespace Game
                     {
                         UpdateAbilities(unit);
                         HashSet<Vector2Int> movementOptions = UpdateMovement(unit);
-                        yield return null;
 
-                        If_AI_TakeTurn(unit);
+                        LeanTween.delayedCall(0.1f, () => If_AI_TakeTurn(unit));
+                        yield return null;
 
                         bool waitForAnimation = false;
                         switch (lastUserInput)
                         {
                             case MovementInput movementInput:
                                 HandleMovement(movementOptions, movementInput, unit);
+                                Debug.Log($"{unit.name} vom Spieler {unit.GetFaction()} läuft auf {movementInput.position}");
                                 break;
                             case AbilityInput abilityInput:
                                 HandleAbility(unit, abilityInput, ref unitIsFinished, ref waitForAnimation);
+                                Debug.Log($"{unit.name} vom Spieler {unit.GetFaction()} castet {abilityInput.ability.name}");
                                 break;
                         }
 
