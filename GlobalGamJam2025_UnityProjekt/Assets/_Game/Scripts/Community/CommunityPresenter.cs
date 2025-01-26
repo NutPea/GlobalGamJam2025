@@ -3,7 +3,7 @@ using static Game.Unit.UnitModel;
 
 namespace Game.Community
 {
-    public class CommunityPresenter : MonoBehaviour
+    public class CommunityPresenter : MonoBehaviour, ITarget
     {
         private CommunityModel model;
 

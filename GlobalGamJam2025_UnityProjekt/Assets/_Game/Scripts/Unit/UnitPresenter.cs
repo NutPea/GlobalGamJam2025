@@ -7,7 +7,7 @@ using static Game.Unit.UnitModel;
 namespace Game.Unit
 {
     [RequireComponent(typeof(UnitModel)), RequireComponent(typeof(IMovementProvider)), RequireComponent(typeof(IAbilityProvider))]
-    public class UnitPresenter : MonoBehaviour
+    public class UnitPresenter : MonoBehaviour, ITarget
     {
         private UnitModel model;
         private AUnitView view;

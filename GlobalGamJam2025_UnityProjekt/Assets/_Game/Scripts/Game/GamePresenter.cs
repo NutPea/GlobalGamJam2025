@@ -2,6 +2,7 @@ using Game.Grid;
 using Game.Input;
 using Game.Unit;
 using GetraenkeBub;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,12 @@ namespace Game
 {
     public class GamePresenter : MonoBehaviour
     {
+        public event Action<ITarget, ITarget> OnTargetChanged;
+        public event Action<List<UnitPresenter>> OnUnitListChanged; //Gameover selber feststellen
+        public event Action<int, int> OnPointsChanged;
+        public event Action<int, int> OnRoundCounterChanged;
+        public event Action OnLastRoundOver;
+
         [SerializeField] private GridPresenter[] levels;
         private List<UnitPresenter> units;
         private AUserInput lastUserInput;
@@ -63,7 +70,7 @@ namespace Game
                 foreach(UnitPresenter unit in units)
                 {
                     Debug.Log(unit.gameObject);
-                    if(unit.gameObject == null) continue; //TODO HIER GEHTS MORGEN WEITER
+                    if(unit.gameObject == null) continue;
                     unit.ApplyIndividualRoundStart();
 
                     bool unitIsFinished = false;
