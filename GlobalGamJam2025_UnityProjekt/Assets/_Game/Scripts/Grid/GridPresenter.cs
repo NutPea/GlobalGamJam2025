@@ -47,10 +47,11 @@ namespace Game.Grid
         {
             model.SwapCells(posA, posB);
         }
-        public void DestroyUnit(Vector2Int position)
+        public void DestroyCell(Vector2Int position)
         {
             AGridContent newEmpty = Instantiate(emptyPrefab, transform).GetComponentInChildren<AGridContent>();
             newEmpty.transform.position = new Vector3(position.x, 0, position.y);
+            GameObject.Destroy(model.GetContent(position).gameObject);
             model.Replace(position, newEmpty);
         }
         public int GetRoundCount()

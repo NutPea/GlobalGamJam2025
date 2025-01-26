@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 namespace GetraenkeBub
@@ -10,6 +11,8 @@ namespace GetraenkeBub
         bool follow;
         [SerializeField] private Transform LookAtPosition;
         private Transform target;
+
+       public CinemachineVirtualCamera attackCamera;
 
 
         private void Awake()

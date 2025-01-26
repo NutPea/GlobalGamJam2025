@@ -7,7 +7,7 @@ using static Game.Unit.UnitModel;
 namespace Game.Unit
 {
     [RequireComponent(typeof(UnitModel)), RequireComponent(typeof(IMovementProvider)), RequireComponent(typeof(IAbilityProvider))]
-    public class UnitPresenter : MonoBehaviour
+    public class UnitPresenter : MonoBehaviour, ITarget
     {
         private UnitModel model;
         private AUnitView view;
@@ -148,8 +148,8 @@ namespace Game.Unit
         }
         public void DestroyUnit()
         {
-            GridPresenter.Instance.DestroyUnit(model.Position.Value);
-            GameObject.Destroy(transform.parent.gameObject);
+            GridPresenter.Instance.DestroyCell(model.Position.Value);
+            GameObject.Destroy(gameObject);
         }
     }
 }

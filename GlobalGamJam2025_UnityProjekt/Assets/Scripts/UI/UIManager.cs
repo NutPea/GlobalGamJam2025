@@ -16,8 +16,10 @@ namespace GetraenkeBub
         public event Action OnAbilityStop; //TODO INVOKE!
 
         private UIState currentUIState;
+        private UIState lastUIState;
         [SerializeField] private EUIState startUIState;
         [SerializeField] private List<AbilityButtonView> abilityButtonViews;
+        [SerializeField] private CharacterAttackUI characterAttackUI;
 
         [SerializeField] private List<UIState> UIStates;
         private void Awake()
@@ -49,11 +51,17 @@ namespace GetraenkeBub
             if(currentUIState != null)
             {
                 currentUIState.OnLeave();
+                lastUIState = currentUIState;
             }
             currentUIState = GetUISTate(toChangeUiState);
             currentUIState.OnBeforeEnter();
             currentUIState.OnEnter();
 
+        }
+
+        public void ReturnToLastUiState()
+        {
+            ChangeUIState(lastUIState.uIState);
         }
 
         public void SetAbilities(List<(AAbility, AbilityUsability)> abilities)
@@ -81,7 +89,18 @@ namespace GetraenkeBub
 
         public void HandleAbility(Action done, AAbility ability, GameObject caster, List<GameObject> targets, bool communitySuccess)
         {
-            done?.Invoke();
+            if(targets.Count == 0)
+            {
+                done?.Invoke();
+            }
+            else if(targets.Count == 1 && targets.Contains(caster))
+            {
+                done?.Invoke();
+            }
+            else
+            {
+                characterAttackUI.HandleAbility(() => done.Invoke(),ability, caster, targets);
+            }
         }
 
     }
@@ -92,6 +111,7 @@ namespace GetraenkeBub
 
         [SerializeField] private GameObject UIManager;
         [SerializeField]private EUIState uiState;
+        public EUIState uIState => uiState;
         private IUIState IUIState;
 
         public bool CheckIfUIState(EUIState toCheckUIState)

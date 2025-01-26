@@ -514,7 +514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -16.174988, y: 0}
+  m_AnchoredPosition: {x: -16.175049, y: 0}
   m_SizeDelta: {x: -32.35008, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1746137141645113349
@@ -878,6 +878,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa50f3598b6485a4b8be9abdb2898ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extraDistance: 8
+  timeBeforeAttack: 0.5
+  timeBeforeReaktion: 1
+  timeNeeded: 2
+  attackMemeGameobject: {fileID: 4851810084712495914, guid: 0aaf90c7687c6e64786f088de2cbac9a,
+    type: 3}
+  reaktionGameobject: {fileID: 1144419708369041679, guid: f6dee88499dae354db295ca473d0c7e7,
+    type: 3}
 --- !u!1 &3442755175128314155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,7 +1547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 18.119984, y: 0}
+  m_AnchoredPosition: {x: 18.119873, y: 0}
   m_SizeDelta: {x: -36.24004, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7136893525960815180
@@ -2034,6 +2042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3819132986126700745}
   - component: {fileID: 1802901857300094518}
+  - component: {fileID: 1388033087575273628}
   m_Layer: 5
   m_Name: UIManager
   m_TagString: Untagged
@@ -2084,6 +2093,7 @@ MonoBehaviour:
   - {fileID: 2280340316135459718}
   - {fileID: 2684074753203791585}
   - {fileID: 6422888541047990795}
+  characterAttackUI: {fileID: 5914679659510066001}
   UIStates:
   - UIManager: {fileID: 6214187764298084750}
     uiState: 0
@@ -2095,6 +2105,23 @@ MonoBehaviour:
     uiState: 3
   - UIManager: {fileID: 2457095319320038846}
     uiState: 4
+--- !u!114 &1388033087575273628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6837437863218072235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fc26e876c50d04cbad55d916c8fe88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mockAttack: 0
+  aAbility: {fileID: 0}
+  target: {fileID: 0}
+  opfer:
+  - {fileID: 0}
 --- !u!1 &6985294055475808458
 GameObject:
   m_ObjectHideFlags: 0
