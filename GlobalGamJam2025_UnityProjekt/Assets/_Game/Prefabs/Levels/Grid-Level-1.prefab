@@ -1,5 +1,105 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2367865661731945595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6632803926135108101}
+  - component: {fileID: 5748091748829850417}
+  m_Layer: 0
+  m_Name: AI_TinFoil
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6632803926135108101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2367865661731945595}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2800599420001256377}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5748091748829850417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2367865661731945595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25491a8b9e58ad846b3d887588594fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction: 3
+  attackBias: 0
+  defendBias: 0
+  captureBias: 0
+  chaosBias: 0
+  agentPriorityBias: 0
+--- !u!1 &3121630700255672016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 47534570306004493}
+  - component: {fileID: 5875082015450598417}
+  m_Layer: 0
+  m_Name: AI_Baverians
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &47534570306004493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121630700255672016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2800599420001256377}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5875082015450598417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121630700255672016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25491a8b9e58ad846b3d887588594fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction: 2
+  attackBias: 0
+  defendBias: 0
+  captureBias: 0
+  chaosBias: 0
+  agentPriorityBias: 0
 --- !u!1 &8338644538756706139
 GameObject:
   m_ObjectHideFlags: 0
@@ -17,7 +117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2800599420001256377
 Transform:
   m_ObjectHideFlags: 0
@@ -49,6 +149,8 @@ Transform:
   - {fileID: 8770549063004027428}
   - {fileID: 7056673359391984247}
   - {fileID: 8135654303826000002}
+  - {fileID: 47534570306004493}
+  - {fileID: 6632803926135108101}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2761489687177169243
@@ -1252,6 +1354,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitA-Cell (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4675219143925238713, guid: 940fec21134a77642a3d8e1173e06fc5,
+        type: 3}
+      propertyPath: abilityIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 8313c9ea30725c743814b7bd9950132c,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1325,6 +1433,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UnitA-Cell
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537325929831409539, guid: 940fec21134a77642a3d8e1173e06fc5,
+        type: 3}
+      propertyPath: _maxHP
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3537325929831409539, guid: 940fec21134a77642a3d8e1173e06fc5,
         type: 3}
