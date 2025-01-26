@@ -70,6 +70,12 @@ namespace Game.Unit
         {
             model.IsUsedThisRound.Value = false;
         }
+
+        public bool GetUsedThisRound()
+        {
+           return model.IsUsedThisRound.Value;
+        }
+
         public void ApplyIndividualRoundStart()
         {
             model.ApplyRoundStart();
@@ -150,6 +156,10 @@ namespace Game.Unit
         {
             GridPresenter.Instance.DestroyCell(model.Position.Value);
             GameObject.Destroy(gameObject);
+        }
+        public Sprite GetProfilPicture()
+        {
+            return model.unitIcon;
         }
     }
 }
