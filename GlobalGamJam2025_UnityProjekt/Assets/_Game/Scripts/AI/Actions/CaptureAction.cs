@@ -1,17 +1,23 @@
+using Game.Community;
 using Game.Unit;
 
 namespace AI.Actions
 {
     public class CaptureAction : AAIAction
     {
-        public CaptureAction target;
+        public CommunityPresenter target;
+
+        public CaptureAction(CommunityPresenter target)
+        {
+            this.target = target;
+        }
 
         public override float GetAgentBias(UnitPresenter caster)
         {
             throw new System.NotImplementedException();
         }
 
-        public override float GetSituationalBias()
+        public override float GetSituationalBias(AIDirector director)
         {
             throw new System.NotImplementedException();
         }

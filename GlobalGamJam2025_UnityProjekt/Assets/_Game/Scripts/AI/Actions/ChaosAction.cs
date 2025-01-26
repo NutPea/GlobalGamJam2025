@@ -9,7 +9,7 @@ namespace AI.Actions
             throw new System.NotImplementedException();
         }
 
-        public override float GetSituationalBias()
+        public override float GetSituationalBias(AIDirector director)
         {
             throw new System.NotImplementedException();
         }
