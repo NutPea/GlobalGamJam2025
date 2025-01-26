@@ -8,6 +8,9 @@ namespace Game.Unit
         public enum Faction { None, Vegans, Bavarians, Tinfoil}
         public enum UnitRotation { Up, Right, Down, Left }
 
+        public string unitName = "None";
+        public Sprite unitIcon;
+
         [SerializeField, Tooltip("maximale movement aktionen pro Runde")] private int _maxMovePoints;
 
         [SerializeField, Tooltip("Actionpoints in der ersten Runde BEVOR defaultActionPointChange applied wurde")] private int _startActionPoints;
