@@ -1,5 +1,8 @@
+using Game;
 using Game.Community;
 using Game.Unit;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AI.Actions
 {
@@ -14,17 +17,19 @@ namespace AI.Actions
 
         public override float GetAgentBias(UnitPresenter caster)
         {
-            throw new System.NotImplementedException();
+            return 0;
         }
 
         public override float GetSituationalBias(AIDirector director)
         {
-            throw new System.NotImplementedException();
+            return 0;
         }
 
-        public override void Perform(UnitPresenter unitPresenter)
+        public override void Perform(UnitPresenter caster)
         {
-            throw new System.NotImplementedException();
+            List<AAbility> abilities = caster.GetAbilityOptions();
+            List<AAbility> skipAbilities = abilities.Where(a => a.actionDirection == ActionDirection.skip).ToList();
+            GamePresenter.Instance.AbilityCastedHandler(skipAbilities.First());
         }
     }
 }
