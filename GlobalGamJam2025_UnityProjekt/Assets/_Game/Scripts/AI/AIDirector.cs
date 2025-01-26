@@ -1,6 +1,10 @@
 using AI;
 using AI.Actions;
+using Game.Community;
+using Game.Grid;
+using Game.Unit;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Game.Unit.UnitModel;
 
@@ -36,10 +40,31 @@ public class AIDirector : MonoBehaviour
     {
         return priorityList;
     }
-
+    public Faction GetFaction() 
+    {
+        return faction;
+    }
 
     private List<AAIAction> GetPossibleActions()
     {
+        List<AAIAction> attackActions = new List<AAIAction>();
+
+        attackActions.Add(new ChaosAction());
+
+        foreach (UnitPresenter item in GridPresenter.Instance.GetAll<UnitPresenter>().Where(u => u.GetFaction() == Faction.Vegans))
+        {
+            attackActions.Add(new AttackAction(item));
+        }
+
+        foreach (CommunityPresenter item in GridPresenter.Instance.GetAll<CommunityPresenter>().Where(u => u.GetFaction() != faction))
+        {
+            attackActions.Add(new CaptureAction(item));
+        }
+
+        foreach (CommunityPresenter item in GridPresenter.Instance.GetAll<CommunityPresenter>().Where(u => u.GetFaction() == faction))
+        {
+            attackActions.Add(new DefendAction(item));
+        }
         return new List<AAIAction>();
     }
     private void AssignBaseBias(List<AAIAction> actions)
@@ -68,12 +93,7 @@ public class AIDirector : MonoBehaviour
     {
         foreach (AAIAction action in actions)
         {
-            action.directorPriority *= action.GetSituationalBias();           
+            action.directorPriority *= action.GetSituationalBias(this);           
         }
     }
 }
-
-/*
- TODO IN DIESER DATEI:
-    - GetPossibleActions
- */

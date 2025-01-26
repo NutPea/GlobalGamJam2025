@@ -57,17 +57,17 @@ namespace Game
 
         }
         #region SubscribeEvents Handler Functions
-        private void AbilityCastedHandler(AAbility ability)
+        public void AbilityCastedHandler(AAbility ability)
         {
             lastUserInput = new AbilityInput(ability);
             gameFlow?.MoveNext();
         }
-        private void GridClickedHandler(Vector2Int position)
+        public void GridClickedHandler(Vector2Int position)
         {
             lastUserInput = new MovementInput(position);
             gameFlow?.MoveNext();
         }
-        private void WaitFinishedHandler()
+        public void WaitFinishedHandler()
         {
             lastUserInput = new FinishAnimationInput();
             gameFlow?.MoveNext();
@@ -183,6 +183,11 @@ namespace Game
             if (unit.GetCurrentMovementPoints() > 0)
             {
                 movementOptions = unit.GetMovementOptions();
+                if(unit.GetFaction() != UnitModel.Faction.Vegans)
+                {
+                    return movementOptions;
+                }
+
                 foreach (Vector2Int item in movementOptions)
                 {
                     GridPresenter.Instance.GetContent(item).SetHighlightOption(AGridContent.HighlightOption.Movement);

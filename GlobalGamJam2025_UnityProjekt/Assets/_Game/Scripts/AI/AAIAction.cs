@@ -18,7 +18,7 @@ namespace AI
             agentPriority = 0;
         }
 
-        public abstract float GetSituationalBias();
+        public abstract float GetSituationalBias(AIDirector director);
         public abstract float GetAgentBias(UnitPresenter caster);
         public abstract void Perform(UnitPresenter unitPresenter);
     }

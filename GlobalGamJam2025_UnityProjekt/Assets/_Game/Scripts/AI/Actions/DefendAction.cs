@@ -7,12 +7,17 @@ namespace AI.Actions
     {
         public CommunityPresenter target;
 
+        public DefendAction(CommunityPresenter target)
+        {
+            this.target = target;
+        }
+
         public override float GetAgentBias(UnitPresenter caster)
         {
             throw new System.NotImplementedException();
         }
 
-        public override float GetSituationalBias()
+        public override float GetSituationalBias(AIDirector director)
         {
             throw new System.NotImplementedException();
         }

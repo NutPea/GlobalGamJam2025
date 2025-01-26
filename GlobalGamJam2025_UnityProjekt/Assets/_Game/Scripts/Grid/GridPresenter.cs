@@ -1,3 +1,4 @@
+using Game.Grid.Content;
 using Game.Unit;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,11 @@ namespace Game.Grid
         public int GetRoundCount()
         {
             return model.GetRoundCount();
+        }
+
+        public bool IsWalkable(Vector2Int position)
+        {
+            return model.GetContent(position) is EmptyContent;
         }
 
     }

@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 5968246510144762717, guid: df8427ccd81d31c47b50236a64f5642b,
         type: 3}
       propertyPath: m_Name
-      value: CommunityCell
+      value: ParentCommunityCell
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2947346123411284916, guid: df8427ccd81d31c47b50236a64f5642b, type: 3}
@@ -71,7 +71,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5968246510144762717, guid: df8427ccd81d31c47b50236a64f5642b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3357489503210907434}
+      addedObject: {fileID: 4930134807713550584}
   m_SourcePrefab: {fileID: 100100000, guid: df8427ccd81d31c47b50236a64f5642b, type: 3}
 --- !u!1 &4908256812264594444 stripped
 GameObject:
@@ -85,7 +85,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2431066413567071350}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3357489503210907434
+--- !u!114 &4930134807713550584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8318036987142006571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b129fb3aab41b346a16435ed9d20519, type: 3}
+  m_Script: {fileID: 11500000, guid: 2221845783e0a32468e2683db038deec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debugVisual: {fileID: 4908256812264594444}
+  communityPresenter: {fileID: 0}
