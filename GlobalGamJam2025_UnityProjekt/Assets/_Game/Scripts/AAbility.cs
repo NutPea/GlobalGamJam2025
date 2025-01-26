@@ -151,35 +151,39 @@ namespace Game
         public bool IsTargetConditionSatisfied()
         {
             Vector2Int parentPos = GetComponentInParent<Unit.UnitPresenter>().GetPosition();
-
             Vector2Int direction;
-
             direction = EvaluateDirectionFromEnum();
 
+            return IsTargetConditionSatisfied(parentPos, direction);
+        }
+
+        public bool IsTargetConditionSatisfied(Vector2Int startPosition, Vector2Int direction)
+        {
             switch (actionDirection)
             {
                 case ActionDirection.forward:
-                    return EvaluateStraightDirection(parentPos, length, direction);
+                    return EvaluateStraightDirection(startPosition, length, direction);
                 case ActionDirection.circle:
-                    return EvaluatePattern(parentPos, Vector2Int.up, patternCircle);
+                    return EvaluatePattern(startPosition, Vector2Int.up, patternCircle);
                 case ActionDirection.O:
-                    return EvaluatePattern(parentPos, Vector2Int.up, patternO);
+                    return EvaluatePattern(startPosition, Vector2Int.up, patternO);
                 case ActionDirection.L:
-                    return EvaluatePattern(parentPos, direction, patternL);
+                    return EvaluatePattern(startPosition, direction, patternL);
                 case ActionDirection.T:
-                    return EvaluatePattern(parentPos, direction, patternT);
+                    return EvaluatePattern(startPosition, direction, patternT);
                 case ActionDirection.X:
-                    return EvaluateX(parentPos, length);
+                    return EvaluateX(startPosition, length);
                 case ActionDirection.cross:
-                    return EvaluatePattern(parentPos, direction, patternCross);
+                    return EvaluatePattern(startPosition, direction, patternCross);
                 case ActionDirection.middleFinger:
-                    return EvaluatePattern(parentPos, direction, patternMiddleFinger);
+                    return EvaluatePattern(startPosition, direction, patternMiddleFinger);
                 case ActionDirection.skip:
                     return true;
             }
 
             return false;
         }
+
 
         private bool EvaluateX(Vector2Int parentPos, int length)
         {
