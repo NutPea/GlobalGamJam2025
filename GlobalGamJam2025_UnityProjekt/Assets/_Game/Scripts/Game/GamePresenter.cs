@@ -22,15 +22,25 @@ namespace Game
 
         public event Action<int, int> OnPointsChanged;
 
+        public static GamePresenter Instance;
+
         [SerializeField] private GridPresenter[] levels;
         private List<UnitPresenter> units;
         private List<CommunityPresenter> communities;
         private List<SpawnerPresenter> spawners;
 
         private AUserInput lastUserInput;
+        private GameModel model;
 
         private IEnumerator gameFlow;
 
+        private void Awake()
+        {
+            model = GetComponent<GameModel>();
+
+            model.Points.OnChange += OnPointChangeHandler;
+            Instance = this;
+        }
         private void Start()
         {
             gameFlow = PlayLevel(0);
@@ -130,7 +140,6 @@ namespace Game
                     }                    
                 }
 
-                //communities 
                 foreach (CommunityPresenter community in communities)
                 {
                     LeanTween.delayedCall(community.GetTurnFocusDuration(), () => community.UpdateCommunity());
@@ -224,6 +233,15 @@ namespace Game
         public List<UnitPresenter> GetUnits()
         {
             return units;
+        }
+
+        public void ChangePoints(int value)
+        {
+            model.Points.Value += value;
+        }
+        private void OnPointChangeHandler(int oldValue, int newValue)
+        {
+            OnPointsChanged?.Invoke(oldValue, newValue);
         }
     }
 }

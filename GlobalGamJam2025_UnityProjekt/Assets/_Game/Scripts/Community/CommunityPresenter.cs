@@ -7,6 +7,8 @@ namespace Game.Community
     public class CommunityPresenter : MonoBehaviour, ITarget
     {
         [SerializeField] private int initiative;
+        [SerializeField] private int pointPerRound;
+
         private CommunityModel model;
 
         [Header("VeganComments")]
@@ -53,7 +55,8 @@ namespace Game.Community
 
         public void UpdateCommunity()
         {
-            return;
+            if (model.faction.Value == Faction.None) return;
+            GamePresenter.Instance.ChangePoints(pointPerRound);
         }
 
         public int GetInitiative()
