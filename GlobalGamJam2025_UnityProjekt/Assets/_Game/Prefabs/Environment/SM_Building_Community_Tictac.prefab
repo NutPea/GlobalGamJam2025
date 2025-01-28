@@ -48,12 +48,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initiative: 1
   pointPerRound: 2
-  positivVeganComments: []
-  negativVeganComments: []
-  positivBavariaComments: []
-  negativBavariaComments: []
-  positivAluHeadComments: []
-  negativAluHeadComments: []
+  positivVeganComments:
+  - Some people rescue dogs and cats, but I guess roast pork just had tough luck.
+  - "The dairy industry calls it a \u2018product,\u2019 but the cow calls it \u2018my
+    baby\u2019s breakfast.\u2019 Seriously?"
+  - "The dairy industry calls it a \u2018product,\u2019 but the cow calls it \u2018my
+    baby\u2019s breakfast.\u2019 Seriously?"
+  - "Every cent you spend on meat is a \u2018thank you\u2019 to animal cruelty. But
+    hey, what\u2019s the price of a conscience?"
+  negativVeganComments:
+  - "Your barbecue smells like freedom? No, it smells like a pig\u2019s burned dreams."
+  - "But meat is so cheap!' \u2013 Yeah, just like your compassion!"
+  - "The best argument for veganism: Nobody has to die for my plate. The best argument
+    for meat? 'But BACON!' \u2026 Really? Bacon?!"
+  - Sold my car today to make space for another garden bed. Who needs mobility when
+    you can harvest organic zucchini?
+  positivBavariaComments:
+  - "Vegetarian meat loaf? Might as well burn the constitution while you\u2019re
+    at it!"
+  - Vegan sausage?! What has become of our society?
+  - "Speaking Bavarian isn\u2019t just a dialect \u2013 it\u2019s an identity! Why
+    do people move here if they don\u2019t bother learning proper Bavarian?"
+  - "Bavaria without beer gardens? That\u2019s like Munich without the Frauenkirche!"
+  negativBavariaComments:
+  - "Our beer culture is sacred. If you don\u2019t sit in the sun with a Helles,
+    you don\u2019t get Bavarian life."
+  - Why does everything have to be politically correct? We used to celebrate traditions
+    without all the whining!
+  - "Back in the day, women took pride in being homemakers. Now they all want to
+    be politicians \u2013 and look where that got us!"
+  - "Back then, everyone knew their place. Now there are so many genders, I can\u2019t
+    keep up!"
+  positivAluHeadComments:
+  - What if toothpaste actually erodes your enamel, so you visit the dentist more
+    often?
+  - "Why get vaccinated? Humanity didn\u2019t have vaccines in the past and everybody
+    is perfectly fine."
+  - "Ever noticed how Big Pharma trashes homeopathy? If it\u2019s so \u2018ineffective,\u2019
+    why do they care so much?"
+  - "Why did it take so long to call sugar \u2018unhealthy\u2019? What if sugar is
+    secretly a healing agent that Big Pharma d"
+  negativAluHeadComments:
+  - "Your smartphone is spying on you! That \u2018smile\u2019 on selfies? Just a
+    trick to measure brainwave frequencies."
+  - "HIV came from animals? Right, and the ocean is just water. Probably created
+    in a secret lab, then \u2018oops, it got out.\u2019"
+  - "The media lies to you! They spread fake news to keep us in fear. The \u2018climate
+    crisis\u2019 is just another manipulation tactic!"
+  - "Why doesn\u2019t the radio ever talk about government scandals like alien abductions
+    or secret child-trafficking rings for adrenochrome?"
 --- !u!114 &6661486652910573333
 MonoBehaviour:
   m_ObjectHideFlags: 0

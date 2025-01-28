@@ -120,8 +120,7 @@ namespace GetraenkeBub
         private void TransitionCummunityIn()
         {
             //Spawn
-            spawnedPostGameobjekt = Instantiate(reaktionPostGameobject, communityPresenter.transform.position, Quaternion.identity);
-            Debug.Log(spawnedPostGameobjekt.GetComponent<CommunityPostHandlerUI>());
+            spawnedPostGameobjekt = Instantiate(reaktionPostGameobject, UIStateManager.Instance.currentUnitPresenter.transform.position + UIStateManager.Instance.currentUnitPresenter.transform.forward * extraDistance, Quaternion.identity);
             spawnedPostGameobjekt.GetComponent<CommunityPostHandlerUI>().Setup(UIStateManager.Instance.currentUnitPresenter,communityPresenter, WasCommunityWasSuccsesfull);
         }
 
