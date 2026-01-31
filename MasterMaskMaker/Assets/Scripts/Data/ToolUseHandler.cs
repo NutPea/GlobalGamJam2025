@@ -43,7 +43,7 @@ public class ToolUseHandler : MonoBehaviour
 
     private PlayerInput playerInput;
 
-
+    [SerializeField] private Transform zwischenMaskTransform;
     [SerializeField] private Transform maskTransform;
     [SerializeField] private Image maskImage;
     private MaskUIHandler maskUIHandler;
@@ -243,6 +243,8 @@ public class ToolUseHandler : MonoBehaviour
             return;
         }
 
+        spawnedDragable.transform.parent = maskTransform;
+        zwischenMaskTransform.gameObject.SetActive(false);
 
         if (!IsOverMask())
         {
@@ -267,7 +269,23 @@ public class ToolUseHandler : MonoBehaviour
 
     private bool IsOverMask()
     {
-        return maskUIHandler.IsOverMask;
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            pointerId = -1,
+        };
+
+        pointerData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+        List<Transform> transforms = new List<Transform>();
+       
+        foreach(RaycastResult resultTransforms in results)
+        {
+            transforms.Add(resultTransforms.gameObject.transform);
+        }
+
+        return transforms.Contains(maskTransform);
     }
 
     private void OnNotOverMask()
@@ -286,7 +304,8 @@ public class ToolUseHandler : MonoBehaviour
     public void SpawnDragable(DragTool dragTool)
     {
         spawnedDragable = Instantiate(dragTool.SpawnedDragTool);
-        spawnedDragable.transform.parent = maskTransform;
+        zwischenMaskTransform.gameObject.SetActive(true);
+        spawnedDragable.transform.parent = zwischenMaskTransform;
         spawnableRectTransform = spawnedDragable.GetComponent<RectTransform>();
         spawnableRectTransform.position = Vector3.zero;
         spawnableRectTransform.localScale = Vector3.one;

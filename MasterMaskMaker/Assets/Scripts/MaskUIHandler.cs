@@ -7,6 +7,13 @@ public class MaskUIHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public bool IsOverMask;
     public Tool Tool;
 
+    private void Update()
+    {
+        
+    }
+
+
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         IsOverMask = true;
