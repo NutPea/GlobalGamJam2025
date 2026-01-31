@@ -4,6 +4,7 @@ using UnityEngine;
 public class SUIManager : MonoBehaviour
 {
     public static SUIManager Instance;
+    public Canvas mainCanvas;
 
     [SerializeField] private List<State> UIStates = new List<State>();
     private Dictionary<string, State> UIStateDictonary = new Dictionary<string, State>();
