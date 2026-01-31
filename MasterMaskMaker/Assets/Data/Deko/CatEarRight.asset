@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
+  m_Name: CatEarRight
+  m_EditorClassIdentifier: Assembly-CSharp::DragTool
+  Icon: {fileID: -716194479585376, guid: 806bbaf8c1f2a4352bbca8f87acba7e4, type: 3}
+  GUID: CatEarRight
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: 534f07730f07a4713bc40e55fa41d219, type: 3}

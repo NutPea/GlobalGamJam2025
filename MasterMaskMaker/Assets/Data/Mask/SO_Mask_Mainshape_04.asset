@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07d7c8d1a9de1b24d9dede8e35d3eae3, type: 3}
+  m_Name: SO_Mask_Mainshape_04
+  m_EditorClassIdentifier: Assembly-CSharp::MaskShapeTool
+  Icon: {fileID: -3631599995334208609, guid: 4cd815d3efc794345ba6d95d26c3c9df, type: 3}
+  GUID: SO_Mask_Mainshape_04
+  MaskBase: {fileID: -3631599995334208609, guid: 4cd815d3efc794345ba6d95d26c3c9df, type: 3}
