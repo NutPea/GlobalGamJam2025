@@ -32,6 +32,8 @@ public class ToolUseHandler : MonoBehaviour
     [SerializeField] private Button colorCategoryButton;
     [SerializeField] private List<Tool> colorTools;
 
+    [SerializeField] private Button deleteButton;
+
     [SerializeField]private Transform schublade;
     [SerializeField] private float moveTime;
     [SerializeField] private float moveAmount;
@@ -69,9 +71,15 @@ public class ToolUseHandler : MonoBehaviour
 
         colorCategoryButton.onClick.AddListener(() => SetCategory(colorTools));
         schubladeXPosition = schublade.GetComponent<RectTransform>().localPosition.x;
+
+        deleteButton.onClick.AddListener(DeleteAll);
     }
 
-
+    private void Start()
+    {
+        
+        SGameManager.Instance.OnChangeCustomer.AddListener(DeleteAll);
+    }
     private void OnEnable()
     {
         playerInput.Enable();
@@ -146,6 +154,17 @@ public class ToolUseHandler : MonoBehaviour
             currentDragTool = dragTool;
             SpawnDragable(dragTool);
         }
+    }
+
+    private void DeleteAll()
+    {
+        for (int i = maskTransform.childCount - 1; i >= 0; i--)
+        {
+            GameObject child = maskTransform.GetChild(i).gameObject;
+            Destroy(child);
+        }
+        SGameManager.Instance.RemoveAll();
+        maskTransform.gameObject.SetActive(false);
     }
 
     public void UseTool()

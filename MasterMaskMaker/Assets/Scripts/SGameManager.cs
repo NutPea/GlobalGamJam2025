@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,12 +18,13 @@ public class SGameManager : MonoBehaviour
             customer.customerData = copyData;
         }
     }
-    
+
 
     public CustomerData currentCustomer;
     public List<Tool> UsedTools = new List<Tool>();
 
     public UnityEvent<CustomerData,List<CustomerData>> OnNewCustomers = new UnityEvent<CustomerData,List<CustomerData>>();
+    public UnityEvent OnChangeCustomer = new UnityEvent();
 
     public void AddTool(Tool tool)
     {
@@ -40,6 +42,11 @@ public class SGameManager : MonoBehaviour
         {
             UsedTools.Remove(tool);
         }
+    }
+
+    public void RemoveAll()
+    {
+        UsedTools.Clear();
     }
 
     public void StartGame()
@@ -69,7 +76,6 @@ public class SGameManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Check");
         OnNewCustomers.Invoke(currentCustomer,foundCustomers);
         currentCustomer = null;
     }
@@ -85,6 +91,17 @@ public class SGameManager : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void SetCustomer(CustomerData customerData)
+    {
+        if(customerData != currentCustomer)
+        {
+            currentCustomer = customerData;
+            OnChangeCustomer.Invoke();
+        }
+
+        SUIManager.Instance.ChangeUIState("Mask");
     }
 
 }
