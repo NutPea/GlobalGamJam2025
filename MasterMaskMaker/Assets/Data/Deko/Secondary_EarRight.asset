@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
-  m_Name: Feather
+  m_Name: Secondary_EarRight
   m_EditorClassIdentifier: Assembly-CSharp::DragTool
-  Icon: {fileID: 173998298056014221, guid: 53169355fcd004d56990f734d1767ad4, type: 3}
-  GUID: Feather
-  SpawnedDragTool: {fileID: 8436564078897480203, guid: 6ab97a2e4920c4ee8b26f2ff933e4229, type: 3}
+  Icon: {fileID: 21300000, guid: 719422c4696037a4092b106cc5a95154, type: 3}
+  GUID: EarRight
+  SpawnedDragTool: {fileID: 2641240761670336008, guid: a82d16d86389a244fba67a6124271675, type: 3}

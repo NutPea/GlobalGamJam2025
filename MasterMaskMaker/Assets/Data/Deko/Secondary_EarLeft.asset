@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
-  m_Name: CatEarRight
+  m_Name: Secondary_EarLeft
   m_EditorClassIdentifier: Assembly-CSharp::DragTool
-  Icon: {fileID: -716194479585376, guid: 806bbaf8c1f2a4352bbca8f87acba7e4, type: 3}
-  GUID: CatEarRight
-  SpawnedDragTool: {fileID: 8436564078897480203, guid: 534f07730f07a4713bc40e55fa41d219, type: 3}
+  Icon: {fileID: 21300000, guid: baa06fa8f0d984f43a18b95927814786, type: 3}
+  GUID: EarLeft
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: 5b2df7be19cc92c4d87564b96ca149a3, type: 3}

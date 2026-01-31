@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
-  m_Name: Patch
+  m_Name: Secondary_CatEarRight
   m_EditorClassIdentifier: Assembly-CSharp::DragTool
-  Icon: {fileID: 173998298056014221, guid: 53169355fcd004d56990f734d1767ad4, type: 3}
-  GUID: Feather
-  SpawnedDragTool: {fileID: 8436564078897480203, guid: 6ab97a2e4920c4ee8b26f2ff933e4229, type: 3}
+  Icon: {fileID: -716194479585376, guid: 806bbaf8c1f2a4352bbca8f87acba7e4, type: 3}
+  GUID: Secondary_CatEarRight
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: 534f07730f07a4713bc40e55fa41d219, type: 3}

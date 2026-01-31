@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
-  m_Name: Gem
+  m_Name: Minor_Feather
   m_EditorClassIdentifier: Assembly-CSharp::DragTool
-  Icon: {fileID: -7094460417105978654, guid: 01fba06f3d0b04a22af7755979c49f8d, type: 3}
-  GUID: Gem
-  SpawnedDragTool: {fileID: 8436564078897480203, guid: d361dbcdf085444ad9a4ebc5c5bda53b, type: 3}
+  Icon: {fileID: 173998298056014221, guid: 53169355fcd004d56990f734d1767ad4, type: 3}
+  GUID: Feather
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: 6ab97a2e4920c4ee8b26f2ff933e4229, type: 3}
