@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
-  m_Name: Feather
+  m_Name: Patch
   m_EditorClassIdentifier: Assembly-CSharp::DragTool
   Icon: {fileID: 173998298056014221, guid: 53169355fcd004d56990f734d1767ad4, type: 3}
   GUID: Feather
