@@ -14,7 +14,7 @@ public class SGameManager : MonoBehaviour
 
     public void AddTool(Tool tool)
     {
-
+        UsedTools.Add(tool);
     }
 
     public void TryRemoveTool(Tool tool)
@@ -24,7 +24,10 @@ public class SGameManager : MonoBehaviour
             return;
         }
 
-
+        if (UsedTools.Contains(tool))
+        {
+            UsedTools.Remove(tool);
+        }
     }
 
 

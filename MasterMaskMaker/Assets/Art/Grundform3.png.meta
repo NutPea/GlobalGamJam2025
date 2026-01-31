@@ -103,9 +103,9 @@ TextureImporter:
       name: Grundform3_0
       rect:
         serializedVersion: 2
-        x: 631
-        y: 129
-        width: 859
+        x: 23
+        y: 40
+        width: 860
         height: 774
       alignment: 0
       pivot: {x: 0, y: 0}

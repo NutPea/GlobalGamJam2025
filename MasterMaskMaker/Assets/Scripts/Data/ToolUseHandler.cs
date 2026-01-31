@@ -38,7 +38,12 @@ public class ToolUseHandler : MonoBehaviour
         playerInput = new PlayerInput();
         playerInput.Keyboard.LeftMouseButton.performed += ctx => UseTool();
         playerInput.Keyboard.LeftMouseButton.canceled += ctx => MouseButtonUp();
+
+        playerInput.Keyboard.RightMouseButton.performed += ctx => RemoveTool();
+
+
     }
+
 
     private void OnEnable()
     {
@@ -113,6 +118,23 @@ public class ToolUseHandler : MonoBehaviour
         }
     }
 
+    private void RemoveTool()
+    {
+        Image image = SearchForImage();
+        if(image == null)
+        {
+            return;
+        }
+
+        if(image.TryGetComponent<ToolHolder>(out ToolHolder holder))
+        {
+            SGameManager.Instance.TryRemoveTool(holder.Tool);
+            Destroy(holder.gameObject);
+        }
+        
+    }
+
+
     private Image SearchForImage()
     {
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
@@ -180,6 +202,10 @@ public class ToolUseHandler : MonoBehaviour
             Destroy(spawnedDragable);
             OnNotOverMask();
         }
+        else
+        {
+            SGameManager.Instance.AddTool(spawnedDragable.GetComponent<ToolHolder>().Tool);
+        }
         ClearTool();
     }
 
@@ -204,6 +230,7 @@ public class ToolUseHandler : MonoBehaviour
 
     public void PlaceMask(MaskShapeTool maskShapeTool)
     {
+        Debug.Log("Place");
         maskTransform.gameObject.SetActive(true);
         maskImage.sprite = maskShapeTool.MaskBase;
         SGameManager.Instance.TryRemoveTool(maskUIHandler.Tool);
@@ -216,6 +243,8 @@ public class ToolUseHandler : MonoBehaviour
         spawnedDragable.transform.parent = maskTransform;
         spawnableRectTransform = spawnedDragable.GetComponent<RectTransform>();
         spawnableRectTransform.position = Vector3.zero;
+        ToolHolder toolHolder = spawnedDragable.GetComponent<ToolHolder>();
+        toolHolder.Tool = dragTool;
         IsDragging = true;
     }
 

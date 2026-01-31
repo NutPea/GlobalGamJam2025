@@ -18,7 +18,7 @@ public class ToolButton : MonoBehaviour , IPointerDownHandler
 
     public void SetUpButton(Tool tool, ToolUseHandler toolUseHandler)
     {
-        Tool = tool;
+        Tool =Instantiate(tool);
         image.sprite = tool.Icon;
         if(Tool is ColorTool colorTool)
         {

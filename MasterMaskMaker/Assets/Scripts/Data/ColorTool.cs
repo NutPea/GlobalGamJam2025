@@ -10,5 +10,6 @@ public class ColorTool : InteractTool
     {
         base.ToolUse(image);
         image.color = Color;
+        SGameManager.Instance.AddTool(Instantiate(this));
     }
 }
