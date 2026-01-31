@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 02a574f4d2b074316acb39c2332dcb6c
+guid: 16a5bafbeb0d24d9b8a8b6d0a84ff508
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3357291008737561372
-    second: Icon_96_Brille_0
+      213: 4877706163313231645
+    second: Icon_96_ Brille_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icon_96_Brille_0
+      name: Icon_96_ Brille_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c1b4a6f726e779e20800000000000000
-      internalID: 3357291008737561372
+      spriteID: d17c40f89e711b340800000000000000
+      internalID: 4877706163313231645
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Icon_96_Brille_0: 3357291008737561372
+      Icon_96_ Brille_0: 4877706163313231645
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
