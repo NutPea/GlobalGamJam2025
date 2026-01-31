@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,16 +21,19 @@ public class SUIManager : MonoBehaviour
         Instance = this;
         foreach(State state in UIStates)
         {
-            state.stateObject.gameObject.SetActive(true);
-            state.OnInit();
-            state.stateObject.gameObject.SetActive(false);
-
             UIStateDictonary.Add(state.Name, state);
         }
     }
 
     private void Start()
     {
+        foreach (State state in UIStates)
+        {
+            state.stateObject.gameObject.SetActive(true);
+            state.OnInit();
+            state.stateObject.gameObject.SetActive(false);
+        }
+
         if (startWithUIState)
         {
             ChangeUIState(startUiStateName);
