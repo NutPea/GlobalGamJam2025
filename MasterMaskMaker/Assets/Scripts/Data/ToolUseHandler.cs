@@ -8,7 +8,6 @@ public class ToolUseHandler : MonoBehaviour
 {
     [SerializeField] private List<ToolButton> toolButtons;
 
-    [SerializeField] private List<Tool> category1;
 
     private Tool CurrentUsedTool;
     private InteractTool currentInteractTool;
@@ -18,6 +17,27 @@ public class ToolUseHandler : MonoBehaviour
     private bool IsInteractTool => currentInteractTool != null;
 
     private bool canBeDragged;
+
+    [Header("Category")]
+    [SerializeField] private Button maskCategoryButton;
+    [SerializeField] private List<Tool> masksTools;
+
+
+    [SerializeField] private Button secondaryCategoryButton;
+    [SerializeField] private List<Tool> secondaryTools;
+
+    [SerializeField] private Button minorToolsCategoryButton;
+    [SerializeField] private List<Tool> minorTools;
+
+    [SerializeField] private Button colorCategoryButton;
+    [SerializeField] private List<Tool> colorTools;
+
+    [SerializeField]private Transform schublade;
+    [SerializeField] private float moveTime;
+    [SerializeField] private float moveAmount;
+    [SerializeField] private LeanTweenType moveType = LeanTweenType.easeInOutSine;
+
+    private float schubladeXPosition;
 
     [Header("Mask")]
 
@@ -41,7 +61,14 @@ public class ToolUseHandler : MonoBehaviour
 
         playerInput.Keyboard.RightMouseButton.performed += ctx => RemoveTool();
 
+        maskCategoryButton.onClick.AddListener(() => SetCategory(masksTools));
 
+        secondaryCategoryButton.onClick.AddListener(() => SetCategory(secondaryTools));
+
+        minorToolsCategoryButton.onClick.AddListener(() => SetCategory(minorTools));
+
+        colorCategoryButton.onClick.AddListener(() => SetCategory(colorTools));
+        schubladeXPosition = schublade.GetComponent<RectTransform>().localPosition.x;
     }
 
 
@@ -63,7 +90,7 @@ public class ToolUseHandler : MonoBehaviour
             toolButton.OnInteract.AddListener(Interact);
         }
 
-        SetCategory(category1);
+        SetCategoryImmediate(masksTools);
         maskUIHandler = maskTransform.GetComponent<MaskUIHandler>();
     }
 
@@ -73,9 +100,29 @@ public class ToolUseHandler : MonoBehaviour
         
     }
 
+    private List<Tool> toChangeToTools = new List<Tool>();
+
     public void SetCategory(List<Tool> categoryTools)
     {
-        for(int i = 0; i< categoryTools.Count; i++)
+        toChangeToTools = categoryTools;
+        LeanTween.moveLocalX(schublade.gameObject, -moveAmount, moveTime).setEase(moveType).setOnComplete(ChangeCategory);
+
+    }
+
+    private void ChangeCategory()
+    {
+        SetCategoryImmediate(toChangeToTools);
+        LeanTween.moveLocalX(schublade.gameObject, schubladeXPosition, moveTime).setEase(moveType);
+    }
+
+    public void SetCategoryImmediate(List<Tool> categoryTools)
+    {
+        foreach (ToolButton toolButton in toolButtons)
+        {
+            toolButton.RemoveTool();
+        }
+
+        for (int i = 0; i< categoryTools.Count; i++)
         {
             toolButtons[i].SetUpButton(categoryTools[i],this);
         }
@@ -230,7 +277,6 @@ public class ToolUseHandler : MonoBehaviour
 
     public void PlaceMask(MaskShapeTool maskShapeTool)
     {
-        Debug.Log("Place");
         maskTransform.gameObject.SetActive(true);
         maskImage.sprite = maskShapeTool.MaskBase;
         SGameManager.Instance.TryRemoveTool(maskUIHandler.Tool);
@@ -243,6 +289,8 @@ public class ToolUseHandler : MonoBehaviour
         spawnedDragable.transform.parent = maskTransform;
         spawnableRectTransform = spawnedDragable.GetComponent<RectTransform>();
         spawnableRectTransform.position = Vector3.zero;
+        spawnableRectTransform.localScale = Vector3.one;
+
         ToolHolder toolHolder = spawnedDragable.GetComponent<ToolHolder>();
         toolHolder.Tool = dragTool;
         IsDragging = true;

@@ -24,7 +24,16 @@ public class ToolButton : MonoBehaviour , IPointerDownHandler
         {
             image.color = colorTool.Color;
         }
+        else
+        {
+            image.color = Color.white;
+        }
         Tool.Init(toolUseHandler);
+    }
+
+    public void RemoveTool()
+    {
+        Tool = null;
     }
 
     public void SetActive()
