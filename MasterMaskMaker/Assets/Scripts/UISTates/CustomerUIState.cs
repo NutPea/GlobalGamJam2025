@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class CustomerUIState : UIState
 {
 
-    [SerializeField] private Button backButton;
     [SerializeField]private bool startGame;
 
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
@@ -16,7 +15,6 @@ public class CustomerUIState : UIState
     public override void OnInit()
     {
         base.OnInit();
-        backButton.onClick.AddListener(Back);
         SGameManager.Instance.OnNewCustomers.AddListener(StartCustomerPipeline);
     }
 
@@ -51,6 +49,8 @@ public class CustomerUIState : UIState
             customer.transform.localPosition = Vector3.zero;
             customer.transform.localScale = Vector3.one;
             spawnedCustomers.Add(toSpawnCustomerData);
+
+            customer.GetComponent<CustomerHandler>().Setup(toSpawnCustomerData);
         }
     }
 
@@ -64,10 +64,6 @@ public class CustomerUIState : UIState
         }
     }
 
-    private void Back()
-    {
-        SUIManager.Instance.ChangeUIState("Mask");
-    }
 
 
 }
