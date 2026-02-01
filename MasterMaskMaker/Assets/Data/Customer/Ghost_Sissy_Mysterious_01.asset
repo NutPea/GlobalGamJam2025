@@ -19,4 +19,4 @@ MonoBehaviour:
   SpawnedCustomer: {fileID: 0}
   CustomerPrefab: {fileID: 4926806768543843709, guid: 7d10e8d771af7411f9b0c174fc3c00ec, type: 3}
   aura: 1
-  time: 10
+  time: 30
