@@ -18,7 +18,7 @@ public class ColorTool : InteractTool
         {
             uiHandler.Place();
         }
-
+        SSoundManager.Instance.PlaySound(SSoundManager.Instance.UI_DropColor);
         SGameManager.Instance.AddTool(Instantiate(this));
 
     }

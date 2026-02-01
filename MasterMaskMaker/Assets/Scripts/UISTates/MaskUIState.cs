@@ -27,6 +27,7 @@ public class MaskUIState : UIState
     {
 
         SGameManager.Instance.GiveMask();
+        SSoundManager.Instance.PlaySound(SSoundManager.Instance.UI_SellMask);
     }
 
     private void Update()
@@ -40,6 +41,10 @@ public class MaskUIState : UIState
             else
             {
                 currentTime -= Time.deltaTime;
+                if(currentTime < 10)
+                {
+                    timer.color = Color.red;
+                }
                 timer.text = currentTime.ToString("F0");
             }
 
@@ -59,6 +64,7 @@ public class MaskUIState : UIState
             currentTime = data.time;
 
         }
+        timer.color = Color.black;
     }
 
     private void Back()

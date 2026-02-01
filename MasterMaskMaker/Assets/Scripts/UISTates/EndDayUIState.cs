@@ -35,6 +35,7 @@ public class EndDayUIState : UIState
             ghost.gameObject.SetActive(true);
         }
         whereToFind.gameObject.SetActive(false);
+        SSoundManager.Instance.PlaySound(SSoundManager.Instance.UI_Endscore);
     }
 
     private void SetActive(bool value)
@@ -42,6 +43,7 @@ public class EndDayUIState : UIState
         shareButton.gameObject.SetActive(value);
         takeScreenShot.gameObject.SetActive(value);
         quit.gameObject.SetActive(value);
+        whereToFind.gameObject.SetActive(value);
     }
 
     private void ShowInfo()
@@ -77,7 +79,7 @@ public class EndDayUIState : UIState
 
     private void ShareintendInstagram()
     {
-
+        GUIUtility.systemCopyBuffer = path;
     }
 
 
