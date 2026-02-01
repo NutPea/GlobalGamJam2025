@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 534647417370943580, guid: c845028ce0707a44c84012d215ef2489, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 768537449778077770, guid: c845028ce0707a44c84012d215ef2489, type: 3}
       propertyPath: m_Name
-      value: BaseButton (2) Variant
+      value: Category
       objectReference: {fileID: 0}
     - target: {fileID: 1695758982473899303, guid: c845028ce0707a44c84012d215ef2489, type: 3}
       propertyPath: m_Pivot.x
