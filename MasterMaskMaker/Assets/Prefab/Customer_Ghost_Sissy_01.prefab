@@ -34,11 +34,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4429223622534775847, guid: 1fd8dd913e51fd34db5b5d0d52fdf266, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 320
+      value: 498
       objectReference: {fileID: 0}
     - target: {fileID: 4429223622534775847, guid: 1fd8dd913e51fd34db5b5d0d52fdf266, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 500
+      value: 1015
       objectReference: {fileID: 0}
     - target: {fileID: 4429223622534775847, guid: 1fd8dd913e51fd34db5b5d0d52fdf266, type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078651305549365149, guid: 1fd8dd913e51fd34db5b5d0d52fdf266, type: 3}
       propertyPath: m_Name
-      value: Customer
+      value: Customer_Ghost_Sissy_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

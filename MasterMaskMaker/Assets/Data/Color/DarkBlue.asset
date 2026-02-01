@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b791fc52a6dd16488114e36d7eb4043, type: 3}
-  m_Name: Blue
+  m_Name: DarkBlue
   m_EditorClassIdentifier: Assembly-CSharp::ColorTool
   Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  GUID: Blue
-  Color: {r: 0, g: 1, b: 0.9843137, a: 1}
+  GUID: DarkBlue
+  Color: {r: 0.16862746, g: 0.4509804, b: 1, a: 1}

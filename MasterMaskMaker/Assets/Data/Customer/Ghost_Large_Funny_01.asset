@@ -17,6 +17,6 @@ MonoBehaviour:
   secondaryDetail2: {fileID: 11400000, guid: 5e2183ae4dcf743d2816884382f46770, type: 2}
   minorDetail: {fileID: 11400000, guid: 1eabdbd2be0014dceb4ab5b45ce8e0ff, type: 2}
   SpawnedCustomer: {fileID: 0}
-  CustomerPrefab: {fileID: 5078651305549365149, guid: 1fd8dd913e51fd34db5b5d0d52fdf266, type: 3}
+  CustomerPrefab: {fileID: 4926806768543843709, guid: 76f0a5b0fc622400c86bfeb13bc27d1b, type: 3}
   aura: 2
   time: 10
