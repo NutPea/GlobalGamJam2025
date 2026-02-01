@@ -27,7 +27,7 @@ public class SGameManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         if (startGame)
         {
-            StartGame();
+            //StartGame();
         }
     }
 

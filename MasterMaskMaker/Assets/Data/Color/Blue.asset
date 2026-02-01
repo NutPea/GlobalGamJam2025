@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b791fc52a6dd16488114e36d7eb4043, type: 3}
   m_Name: Blue
   m_EditorClassIdentifier: Assembly-CSharp::ColorTool
-  Icon: {fileID: 21300000, guid: 719422c4696037a4092b106cc5a95154, type: 3}
+  Icon: {fileID: -331822564263145124, guid: 299fc6f97317040baae5232e280b9d73, type: 3}
   GUID: Blue
   Color: {r: 0, g: 1, b: 0.9843137, a: 1}

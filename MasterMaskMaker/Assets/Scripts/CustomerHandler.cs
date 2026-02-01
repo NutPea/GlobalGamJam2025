@@ -59,7 +59,7 @@ public class CustomerHandler : MonoBehaviour
     public void FadeIn()
     {
         images = GetComponentsInChildren<Image>(true);
-        button.interactable = false;
+        button.interactable = true;
         LeanTween.value(gameObject, 0, 1, fadeDurationOut).setOnUpdate((val) =>
         {
             foreach (Image i in images)
@@ -115,7 +115,6 @@ public class CustomerHandler : MonoBehaviour
                 i.color = c;
             }
         });
-
         button.interactable = false;
     }
 
