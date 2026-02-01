@@ -14,4 +14,6 @@ public class CustomerData : ScriptableObject
 
     public GameObject CustomerPrefab;
 
+    public float time = 10f;
+
 }

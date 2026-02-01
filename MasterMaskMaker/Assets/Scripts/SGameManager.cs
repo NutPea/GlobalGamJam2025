@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,7 +9,9 @@ public class SGameManager : MonoBehaviour
     public static SGameManager Instance;
 
     [SerializeField] private List<Customer> customers;
-    private int currentAmountOfDoneCustomers = 0;
+    private int currentCustomerIndex = 0;
+    [SerializeField] private Transform mask;
+    [SerializeField] private bool startGame = true;
     private void Awake()
     {
         Instance = this;
@@ -19,12 +22,23 @@ public class SGameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (startGame)
+        {
+            StartGame();
+        }
+    }
 
     public CustomerData currentCustomer;
     public List<Tool> UsedTools = new List<Tool>();
 
-    public UnityEvent<CustomerData,List<CustomerData>> OnNewCustomers = new UnityEvent<CustomerData,List<CustomerData>>();
+    public UnityEvent<CustomerData,CustomerData> OnNewCustomers = new UnityEvent<CustomerData,CustomerData>();
+    public UnityEvent OnFinishedGame = new UnityEvent();
     public UnityEvent OnChangeCustomer = new UnityEvent();
+
+    private List<GameObject> copiedCustomers = new List<GameObject>();
 
     public void AddTool(Tool tool)
     {
@@ -51,46 +65,48 @@ public class SGameManager : MonoBehaviour
 
     public void StartGame()
     {
+        currentCustomerIndex = 0;
         CheckForMoreCustomers();
     }
 
     public void GiveMask()
     {
-        SUIManager.Instance.ChangeUIState("Customer");
-        currentAmountOfDoneCustomers++;
-        
+        GameObject maskCopy = Instantiate(mask.gameObject);
+        Transform maskPosition = currentCustomer.SpawnedCustomer.GetComponent<CustomerHandler>().maskPosition;
+        maskCopy.transform.SetParent(maskPosition);
+        maskCopy.transform.localPosition = Vector3.zero;
+        RectTransform rect = maskCopy.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(770.5001f, 617.7f);
+
+
+        // Optional: zentrieren
+        rect.anchoredPosition = Vector2.zero;
+        rect.localScale = new Vector3(0.3f,0.3f,1f);
+
+        GameObject copiedCustomer = Instantiate(currentCustomer.SpawnedCustomer);
+        copiedCustomers.Add(copiedCustomer);
+        copiedCustomer.gameObject.SetActive(false);
+
+
         CheckForMoreCustomers();
-        AllCusomersDone();
     }
+
+
 
     private void CheckForMoreCustomers()
     {
-        List<CustomerData> foundCustomers = new List<CustomerData>();
-        foreach(Customer customer in customers)
-        {
-            if(customer.amountTrigger <= currentAmountOfDoneCustomers)
-            {
-                if (!customer.CustomerDone)
-                {
-                    foundCustomers.Add(customer.customerData);
-                }
-            }
-        }
-        OnNewCustomers.Invoke(currentCustomer,foundCustomers);
-        currentCustomer = null;
-    }
 
-    private bool AllCusomersDone()
-    {
-        foreach(Customer customer in customers)
+        if (currentCustomerIndex < customers.Count)
         {
-            if (customer.CustomerDone)
-            {
-                return false;
-            }
-        }
 
-        return true;
+            OnNewCustomers.Invoke(currentCustomer,customers[currentCustomerIndex].customerData);
+            currentCustomerIndex++;
+        }
+        else
+        {
+            OnFinishedGame.Invoke();
+        }
+            SUIManager.Instance.ChangeUIState("Customer");
     }
 
     public void SetCustomer(CustomerData customerData)
