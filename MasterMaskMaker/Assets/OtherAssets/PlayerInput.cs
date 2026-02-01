@@ -109,6 +109,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""c01d1333-8e47-4810-a857-896c57bafaaf"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -133,6 +142,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""RightMouseButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""b3b16e4d-6e03-4a13-bb57-63a613716794"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""398c0190-605a-45c6-bfc5-3461615b177d"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""1629eed8-54d6-440b-9381-3ae862b013f4"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -143,6 +185,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_LeftMouseButton = m_Keyboard.FindAction("LeftMouseButton", throwIfNotFound: true);
         m_Keyboard_RightMouseButton = m_Keyboard.FindAction("RightMouseButton", throwIfNotFound: true);
+        m_Keyboard_Scroll = m_Keyboard.FindAction("Scroll", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -225,6 +268,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IKeyboardActions> m_KeyboardActionsCallbackInterfaces = new List<IKeyboardActions>();
     private readonly InputAction m_Keyboard_LeftMouseButton;
     private readonly InputAction m_Keyboard_RightMouseButton;
+    private readonly InputAction m_Keyboard_Scroll;
     /// <summary>
     /// Provides access to input actions defined in input action map "Keyboard".
     /// </summary>
@@ -244,6 +288,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Keyboard/RightMouseButton".
         /// </summary>
         public InputAction @RightMouseButton => m_Wrapper.m_Keyboard_RightMouseButton;
+        /// <summary>
+        /// Provides access to the underlying input action "Keyboard/Scroll".
+        /// </summary>
+        public InputAction @Scroll => m_Wrapper.m_Keyboard_Scroll;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -276,6 +324,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RightMouseButton.started += instance.OnRightMouseButton;
             @RightMouseButton.performed += instance.OnRightMouseButton;
             @RightMouseButton.canceled += instance.OnRightMouseButton;
+            @Scroll.started += instance.OnScroll;
+            @Scroll.performed += instance.OnScroll;
+            @Scroll.canceled += instance.OnScroll;
         }
 
         /// <summary>
@@ -293,6 +344,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RightMouseButton.started -= instance.OnRightMouseButton;
             @RightMouseButton.performed -= instance.OnRightMouseButton;
             @RightMouseButton.canceled -= instance.OnRightMouseButton;
+            @Scroll.started -= instance.OnScroll;
+            @Scroll.performed -= instance.OnScroll;
+            @Scroll.canceled -= instance.OnScroll;
         }
 
         /// <summary>
@@ -347,5 +401,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRightMouseButton(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Scroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScroll(InputAction.CallbackContext context);
     }
 }

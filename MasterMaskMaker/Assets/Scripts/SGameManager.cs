@@ -38,7 +38,7 @@ public class SGameManager : MonoBehaviour
     public UnityEvent OnFinishedGame = new UnityEvent();
     public UnityEvent OnChangeCustomer = new UnityEvent();
 
-    private List<GameObject> copiedCustomers = new List<GameObject>();
+    public List<GameObject> copiedCustomers = new List<GameObject>();
 
     public void AddTool(Tool tool)
     {
@@ -81,7 +81,7 @@ public class SGameManager : MonoBehaviour
 
         // Optional: zentrieren
         rect.anchoredPosition = Vector2.zero;
-        rect.localScale = new Vector3(0.3f,0.3f,1f);
+        rect.localScale = new Vector3(0.25f,0.25f,1f);
 
         GameObject copiedCustomer = Instantiate(currentCustomer.SpawnedCustomer);
         copiedCustomers.Add(copiedCustomer);

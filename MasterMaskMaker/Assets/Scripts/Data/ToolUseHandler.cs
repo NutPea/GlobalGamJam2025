@@ -55,6 +55,8 @@ public class ToolUseHandler : MonoBehaviour
     private RectTransform spawnableRectTransform;
     private bool IsDragging;
 
+    [SerializeField]float rotationSpeed = 1f;
+
     private void Awake()
     {
         playerInput = new PlayerInput();
@@ -72,7 +74,21 @@ public class ToolUseHandler : MonoBehaviour
         colorCategoryButton.onClick.AddListener(() => SetCategory(colorTools));
         schubladeXPosition = schublade.GetComponent<RectTransform>().localPosition.x;
 
+        playerInput.Keyboard.Scroll.performed += ctx => Scroll();
+        playerInput.Keyboard.Scroll.canceled += ctx => Scroll();
+
         deleteButton.onClick.AddListener(DeleteAll);
+    }
+
+    private void Scroll()
+    {
+        if (!IsDragging)
+        {
+            return;
+        }
+        float scrollAmount = playerInput.Keyboard.Scroll.ReadValue<float>();
+        spawnableRectTransform.Rotate(new Vector3(0, 0, scrollAmount * rotationSpeed),Space.Self);
+        
     }
 
     private void Start()
@@ -246,6 +262,8 @@ public class ToolUseHandler : MonoBehaviour
         );
 
         spawnableRectTransform.localPosition = mousePos;
+
+
 
     }
 
