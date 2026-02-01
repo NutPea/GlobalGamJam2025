@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{5adb3ee5-3aa9-4df6-8d92-5cf0f98241f0}">
+		<property name="assetPath">
+			<value>SFX/NPCs/SFX_NPC_GhostBig-Hello.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.0375510204081633</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b3c77679-9d5f-4556-bad1-15e87f05ab91}</destination>
+		</relationship>
+	</object>
+</objects>
