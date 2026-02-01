@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23b09ed3f689d27459eb78ec35e358cd, type: 3}
-  m_Name: Ghost_Sissy_01
+  m_Name: Ghost_Sissy_Sparkly_01
   m_EditorClassIdentifier: Assembly-CSharp::CustomerData
-  mask: {fileID: 11400000, guid: 5e24cc83563f949a4b5908dc5112bc1c, type: 2}
-  secondaryDetail: {fileID: 11400000, guid: d7eba91f267dc4a7b950adbe89e80b12, type: 2}
-  secondaryDetail2: {fileID: 11400000, guid: 6b74b7ae114684e0fa1344cb2d40e079, type: 2}
-  minorDetail: {fileID: 0}
+  mask: {fileID: 11400000, guid: b6329503016fc4c95bd8c375eec3bb02, type: 2}
+  secondaryDetail: {fileID: 11400000, guid: e1b18eb39ae324eabb65cdfcfd78f080, type: 2}
+  secondaryDetail2: {fileID: 11400000, guid: 946cd9cf4798d42c791a7281420383ea, type: 2}
+  minorDetail: {fileID: 11400000, guid: 3c99d39f84f5f49849b4e953340e9cb4, type: 2}
   SpawnedCustomer: {fileID: 0}
   CustomerPrefab: {fileID: 5078651305549365149, guid: 1fd8dd913e51fd34db5b5d0d52fdf266, type: 3}
-  aura: 0
+  aura: 3
   time: 10

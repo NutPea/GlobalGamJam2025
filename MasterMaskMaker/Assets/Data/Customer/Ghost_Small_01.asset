@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b09ed3f689d27459eb78ec35e358cd, type: 3}
   m_Name: Ghost_Small_01
   m_EditorClassIdentifier: Assembly-CSharp::CustomerData
-  mask: {fileID: 11400000, guid: 20e57f843170dbc4fa05dc5bb9f926c8, type: 2}
-  secondaryDetail: {fileID: 11400000, guid: ffa210d2d8de7224b8068d536b49acad, type: 2}
-  minorDetail: {fileID: 11400000, guid: 8fc3a7e31eaeebd4ebcdf4d552f98868, type: 2}
+  mask: {fileID: 11400000, guid: 7747add28a0ad4b9485343f8eeffdf3b, type: 2}
+  secondaryDetail: {fileID: 11400000, guid: 6b74b7ae114684e0fa1344cb2d40e079, type: 2}
+  secondaryDetail2: {fileID: 11400000, guid: c135864003cf44cedb7e095656be43d1, type: 2}
+  minorDetail: {fileID: 0}
   SpawnedCustomer: {fileID: 0}
   CustomerPrefab: {fileID: 5078651305549365149, guid: 1fd8dd913e51fd34db5b5d0d52fdf266, type: 3}
+  aura: 0
+  time: 10
