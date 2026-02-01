@@ -7,12 +7,18 @@ public class MaskUIHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public bool IsOverMask;
     public Tool Tool;
 
-    private void Update()
+    private LeanTweenScaleHandler leanTweenScaleHandler;
+
+    private void Start()
     {
-        
+        leanTweenScaleHandler = GetComponent<LeanTweenScaleHandler>();
     }
 
 
+    public void Place()
+    {
+        leanTweenScaleHandler.ScaleFeedBack();
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {

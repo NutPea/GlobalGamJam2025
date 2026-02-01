@@ -269,10 +269,13 @@ public class ToolUseHandler : MonoBehaviour
         {
             Destroy(spawnedDragable);
             OnNotOverMask();
+            
         }
         else
         {
-            SGameManager.Instance.AddTool(spawnedDragable.GetComponent<ToolHolder>().Tool);
+            ToolHolder toolHolder = spawnedDragable.GetComponent<ToolHolder>();
+            SGameManager.Instance.AddTool(toolHolder.Tool);
+            toolHolder.PlayFeedback();
         }
         ClearTool();
     }
@@ -318,6 +321,7 @@ public class ToolUseHandler : MonoBehaviour
         maskImage.sprite = maskShapeTool.MaskBase;
         SGameManager.Instance.TryRemoveTool(maskUIHandler.Tool);
         maskUIHandler.Tool = Instantiate(maskShapeTool);
+        maskUIHandler.Place();
 
     }
     public void SpawnDragable(DragTool dragTool)

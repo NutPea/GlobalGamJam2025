@@ -17,3 +17,4 @@ MonoBehaviour:
   minorDetail: {fileID: 11400000, guid: 8fc3a7e31eaeebd4ebcdf4d552f98868, type: 2}
   SpawnedCustomer: {fileID: 0}
   CustomerPrefab: {fileID: 5078651305549365149, guid: 1fd8dd913e51fd34db5b5d0d52fdf266, type: 3}
+  time: 100000

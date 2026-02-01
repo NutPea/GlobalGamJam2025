@@ -1929,6 +1929,7 @@ GameObject:
   - component: {fileID: 840522848}
   - component: {fileID: 840522847}
   - component: {fileID: 840522849}
+  - component: {fileID: 840522850}
   m_Layer: 5
   m_Name: Mask
   m_TagString: Untagged
@@ -2007,6 +2008,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MaskUIHandler
   IsOverMask: 0
   Tool: {fileID: 0}
+--- !u!114 &840522850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840522845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850883982c21c7f4699a4c205ebf95a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeanTweenScaleHandler
+  scaleInTime: 1
+  scaleOutTime: 0.1
+  scaleAmount: 1.1
+  scaleType: 16
 --- !u!1001 &845260775
 PrefabInstance:
   m_ObjectHideFlags: 0

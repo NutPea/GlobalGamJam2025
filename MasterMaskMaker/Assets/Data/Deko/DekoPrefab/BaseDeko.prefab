@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8728138843668158747}
   - component: {fileID: 8578342196792869797}
   - component: {fileID: 6082131412299165724}
+  - component: {fileID: 3784196742907150503}
   m_Layer: 5
   m_Name: BaseDeko
   m_TagString: Untagged
@@ -89,3 +90,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToolHolder
   Tool: {fileID: 0}
+--- !u!114 &3784196742907150503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909732530151208210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850883982c21c7f4699a4c205ebf95a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeanTweenScaleHandler
+  scaleInTime: 0.5
+  scaleOutTime: 0.05
+  scaleAmount: 1.1
+  scaleType: 16

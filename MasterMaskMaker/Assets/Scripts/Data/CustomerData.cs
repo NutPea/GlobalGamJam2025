@@ -8,11 +8,23 @@ public class CustomerData : ScriptableObject
 
     public Tool secondaryDetail;
 
+    public Tool secondaryDetail2;
+
     public Tool minorDetail;
 
     public GameObject SpawnedCustomer;
 
     public GameObject CustomerPrefab;
+
+    public enum Aura
+    {
+        None,
+        Mysteriouse,
+        Funny,
+        Sparkly,
+    }
+
+    public Aura aura;
 
     public float time = 10f;
 
