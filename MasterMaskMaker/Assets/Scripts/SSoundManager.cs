@@ -32,6 +32,9 @@ public class SSoundManager : MonoBehaviour
     public FMODUnity.EventReference UI_DropMaskshape;
 
 
+    public FMODUnity.EventReference UI_OpenWorkbench;
+
+
     public FMODUnity.EventReference UI_DropItem;
 
 

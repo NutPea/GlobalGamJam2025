@@ -65,13 +65,21 @@ public class ToolUseHandler : MonoBehaviour
 
         playerInput.Keyboard.RightMouseButton.performed += ctx => RemoveTool();
 
-        maskCategoryButton.onClick.AddListener(() => SetCategory(masksTools));
+        maskCategoryButton.onClick.AddListener(() => {
+            SetCategory(masksTools);
+        });
 
-        secondaryCategoryButton.onClick.AddListener(() => SetCategory(secondaryTools));
+        secondaryCategoryButton.onClick.AddListener(() => {
+            SetCategory(secondaryTools);
+        }) ;
 
-        minorToolsCategoryButton.onClick.AddListener(() => SetCategory(minorTools));
+        minorToolsCategoryButton.onClick.AddListener(() => {
+            SetCategory(minorTools);
+        });
 
-        colorCategoryButton.onClick.AddListener(() => SetCategory(colorTools));
+        colorCategoryButton.onClick.AddListener(() => {
+            SetCategory(colorTools);
+        });
         schubladeXPosition = schublade.GetComponent<RectTransform>().localPosition.x;
 
         playerInput.Keyboard.Scroll.performed += ctx => Scroll();
@@ -130,7 +138,7 @@ public class ToolUseHandler : MonoBehaviour
     {
         toChangeToTools = categoryTools;
         LeanTween.moveLocalX(schublade.gameObject, -moveAmount, moveTime).setEase(moveType).setOnComplete(ChangeCategory);
-
+        SSoundManager.Instance.PlaySound(SSoundManager.Instance.UI_ClickCategory);
     }
 
     private void ChangeCategory()
@@ -181,6 +189,7 @@ public class ToolUseHandler : MonoBehaviour
         }
         SGameManager.Instance.RemoveAll();
         maskTransform.gameObject.SetActive(false);
+        SSoundManager.Instance.PlaySound(SSoundManager.Instance.UI_Trash);
     }
 
     public void UseTool()
@@ -213,7 +222,9 @@ public class ToolUseHandler : MonoBehaviour
             SGameManager.Instance.TryRemoveTool(holder.Tool);
             Destroy(holder.gameObject);
         }
-        
+
+        SSoundManager.Instance.PlaySound(SSoundManager.Instance.UI_Scissors);
+
     }
 
 
@@ -294,6 +305,7 @@ public class ToolUseHandler : MonoBehaviour
             ToolHolder toolHolder = spawnedDragable.GetComponent<ToolHolder>();
             SGameManager.Instance.AddTool(toolHolder.Tool);
             toolHolder.PlayFeedback();
+            SSoundManager.Instance.PlaySound(SSoundManager.Instance.UI_DropItem);
         }
         ClearTool();
     }
@@ -340,6 +352,7 @@ public class ToolUseHandler : MonoBehaviour
         SGameManager.Instance.TryRemoveTool(maskUIHandler.Tool);
         maskUIHandler.Tool = Instantiate(maskShapeTool);
         maskUIHandler.Place();
+        SSoundManager.Instance.PlaySound(SSoundManager.Instance.UI_DropMaskshape);
 
     }
     public void SpawnDragable(DragTool dragTool)
