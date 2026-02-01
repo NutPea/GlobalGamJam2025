@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{f99d2bbe-699d-42ed-b587-d5a550015349}">
 		<property name="assetPath">
-			<value>SFX_UI_DropMaskshape_03.mp3</value>
+			<value>SFX/UI/SFX_UI_DropMaskshape_03.mp3</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>

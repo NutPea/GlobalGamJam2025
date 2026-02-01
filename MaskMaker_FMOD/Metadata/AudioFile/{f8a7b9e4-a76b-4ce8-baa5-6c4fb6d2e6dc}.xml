@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{f8a7b9e4-a76b-4ce8-baa5-6c4fb6d2e6dc}">
 		<property name="assetPath">
-			<value>SFX_UI_DropColor_01.mp3</value>
+			<value>SFX/UI/SFX_UI_DropColor_01.mp3</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
