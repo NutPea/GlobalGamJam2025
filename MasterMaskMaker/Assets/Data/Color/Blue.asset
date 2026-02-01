@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ColorTool
   Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   GUID: Blue
-  Color: {r: 0, g: 0.84539366, b: 1, a: 1}
+  Color: {r: 0, g: 0.8470588, b: 1, a: 1}
