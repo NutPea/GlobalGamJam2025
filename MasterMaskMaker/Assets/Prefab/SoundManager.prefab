@@ -1,0 +1,200 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1506280952308851259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2032279588288206233}
+  - component: {fileID: 1148075056436624466}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2032279588288206233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506280952308851259}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3398.668, y: 1692.7859, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1148075056436624466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506280952308851259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1675b36e672a45547957c200f6f3ab8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SSoundManager
+  GenericButton:
+    Guid:
+      Data1: 1691485837
+      Data2: 1170716544
+      Data3: -399196257
+      Data4: 1225465166
+    Path: event:/UI_Button
+  HoverButton:
+    Guid:
+      Data1: -870283732
+      Data2: 1093453206
+      Data3: 1571906475
+      Data4: 1881975288
+    Path: event:/UI_Hover
+  UI_Trash:
+    Guid:
+      Data1: -983689900
+      Data2: 1101974666
+      Data3: 1380095139
+      Data4: 446612408
+    Path: event:/UI_Trash
+  UI_SellMask:
+    Guid:
+      Data1: -558034155
+      Data2: 1087398824
+      Data3: 1097324160
+      Data4: 855401277
+    Path: event:/UI_SellMask
+  UI_Scissors:
+    Guid:
+      Data1: -191380860
+      Data2: 1242498884
+      Data3: -1709246810
+      Data4: -1268751681
+    Path: event:/UI_Scissors
+  UI_Endscore:
+    Guid:
+      Data1: -400765130
+      Data2: 1283487010
+      Data3: -1889831236
+      Data4: -308398522
+    Path: event:/UI_Endscore
+  UI_DropMaskshape:
+    Guid:
+      Data1: -1712489817
+      Data2: 1267723140
+      Data3: 1257475468
+      Data4: 1398475920
+    Path: event:/UI_DropMaskshape
+  UI_OpenWorkbench:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  UI_DropItem:
+    Guid:
+      Data1: -683056765
+      Data2: 1105085175
+      Data3: 2035338391
+      Data4: -1102900274
+    Path: event:/UI_DropItem
+  UI_DropColor:
+    Guid:
+      Data1: 1700331594
+      Data2: 1120791606
+      Data3: -796382553
+      Data4: 1552314756
+    Path: event:/UI_DropColor
+  UI_ClickCategory:
+    Guid:
+      Data1: -994559765
+      Data2: 1315108274
+      Data3: -1506197610
+      Data4: -1478479037
+    Path: event:/UI_ClickCategory
+  UI_10SecTimer:
+    Guid:
+      Data1: -2105768980
+      Data2: 1112081328
+      Data3: -139132742
+      Data4: -794151207
+    Path: event:/UI_10SecTimer
+  NPC_GhostSpawning:
+    Guid:
+      Data1: 1697512399
+      Data2: 1226473582
+      Data3: -2037047622
+      Data4: -982048838
+    Path: event:/NPC_GhostSpawning
+  NPC_GhostLong_Sad:
+    Guid:
+      Data1: 66119857
+      Data2: 1199937825
+      Data3: -1421862513
+      Data4: -1894099852
+    Path: event:/NPC_GhostLong-Sad
+  NPC_GhostLong_Hello:
+    Guid:
+      Data1: 1611740096
+      Data2: 1341668973
+      Data3: -395052362
+      Data4: 200430232
+    Path: event:/NPC_GhostLong-Hello
+  NPC_GhostLong_Happy:
+    Guid:
+      Data1: -1764780821
+      Data2: 1155713455
+      Data3: 647116711
+      Data4: 161876471
+    Path: event:/NPC_GhostLong-Happy
+  NPC_GhostLittle_Sad:
+    Guid:
+      Data1: -1622488241
+      Data2: 1290788449
+      Data3: -514171970
+      Data4: -1645905681
+    Path: event:/NPC_GhostLittle-Sad
+  NPC_GhostLittle_Hello:
+    Guid:
+      Data1: 387580688
+      Data2: 1270415072
+      Data3: -284578929
+      Data4: -1992394041
+    Path: event:/NPC_GhostLittle-Hello
+  NPC_GhostLittle_Happy:
+    Guid:
+      Data1: -1964819966
+      Data2: 1083376858
+      Data3: -1104196202
+      Data4: 126657968
+    Path: event:/NPC_GhostLittle-Happy
+  NPC_GhostBig_Hello:
+    Guid:
+      Data1: -983282948
+      Data2: 1276252458
+      Data3: 44083383
+      Data4: 698217804
+    Path: event:/NPC_GhostBig-Hello
+  NPC_GhostBig_Happy:
+    Guid:
+      Data1: 2104546823
+      Data2: 1084067162
+      Data3: 1997411223
+      Data4: 697662907
+    Path: event:/NPC_GhostBig-Happy
+  NPC_GhostBig_Sad:
+    Guid:
+      Data1: -1677299924
+      Data2: 1268824184
+      Data3: -1318961517
+      Data4: 2129603304
+    Path: event:/NPC_GhostBig-Sad
