@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b791fc52a6dd16488114e36d7eb4043, type: 3}
   m_Name: Rouge
   m_EditorClassIdentifier: Assembly-CSharp::ColorTool
-  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Icon: {fileID: -331822564263145124, guid: 299fc6f97317040baae5232e280b9d73, type: 3}
   GUID: Rouge
   Color: {r: 0.8784314, g: 0, b: 0.4392157, a: 1}
