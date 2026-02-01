@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
-  m_Name: Secondary_EarLeft
+  m_Name: Secondary_Kissmouth_01
   m_EditorClassIdentifier: Assembly-CSharp::DragTool
-  Icon: {fileID: -4209982893107189405, guid: be500b316c54e4799a0660ee3c3ad193, type: 3}
-  GUID: EarLeft
-  SpawnedDragTool: {fileID: 8436564078897480203, guid: 5b2df7be19cc92c4d87564b96ca149a3, type: 3}
+  Icon: {fileID: -8272527456452383632, guid: 749ca37a3ec604009990310e573b7854, type: 3}
+  GUID: KissMouth
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: 35d78faff00de491894d2ba527ff7658, type: 3}

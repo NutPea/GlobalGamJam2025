@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
-  m_Name: Secondary_EarLeft
+  m_Name: Secondary_WingedEyes_R_01
   m_EditorClassIdentifier: Assembly-CSharp::DragTool
-  Icon: {fileID: -4209982893107189405, guid: be500b316c54e4799a0660ee3c3ad193, type: 3}
-  GUID: EarLeft
-  SpawnedDragTool: {fileID: 8436564078897480203, guid: 5b2df7be19cc92c4d87564b96ca149a3, type: 3}
+  Icon: {fileID: -3840911108751186983, guid: e13a33d305c5a4c2ebf729e6fd10bb49, type: 3}
+  GUID: WingedEyes_R
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: a113c55fe2f664adf94558ac9c418fdd, type: 3}

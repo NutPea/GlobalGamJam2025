@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
-  m_Name: Secondary_EarLeft
+  m_Name: Secondary_VampireTeeths_01
   m_EditorClassIdentifier: Assembly-CSharp::DragTool
-  Icon: {fileID: -4209982893107189405, guid: be500b316c54e4799a0660ee3c3ad193, type: 3}
-  GUID: EarLeft
-  SpawnedDragTool: {fileID: 8436564078897480203, guid: 5b2df7be19cc92c4d87564b96ca149a3, type: 3}
+  Icon: {fileID: 7548764495372022762, guid: bc1063f6da82b47b6b797ebaddb0c640, type: 3}
+  GUID: VampireTeeths
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: b8c25d230fce6468980905bf37612aa1, type: 3}
