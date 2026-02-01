@@ -358,6 +358,7 @@ MonoBehaviour:
   scaleOutTime: 0.05
   scaleAmount: 1.1
   scaleType: 16
+  Stop: 0
 --- !u!114 &3200840510704461334
 MonoBehaviour:
   m_ObjectHideFlags: 0
