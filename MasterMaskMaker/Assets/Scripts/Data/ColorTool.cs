@@ -10,7 +10,15 @@ public class ColorTool : InteractTool
     {
         base.ToolUse(image);
         image.color = Color;
-        image.GetComponent<ToolHolder>().PlayFeedback();
+        if(image.TryGetComponent<ToolHolder>(out ToolHolder holder))
+        {
+            holder.PlayFeedback();
+        }
+        if (image.TryGetComponent<MaskUIHandler>(out MaskUIHandler uiHandler))
+        {
+            uiHandler.Place();
+        }
+
         SGameManager.Instance.AddTool(Instantiate(this));
 
     }

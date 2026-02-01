@@ -2020,8 +2020,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850883982c21c7f4699a4c205ebf95a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LeanTweenScaleHandler
-  scaleInTime: 1
-  scaleOutTime: 0.1
+  scaleInTime: 0.3
+  scaleOutTime: 0.05
   scaleAmount: 1.1
   scaleType: 16
 --- !u!1001 &845260775

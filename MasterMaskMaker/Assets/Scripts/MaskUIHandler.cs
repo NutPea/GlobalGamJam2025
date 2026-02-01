@@ -9,14 +9,11 @@ public class MaskUIHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private LeanTweenScaleHandler leanTweenScaleHandler;
 
-    private void Start()
-    {
-        leanTweenScaleHandler = GetComponent<LeanTweenScaleHandler>();
-    }
 
 
     public void Place()
     {
+        leanTweenScaleHandler = GetComponent<LeanTweenScaleHandler>();
         leanTweenScaleHandler.ScaleFeedBack();
     }
 

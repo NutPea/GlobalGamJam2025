@@ -25,7 +25,7 @@ public class LeanTweenScaleHandler : MonoBehaviour
     public void ScaleFeedBack()
     {
         LeanTween.cancel(gameObject);
-        LeanTween.scale(gameObject, new Vector3(scaleAmount, scaleAmount, 1), scaleInTime).setEase(scaleType).setOnComplete(StartScale);
+        LeanTween.scale(gameObject, new Vector3(scaleAmount, scaleAmount, 1), scaleInTime).setEase(scaleType).setOnComplete(EndScale);
     }
 
 }
