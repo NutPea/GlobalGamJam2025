@@ -9,7 +9,8 @@ public class SGameManager : MonoBehaviour
     public static SGameManager Instance;
 
     [SerializeField] private List<Customer> customers;
-    private int currentCustomerIndex = 0;
+    public List<Customer> Customers => customers;
+    public int currentCustomerIndex = 0;
     [SerializeField] private Transform mask;
     [SerializeField] private bool startGame = true;
     private void Awake()

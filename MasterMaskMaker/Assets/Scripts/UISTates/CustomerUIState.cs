@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class CustomerUIState : UIState
     private CustomerData currentCustomer;
     private CustomerData newCustomer;
     private bool gameEnd;
+    [SerializeField] private TextMeshProUGUI text;
     public override void OnInit()
     {
         base.OnInit();
@@ -81,6 +83,7 @@ public class CustomerUIState : UIState
         {
             Invoke(nameof(EndGameChangeUIState), 1.5f);
         }
+        text.text = SGameManager.Instance.currentCustomerIndex + " / " + SGameManager.Instance.Customers.Count;
     }
 
     private void EndGameChangeUIState() { 
