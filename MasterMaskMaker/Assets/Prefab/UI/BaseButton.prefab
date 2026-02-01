@@ -151,6 +151,8 @@ GameObject:
   - component: {fileID: 495068269238451286}
   - component: {fileID: 1442068437751519192}
   - component: {fileID: 9041639246886796744}
+  - component: {fileID: 6161137429346354122}
+  - component: {fileID: 3888212433085163241}
   m_Layer: 5
   m_Name: BaseButton
   m_TagString: Untagged
@@ -260,3 +262,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6161137429346354122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768537449778077770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850883982c21c7f4699a4c205ebf95a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeanTweenScaleHandler
+  scaleTime: 0.25
+  scaleAmount: 1.1
+  scaleType: 16
+--- !u!114 &3888212433085163241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768537449778077770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf0d10adce43f04e998dec9a9fa07c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonHoverHandler
