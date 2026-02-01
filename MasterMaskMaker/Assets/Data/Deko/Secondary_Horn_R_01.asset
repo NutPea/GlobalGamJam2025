@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DragTool
   Icon: {fileID: -6460638578954427768, guid: 967c79ccf6acc4ecb9ed411ca0dbb941, type: 3}
   GUID: Horn_R
-  SpawnedDragTool: {fileID: 8436564078897480203, guid: b2452145e8c484adbbe2578154171381, type: 3}
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: 97f4b6a368bf749c8939008c91908ea4, type: 3}
