@@ -37,6 +37,7 @@ public class MaskUIState : UIState
             if(currentTime < 0)
             {
                 MaskGive();
+                hasTime = false;
             }
             else
             {
