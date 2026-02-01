@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{e083c94a-0d3d-4ea7-af7d-76c239188e2a}">
-		<property name="assetPath">
-			<value>SFX/UI/SFX_UI_SellMask_03.mp3</value>
-		</property>
+	<object class="AudioFile" id="{ff42e3de-0c0f-423b-8bc7-12abbe436b0e}">
+		<property name="assetPath" />
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
 		</property>
