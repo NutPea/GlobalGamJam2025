@@ -46,7 +46,6 @@ public class CustomerHandler : MonoBehaviour
     {
         SGameManager.Instance.SetCustomer(data);
         SSoundManager.Instance.PlaySound(SSoundManager.Instance.UI_OpenWorkbench);
-        PlayHappy();
     }
 
     public float fadeDurationIn = 0.3f;
