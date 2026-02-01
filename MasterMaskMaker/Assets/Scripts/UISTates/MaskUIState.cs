@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,11 @@ public class MaskUIState : UIState
     [SerializeField] private Button doneButton;
     private ToolUseHandler toolUseHandler;
     [SerializeField] private ToDoHandler toDoHandler;
+
+    [SerializeField] private TextMeshProUGUI timer;
+    private float currentTime = 0f;
+    private bool hasTime = false;
+
     public override void OnInit()
     {
         base.OnInit();
@@ -23,11 +29,36 @@ public class MaskUIState : UIState
         SGameManager.Instance.GiveMask();
     }
 
+    private void Update()
+    {
+        if (hasTime)
+        {
+            if(currentTime < 0)
+            {
+                MaskGive();
+            }
+            else
+            {
+                currentTime -= Time.deltaTime;
+                timer.text = currentTime.ToString("F0");
+            }
+
+        }   
+    }
+
     public override void OnBeforeEnter()
     {
         base.OnBeforeEnter();
         toolUseHandler.OnEnter();
         toDoHandler.OnEnter();
+        hasTime = false;
+        CustomerData data = SGameManager.Instance.currentCustomer;
+        if(data != null)
+        {
+            hasTime = true;
+            currentTime = data.time;
+
+        }
     }
 
     private void Back()

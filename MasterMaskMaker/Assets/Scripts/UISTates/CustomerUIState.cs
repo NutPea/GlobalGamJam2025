@@ -6,62 +6,86 @@ using UnityEngine.UI;
 public class CustomerUIState : UIState
 {
 
-    [SerializeField]private bool startGame;
+    [SerializeField] private Transform spawnPoint;
 
-    [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
-    private List<CustomerData> spawnedCustomers = new List<CustomerData>();
-    private int maxAmountOfCustomers = 3;
-
+    private bool hasNewCustomers;
+    private CustomerData currentCustomer;
+    private CustomerData newCustomer;
+    private bool gameEnd;
     public override void OnInit()
     {
         base.OnInit();
-        SGameManager.Instance.OnNewCustomers.AddListener(StartCustomerPipeline);
+        SGameManager.Instance.OnNewCustomers.AddListener(ToChange);
+        SGameManager.Instance.OnFinishedGame.AddListener(EndGame);
     }
 
-    private void StartCustomerPipeline(CustomerData currentCustomer,List<CustomerData> customerData)
+    private void ToChange(CustomerData currentCustomer, CustomerData newCustomer)
+    {
+
+        this.hasNewCustomers = true;
+        this.currentCustomer = currentCustomer;
+        this.newCustomer = newCustomer;
+    }
+
+
+    private void EndGame()
+    {
+        gameEnd = true;
+    }
+    private void StartCustomerPipeline(CustomerData currentCustomer)
     {
 
         if (currentCustomer != null)
         {
-            Debug.Log("StartPipeline");
+            currentCustomer.SpawnedCustomer.GetComponent<CustomerHandler>().FadeOut();         
         }
-        else
-        {
-            SpawnRemainingCustomer(customerData);
-        }
+
+        Invoke(nameof(SpawnRemainingCustomer), 1.5f);
     }
 
 
-    private void SpawnRemainingCustomer(List<CustomerData> customerData)
-    {
-        int toSpawnAmountOfCustomers = maxAmountOfCustomers-spawnedCustomers.Count;
 
-        for (int i = 0; i< toSpawnAmountOfCustomers; i++)
+    private void SpawnRemainingCustomer()
+    {
+        if (gameEnd)
         {
-            if(i > customerData.Count-1)
-            {
-                break;
-            }
-            CustomerData toSpawnCustomerData = customerData[i];
-            Transform spawnPoint = spawnPoints[spawnedCustomers.Count];
-            GameObject customer = Instantiate(toSpawnCustomerData.CustomerPrefab);
+            SUIManager.Instance.ChangeUIState("EndDay");
+            Debug.Log("EndDay");
+        }
+        else
+        {
+            GameObject customer = Instantiate(newCustomer.CustomerPrefab);
             customer.transform.SetParent(spawnPoint);
             customer.transform.localPosition = Vector3.zero;
             customer.transform.localScale = Vector3.one;
-            spawnedCustomers.Add(toSpawnCustomerData);
-
-            customer.GetComponent<CustomerHandler>().Setup(toSpawnCustomerData);
+            newCustomer.SpawnedCustomer = customer;
+            CustomerHandler customerHandler = customer.GetComponent<CustomerHandler>();
+            customerHandler.Setup(newCustomer);
+            customerHandler.FadeIn();
         }
+
     }
 
 
     public override void OnEnter()
     {
         base.OnEnter();
-        if (startGame)
+
+        if (hasNewCustomers)
         {
-            SGameManager.Instance.StartGame();
+            StartCustomerPipeline(currentCustomer);
+            hasNewCustomers = false;
         }
+
+        if (gameEnd)
+        {
+            Invoke(nameof(EndGameChangeUIState), 1.5f);
+        }
+    }
+
+    private void EndGameChangeUIState() { 
+        SUIManager.Instance.ChangeUIState("EndDay");
+        Debug.Log("EndDay");
     }
 
 
