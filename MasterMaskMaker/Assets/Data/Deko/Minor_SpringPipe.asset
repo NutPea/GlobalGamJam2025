@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
+  m_Name: Minor_SpringPipe
+  m_EditorClassIdentifier: Assembly-CSharp::DragTool
+  Icon: {fileID: 3824909174288545042, guid: 8e18dd16fd33a437b8fa2d0edbe1cc4e, type: 3}
+  GUID: SpringPipe
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: 0397f2793ff52468e9506120b8695803, type: 3}

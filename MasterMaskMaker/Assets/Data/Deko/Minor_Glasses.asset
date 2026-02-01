@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dbab064fb718994fb0dd9ccec22b8e8, type: 3}
+  m_Name: Minor_Glasses
+  m_EditorClassIdentifier: Assembly-CSharp::DragTool
+  Icon: {fileID: 4877706163313231645, guid: 16a5bafbeb0d24d9b8a8b6d0a84ff508, type: 3}
+  GUID: Glasses
+  SpawnedDragTool: {fileID: 8436564078897480203, guid: 2209609c08d77420b8c5737d4d81bad4, type: 3}
